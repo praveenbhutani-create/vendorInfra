@@ -8024,7 +8024,7 @@ function Career() {
       PageHero,
       {
         eyebrow: "Career",
-        title: "Transforming a Trillion-Dollar Industry with Technology, Innovation & Deep Industry Expertise."
+        title: "A place to build, grow, and succeed — together."
       }
     ),
     /* @__PURE__ */ jsxs("main", { className: "flex-1 bg-gradient-to-b from-[#f6f8fb] via-white to-[#f6f8fb]", children: [
@@ -8522,8 +8522,7 @@ function Investor() {
         /* @__PURE__ */ jsx("div", { className: "absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#001d3a] to-transparent" }),
         /* @__PURE__ */ jsx("div", { className: "relative z-10 container mx-auto px-4 py-16 md:py-24 max-w-7xl", children: /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs(motion.div, { initial: { opacity: 0, y: 18 }, animate: { opacity: 1, y: 0 }, children: [
           /* @__PURE__ */ jsx("span", { className: "inline-flex items-center gap-2 rounded-full border border-[#edad1a]/45 bg-[#edad1a]/10 px-4 py-2 text-sm font-bold text-[#edad1a] mb-6", children: "Investor Relations" }),
-          /* @__PURE__ */ jsx("h1", { className: "text-4xl md:text-6xl font-black leading-[0.98] mb-6", children: "AI-Powered Operating System for Infrastructure, Construction & Manufacturing Industry" }),
-          /* @__PURE__ */ jsx("p", { className: "text-white/76 text-base md:text-lg leading-relaxed max-w-2xl mb-8", children: "Digitizing execution across India's 12+ lakh crore infrastructure economy." }),
+          /* @__PURE__ */ jsx("h1", { className: "text-4xl md:text-6xl font-black leading-[0.98] mb-6", children: "Transforming a Trillion-Dollar Industry with Technology, Innovation & Deep Industry Expertise." }),
           /* @__PURE__ */ jsxs("div", { className: "max-w-2xl mb-8", children: [
             /* @__PURE__ */ jsx("div", { className: "grid grid-cols-3 gap-3 mb-3", children: heroStats.slice(0, 3).map((stat) => /* @__PURE__ */ jsx("div", { className: "border-l-2 border-[#edad1a] bg-white/7 px-4 py-3", children: /* @__PURE__ */ jsx("p", { className: "text-xl md:text-2xl font-black text-white", children: stat.value }) }, stat.label)) }),
             /* @__PURE__ */ jsx("div", { className: "grid grid-cols-3 gap-3", children: heroStats.slice(3, 5).map((stat) => /* @__PURE__ */ jsx("div", { className: "border-l-2 border-[#edad1a] bg-white/7 px-4 py-3", children: /* @__PURE__ */ jsx("p", { className: "text-xl md:text-2xl font-black text-white", children: stat.value }) }, stat.label)) })

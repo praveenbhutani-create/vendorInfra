@@ -72,7 +72,9 @@ export default function Career() {
 
       <PageHero
         eyebrow="Career"
-        title="Transforming a Trillion-Dollar Industry with Technology, Innovation & Deep Industry Expertise."
+        // title="Transforming a Trillion-Dollar Industry with Technology, Innovation & Deep Industry Expertise."
+        title="A place to build, grow, and succeed — together."
+       
       />
 
       <main className="flex-1 bg-gradient-to-b from-[#f6f8fb] via-white to-[#f6f8fb]">

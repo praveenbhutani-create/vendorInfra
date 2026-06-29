@@ -925,11 +925,11 @@ export default function Investor() {
                   Investor Relations
                 </span>
                 <h1 className="text-4xl md:text-6xl font-black leading-[0.98] mb-6">
-                  AI-Powered Operating System for Infrastructure, Construction & Manufacturing Industry
+                  Transforming a Trillion-Dollar Industry with Technology, Innovation & Deep Industry Expertise.
                 </h1>
-                <p className="text-white/76 text-base md:text-lg leading-relaxed max-w-2xl mb-8">
+                {/* <p className="text-white/76 text-base md:text-lg leading-relaxed max-w-2xl mb-8">
                   Digitizing execution across India's 12+ lakh crore infrastructure economy.
-                </p>
+                </p> */}
 
                 {/* Stats grid */}
                 <div className="max-w-2xl mb-8">
