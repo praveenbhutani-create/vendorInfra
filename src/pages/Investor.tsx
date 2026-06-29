@@ -955,7 +955,7 @@ export default function Investor() {
                     onClick={() => setShowModal(true)}
                     className={siteButtonClasses("primary", "px-6 py-3")}
                   >
-                    Request an Investor Meeting <Mail className="w-4 h-4" />
+                    Connect With Founder <Mail className="w-4 h-4" />
                   </button>
                 </div>
               </motion.div>
@@ -1257,7 +1257,7 @@ export default function Investor() {
   onClick={() => setShowModal(true)}
   className={siteButtonClasses("primary", "px-6 py-3")}
 >
-  Request an Investor Meeting <Mail className="w-4 h-4" />
+  Connect With Founder <Mail className="w-4 h-4" />
 </button> 
               </div>
               <p className="text-white/35 text-xs mt-6">
