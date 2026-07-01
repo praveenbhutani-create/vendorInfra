@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { usePageSeo } from "@/lib/seo";
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, Linkedin, Shield, Target } from "lucide-react";
+import { ArrowRight, CheckCircle2, Linkedin, Shield, Target, Quote } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CtaArrow } from "@/components/CtaArrow";
@@ -10,6 +11,7 @@ import { Link } from "wouter";
 const base = import.meta.env.BASE_URL;
 
 const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const FOUNDER_PHOTO = "about-members/2025-11-10.png";
 
 const trustedBy = [
   { name: "Adani Group",    logo: "/logos/Adani-Group.png" },
@@ -46,6 +48,176 @@ function LogoMarquee({ logos }: { logos: { name: string; logo: string }[] }) {
       </div>
       <style>{`@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}`}</style>
     </div>
+  );
+}
+
+/* ============================================================
+   FOUNDER'S STORY — narrative with truncate / read-more toggle
+   ============================================================ */
+function FounderNarrative() {
+  const [expanded, setExpanded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: 0.08 }}
+      className="text-gray-600 text-[16px] leading-8"
+    >
+      <p>
+        <span className="float-left text-6xl font-bold text-[#edad1a] leading-[0.8] pr-3 pt-1">V</span>
+        endor Infra was not imagined on a startup whiteboard. It was built from 26 years of
+        ground reality — walking infrastructure project sites, leading large teams, managing
+        complex supply chains, negotiating with contractors and manufacturers, and experiencing
+        first-hand the inefficiencies hidden inside one of the world&rsquo;s largest industries.
+      </p>
+
+      <p className="mt-5">
+        For more than two and a half decades, Rahul Jain lived the Infrastructure &amp;
+        Construction ecosystem from the inside. He saw a repeated pattern across the industry:
+      </p>
+
+      <ul className="mt-5 space-y-3">
+        <li className="flex gap-3">
+          <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#edad1a] shrink-0" />
+          <span>Capable vendors were invisible because the right buyers could not discover them.</span>
+        </li>
+        <li className="flex gap-3">
+          <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#edad1a] shrink-0" />
+          <span>Contractors struggled to identify reliable partners despite thousands of available suppliers.</span>
+        </li>
+        <li className="flex gap-3">
+          <span className="mt-2.5 w-1.5 h-1.5 rounded-full bg-[#edad1a] shrink-0" />
+          <span>
+            Procurement decisions depended on fragmented networks, manual processes, scattered
+            data, and personal relationships rather than intelligence.
+          </span>
+           
+        </li>
+        <li>
+           <span>
+            A multi-trillion-dollar infrastructure industry was accelerating into the future —
+            but its discovery, collaboration, and procurement systems were still operating in
+            the past.
+          </span>
+        </li>
+        <li>
+            <span>
+            Rahul realized the industry did not need another marketplace. It needed an
+            intelligent digital infrastructure layer.
+          </span>
+
+        
+
+        </li>
+        {/* <li>
+            <span>
+            In 2021, he transformed 26 years of domain knowledge into Vendor Infra — an
+            AI-powered ecosystem built specifically for Infrastructure, Construction &amp;
+            Manufacturing.
+          </span>
+        </li> */}
+      </ul>
+
+      {expanded && (
+        <>
+          {/* <p className="mt-5">
+            A multi-trillion-dollar infrastructure industry was accelerating into the future —
+            but its discovery, collaboration, and procurement systems were still operating in
+            the past.
+          </p> */}
+{/* 
+          <p className="mt-5">
+            Rahul realized the industry did not need another marketplace. It needed an
+            intelligent digital infrastructure layer.
+          </p> */}
+
+          <p className="mt-5">
+            In 2021, he transformed 26 years of domain knowledge into Vendor Infra — an
+            AI-powered ecosystem built specifically for Infrastructure, Construction &amp;
+            Manufacturing.
+          </p>
+
+          <p className="mt-5 font-semibold text-[#00274d]">
+            Not a startup chasing a trend.
+            <br />
+            A solution created by someone who had experienced the problem for decades.
+          </p>
+
+          <p className="mt-5">
+            Vendor Infra combines deep industry expertise, artificial intelligence, machine
+            learning, data intelligence, and supply-chain technology to create a connected
+            ecosystem where companies can:
+          </p>
+
+          <ul className="mt-5 grid sm:grid-cols-2 gap-3">
+            {[
+              "Discover the right vendors",
+              "Predict better partnerships",
+              "Procure smarter",
+              "Reduce inefficiencies",
+              "Unlock new business opportunities",
+              "Make faster, data-driven decisions",
+            ].map(item => (
+              <li
+                key={item}
+                className="flex items-center gap-2.5 rounded-xl bg-[#f6f8fb] border border-[#00274d]/10 px-4 py-3 text-[15px] font-semibold text-[#00274d]"
+              >
+                <CheckCircle2 className="w-4.5 h-4.5 text-[#edad1a] shrink-0" />
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-6">
+            The platform continuously learns from industry data, vendor capabilities,
+            transactions, behaviour patterns, and market intelligence — converting decades of
+            fragmented knowledge into actionable AI insights.
+          </p>
+
+          <p className="mt-5">
+            No assumptions. No shortcuts.
+            <br />
+            Just real industry experience converted into intelligent technology.
+          </p>
+
+          <div className="mt-8 grid grid-cols-3 gap-4">
+            <div className="rounded-2xl border border-[#00274d] bg-[#00274d] text-white p-5 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-[#edad1a]">₹500+ Cr</div>
+              <div className="text-xs text-white/70 mt-1 leading-snug">Revenue platform</div>
+            </div>
+            <div className="rounded-2xl border border-[#00274d] bg-[#00274d] text-white p-5 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-[#edad1a]">106</div>
+              <div className="text-xs text-white/70 mt-1 leading-snug">Enterprise clients</div>
+            </div>
+            <div className="rounded-2xl border border-[#00274d] bg-[#00274d] text-white p-5 text-center">
+              <div className="text-2xl md:text-3xl font-bold text-[#edad1a]">32,000+</div>
+              <div className="text-xs text-white/70 mt-1 leading-snug">Verified vendors</div>
+            </div>
+          </div>
+
+          <p className="mt-6">
+            Building the digital and AI backbone for India&rsquo;s Infrastructure &amp;
+            Construction economy — because the future of infrastructure will not be built only
+            with steel and concrete. It will be built with data, intelligence, and connected
+            ecosystems.
+          </p>
+
+          <p className="mt-6 font-bold text-[#00274d] text-lg">
+            Vendor Infra — Built by the Industry. Powered by AI. Transforming the Industry.
+          </p>
+        </>
+      )}
+
+      <button
+        onClick={() => setExpanded(v => !v)}
+        className="mt-7 inline-flex items-center gap-2 font-semibold text-[#00274d] border-b-2 border-[#edad1a] pb-0.5 hover:text-[#edad1a] transition-colors"
+      >
+        {expanded ? "Show Less" : "Read Full Story"}
+        <ArrowRight className={`w-4 h-4 transition-transform ${expanded ? "-rotate-90" : "rotate-0"}`} />
+      </button>
+    </motion.div>
   );
 }
 
@@ -213,6 +385,62 @@ export default function About() {
 </Link>
                 </div>
               </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder's Story */}
+        <section className="relative py-24 bg-white overflow-hidden">
+          {/* <div className="absolute inset-0 hidden lg:block" style={{ left: "calc(50% - 1px)", width: "1px", background: "rgba(0,39,77,0.1)" }} /> */}
+
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 xl:px-12">
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <span className="inline-flex items-center gap-2 text-[#edad1a] text-[12px] font-bold uppercase tracking-[0.3em] mb-4">
+                <span className="w-6 h-px bg-[#edad1a]/60" />
+                Founder&rsquo;s Story
+                <span className="w-6 h-px bg-[#edad1a]/60" />
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#00274d] leading-tight text-balance">
+                26 years of industry intelligence,
+                <br />
+                rebuilt as an <span className="text-[#edad1a]">AI-powered platform</span>
+              </h2>
+            </div>
+
+            <div className="grid lg:grid-cols-[340px_1fr] gap-10 lg:gap-16 items-start">
+              {/* Left: sticky founder card */}
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="lg:sticky lg:top-28"
+              >
+                <div className="rounded-2xl border border-[#00274d] overflow-hidden bg-[#f6f8fb] shadow-sm">
+                  <div className="relative aspect-[4/5] bg-gradient-to-br from-[#f6f8fb] to-[#eef2f8] overflow-hidden">
+                    <img
+                      src={`${base}${FOUNDER_PHOTO}`}
+                      alt="Rahul Jain, Founder & CEO"
+                      className="absolute inset-0 w-full h-full object-cover object-center"
+                      onError={e => {
+                        (e.target as HTMLImageElement).src =
+                          "https://ui-avatars.com/api/?name=Rahul+Jain&background=00274d&color=fff&size=400";
+                      }}
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-bold text-[#00274d] text-lg leading-snug">Rahul Jain</h4>
+                    <p className="text-sm text-gray-500 mt-0.5">Founder &amp; CEO, Vendor Infra</p>
+                    <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-[#00274d]/5 border border-[#00274d]/10 px-3 py-1.5 text-xs font-semibold text-[#00274d]">
+                      26 years in Infrastructure &amp; Construction
+                    </div>
+                  </div>
+                </div>
+
+               
+              </motion.div>
+
+              {/* Right: narrative */}
+              <FounderNarrative />
             </div>
           </div>
         </section>

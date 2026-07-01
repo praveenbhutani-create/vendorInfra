@@ -3101,7 +3101,7 @@ const defaultSerovalPlugins = [
   p
 ];
 async function getStartManifest(matchedRoutes) {
-  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-CgIhIK5b.js");
+  const { tsrStartManifest } = await import("./_tanstack-start-manifest_v-c25t3Rty.js");
   const startManifest = tsrStartManifest();
   let routes = startManifest.routes;
   routes[rootRouteId];
@@ -4652,8 +4652,8 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
   const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-    import("./router-QzDwDQ0W.js"),
-    import("./start-lMTMrgAD.js"),
+    import("./router-TmYcohpY.js"),
+    import("./start-BQC8KitF.js"),
     import("./empty-plugin-adapters-BFgPZ6_d.js")
   ]);
   return {

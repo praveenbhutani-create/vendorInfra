@@ -2556,6 +2556,21 @@ const trustedBy$1 = [
   { name: "Kalpataru", logo: "/logos/KPILLOGO.png" },
   { name: "IRB Infra", logo: "/logos/IRB-logo.jpg" }
 ];
+const supplierNetwork = [
+  { name: "MS Agrawal", logo: "/logos/ms-agrawal.png" },
+  // { name: "Jai Balaji",      logo: "/logos/jai-balaji.png" },
+  { name: "Rungta", logo: "/logos/rungta.png" },
+  { name: "Shyam Steel", logo: "/logos/image28a.deda90641d90831e6621.webp" },
+  { name: "Ambuja Cement", logo: "/logos/Ambuja-Footer 1.webp" },
+  { name: "SAIL", logo: "/logos/SAIL_LOGO_NEW.png" },
+  { name: "Tata Steel", logo: "/logos/tata-steel-logo.webp" },
+  { name: "Rashmi Metaliks", logo: "/logos/Rashmi-logo-dark.png" },
+  { name: "Jindal Steel", logo: "/logos/jindal-steel-logo-white.svg" },
+  { name: "UltraTech Cement", logo: "/logos/ultratech-cement-logo.png" },
+  { name: "JK Cement", logo: "/logos/new-logo-jk.webp" },
+  { name: "Havells", logo: "/logos/Havells_Logo.svg" },
+  { name: "JSW Steel", logo: "/logos/JSW_Steel_Logo.svg" }
+];
 const associations = [
   { name: "ISO 14001", logo: "/logos/ISO-14001.jpg" },
   { name: "ISO 27001", logo: "/logos/ISO-27001.jpg" },
@@ -3289,6 +3304,7 @@ function Home() {
       /* @__PURE__ */ jsx("div", { className: "relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 space-y-16", children: [
         { title: "Trusted By", subtitle: "Chosen by the companies building India's National Infrastructure pipeline.", logos: trustedBy$1 },
         { title: "Associations", subtitle: "We are Proud to be a part of", logos: associations },
+        { title: "Supplier Network", subtitle: "A trusted network of suppliers committed to quality, growth, and efficiency.", logos: supplierNetwork },
         { title: "Our Financing Partners", subtitle: "Who help us drive innovation in the Supply Chain Financing", logos: financingPartners }
       ].map((block) => /* @__PURE__ */ jsx(FadeUp$3, { children: /* @__PURE__ */ jsxs("div", { className: "grid lg:grid-cols-12 gap-6 lg:gap-10 items-center", children: [
         /* @__PURE__ */ jsxs("div", { className: "lg:col-span-3 text-left", children: [
@@ -3434,6 +3450,7 @@ function usePageSeo(title, description) {
 }
 const base = "/";
 const PORTAL_REGISTER_URL$6 = "http://3.110.208.157/customer/";
+const FOUNDER_PHOTO = "about-members/2025-11-10.png";
 const trustedBy = [
   { name: "Adani Group", logo: "/logos/Adani-Group.png" },
   { name: "NCC", logo: "/logos/NCC.png" },
@@ -3469,6 +3486,102 @@ function LogoMarquee({ logos }) {
     ),
     /* @__PURE__ */ jsx("style", { children: `@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}` })
   ] });
+}
+function FounderNarrative() {
+  const [expanded, setExpanded] = useState(false);
+  return /* @__PURE__ */ jsxs(
+    motion.div,
+    {
+      initial: { opacity: 0, y: 24 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true },
+      transition: { delay: 0.08 },
+      className: "text-gray-600 text-[16px] leading-8",
+      children: [
+        /* @__PURE__ */ jsxs("p", { children: [
+          /* @__PURE__ */ jsx("span", { className: "float-left text-6xl font-bold text-[#edad1a] leading-[0.8] pr-3 pt-1", children: "V" }),
+          "endor Infra was not imagined on a startup whiteboard. It was built from 26 years of ground reality — walking infrastructure project sites, leading large teams, managing complex supply chains, negotiating with contractors and manufacturers, and experiencing first-hand the inefficiencies hidden inside one of the world’s largest industries."
+        ] }),
+        /* @__PURE__ */ jsx("p", { className: "mt-5", children: "For more than two and a half decades, Rahul Jain lived the Infrastructure & Construction ecosystem from the inside. He saw a repeated pattern across the industry:" }),
+        /* @__PURE__ */ jsxs("ul", { className: "mt-5 space-y-3", children: [
+          /* @__PURE__ */ jsxs("li", { className: "flex gap-3", children: [
+            /* @__PURE__ */ jsx("span", { className: "mt-2.5 w-1.5 h-1.5 rounded-full bg-[#edad1a] shrink-0" }),
+            /* @__PURE__ */ jsx("span", { children: "Capable vendors were invisible because the right buyers could not discover them." })
+          ] }),
+          /* @__PURE__ */ jsxs("li", { className: "flex gap-3", children: [
+            /* @__PURE__ */ jsx("span", { className: "mt-2.5 w-1.5 h-1.5 rounded-full bg-[#edad1a] shrink-0" }),
+            /* @__PURE__ */ jsx("span", { children: "Contractors struggled to identify reliable partners despite thousands of available suppliers." })
+          ] }),
+          /* @__PURE__ */ jsxs("li", { className: "flex gap-3", children: [
+            /* @__PURE__ */ jsx("span", { className: "mt-2.5 w-1.5 h-1.5 rounded-full bg-[#edad1a] shrink-0" }),
+            /* @__PURE__ */ jsx("span", { children: "Procurement decisions depended on fragmented networks, manual processes, scattered data, and personal relationships rather than intelligence." })
+          ] }),
+          /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("span", { children: "A multi-trillion-dollar infrastructure industry was accelerating into the future — but its discovery, collaboration, and procurement systems were still operating in the past." }) }),
+          /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("span", { children: "Rahul realized the industry did not need another marketplace. It needed an intelligent digital infrastructure layer." }) })
+        ] }),
+        expanded && /* @__PURE__ */ jsxs(Fragment, { children: [
+          /* @__PURE__ */ jsx("p", { className: "mt-5", children: "In 2021, he transformed 26 years of domain knowledge into Vendor Infra — an AI-powered ecosystem built specifically for Infrastructure, Construction & Manufacturing." }),
+          /* @__PURE__ */ jsxs("p", { className: "mt-5 font-semibold text-[#00274d]", children: [
+            "Not a startup chasing a trend.",
+            /* @__PURE__ */ jsx("br", {}),
+            "A solution created by someone who had experienced the problem for decades."
+          ] }),
+          /* @__PURE__ */ jsx("p", { className: "mt-5", children: "Vendor Infra combines deep industry expertise, artificial intelligence, machine learning, data intelligence, and supply-chain technology to create a connected ecosystem where companies can:" }),
+          /* @__PURE__ */ jsx("ul", { className: "mt-5 grid sm:grid-cols-2 gap-3", children: [
+            "Discover the right vendors",
+            "Predict better partnerships",
+            "Procure smarter",
+            "Reduce inefficiencies",
+            "Unlock new business opportunities",
+            "Make faster, data-driven decisions"
+          ].map((item2) => /* @__PURE__ */ jsxs(
+            "li",
+            {
+              className: "flex items-center gap-2.5 rounded-xl bg-[#f6f8fb] border border-[#00274d]/10 px-4 py-3 text-[15px] font-semibold text-[#00274d]",
+              children: [
+                /* @__PURE__ */ jsx(CheckCircle2, { className: "w-4.5 h-4.5 text-[#edad1a] shrink-0" }),
+                item2
+              ]
+            },
+            item2
+          )) }),
+          /* @__PURE__ */ jsx("p", { className: "mt-6", children: "The platform continuously learns from industry data, vendor capabilities, transactions, behaviour patterns, and market intelligence — converting decades of fragmented knowledge into actionable AI insights." }),
+          /* @__PURE__ */ jsxs("p", { className: "mt-5", children: [
+            "No assumptions. No shortcuts.",
+            /* @__PURE__ */ jsx("br", {}),
+            "Just real industry experience converted into intelligent technology."
+          ] }),
+          /* @__PURE__ */ jsxs("div", { className: "mt-8 grid grid-cols-3 gap-4", children: [
+            /* @__PURE__ */ jsxs("div", { className: "rounded-2xl border border-[#00274d] bg-[#00274d] text-white p-5 text-center", children: [
+              /* @__PURE__ */ jsx("div", { className: "text-2xl md:text-3xl font-bold text-[#edad1a]", children: "₹500+ Cr" }),
+              /* @__PURE__ */ jsx("div", { className: "text-xs text-white/70 mt-1 leading-snug", children: "Revenue platform" })
+            ] }),
+            /* @__PURE__ */ jsxs("div", { className: "rounded-2xl border border-[#00274d] bg-[#00274d] text-white p-5 text-center", children: [
+              /* @__PURE__ */ jsx("div", { className: "text-2xl md:text-3xl font-bold text-[#edad1a]", children: "106" }),
+              /* @__PURE__ */ jsx("div", { className: "text-xs text-white/70 mt-1 leading-snug", children: "Enterprise clients" })
+            ] }),
+            /* @__PURE__ */ jsxs("div", { className: "rounded-2xl border border-[#00274d] bg-[#00274d] text-white p-5 text-center", children: [
+              /* @__PURE__ */ jsx("div", { className: "text-2xl md:text-3xl font-bold text-[#edad1a]", children: "32,000+" }),
+              /* @__PURE__ */ jsx("div", { className: "text-xs text-white/70 mt-1 leading-snug", children: "Verified vendors" })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsx("p", { className: "mt-6", children: "Building the digital and AI backbone for India’s Infrastructure & Construction economy — because the future of infrastructure will not be built only with steel and concrete. It will be built with data, intelligence, and connected ecosystems." }),
+          /* @__PURE__ */ jsx("p", { className: "mt-6 font-bold text-[#00274d] text-lg", children: "Vendor Infra — Built by the Industry. Powered by AI. Transforming the Industry." })
+        ] }),
+        /* @__PURE__ */ jsxs(
+          "button",
+          {
+            onClick: () => setExpanded((v) => !v),
+            className: "mt-7 inline-flex items-center gap-2 font-semibold text-[#00274d] border-b-2 border-[#edad1a] pb-0.5 hover:text-[#edad1a] transition-colors",
+            children: [
+              expanded ? "Show Less" : "Read Full Story",
+              /* @__PURE__ */ jsx(ArrowRight, { className: `w-4 h-4 transition-transform ${expanded ? "-rotate-90" : "rotate-0"}` })
+            ]
+          }
+        )
+      ]
+    }
+  );
 }
 const usps = [
   {
@@ -3604,6 +3717,51 @@ function About() {
               /* @__PURE__ */ jsx(Link, { href: "/contact", children: /* @__PURE__ */ jsx(SiteButton, { variant: "primary", className: "mt-7", children: "Book a Demo" }) })
             ] })
           ] })
+        ] })
+      ] }) }),
+      /* @__PURE__ */ jsx("section", { className: "relative py-24 bg-white overflow-hidden", children: /* @__PURE__ */ jsxs("div", { className: "max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 xl:px-12", children: [
+        /* @__PURE__ */ jsxs("div", { className: "text-center max-w-3xl mx-auto mb-16", children: [
+          /* @__PURE__ */ jsxs("span", { className: "inline-flex items-center gap-2 text-[#edad1a] text-[12px] font-bold uppercase tracking-[0.3em] mb-4", children: [
+            /* @__PURE__ */ jsx("span", { className: "w-6 h-px bg-[#edad1a]/60" }),
+            "Founder’s Story",
+            /* @__PURE__ */ jsx("span", { className: "w-6 h-px bg-[#edad1a]/60" })
+          ] }),
+          /* @__PURE__ */ jsxs("h2", { className: "text-3xl md:text-4xl font-bold text-[#00274d] leading-tight text-balance", children: [
+            "26 years of industry intelligence,",
+            /* @__PURE__ */ jsx("br", {}),
+            "rebuilt as an ",
+            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a]", children: "AI-powered platform" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "grid lg:grid-cols-[340px_1fr] gap-10 lg:gap-16 items-start", children: [
+          /* @__PURE__ */ jsx(
+            motion.div,
+            {
+              initial: { opacity: 0, y: 24 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true },
+              className: "lg:sticky lg:top-28",
+              children: /* @__PURE__ */ jsxs("div", { className: "rounded-2xl border border-[#00274d] overflow-hidden bg-[#f6f8fb] shadow-sm", children: [
+                /* @__PURE__ */ jsx("div", { className: "relative aspect-[4/5] bg-gradient-to-br from-[#f6f8fb] to-[#eef2f8] overflow-hidden", children: /* @__PURE__ */ jsx(
+                  "img",
+                  {
+                    src: `${base}${FOUNDER_PHOTO}`,
+                    alt: "Rahul Jain, Founder & CEO",
+                    className: "absolute inset-0 w-full h-full object-cover object-center",
+                    onError: (e) => {
+                      e.target.src = "https://ui-avatars.com/api/?name=Rahul+Jain&background=00274d&color=fff&size=400";
+                    }
+                  }
+                ) }),
+                /* @__PURE__ */ jsxs("div", { className: "p-5", children: [
+                  /* @__PURE__ */ jsx("h4", { className: "font-bold text-[#00274d] text-lg leading-snug", children: "Rahul Jain" }),
+                  /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-500 mt-0.5", children: "Founder & CEO, Vendor Infra" }),
+                  /* @__PURE__ */ jsx("div", { className: "mt-4 inline-flex items-center gap-2 rounded-full bg-[#00274d]/5 border border-[#00274d]/10 px-3 py-1.5 text-xs font-semibold text-[#00274d]", children: "26 years in Infrastructure & Construction" })
+                ] })
+              ] })
+            }
+          ),
+          /* @__PURE__ */ jsx(FounderNarrative, {})
         ] })
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-20 bg-gray-50 border-y", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-4 max-w-5xl", children: [

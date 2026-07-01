@@ -123,6 +123,22 @@ const trustedBy = [
   { name: "IRB Infra",      logo: "/logos/IRB-logo.jpg" },
 ];
 
+const supplierNetwork = [
+  { name: "MS Agrawal",      logo: "/logos/ms-agrawal.png" },
+  // { name: "Jai Balaji",      logo: "/logos/jai-balaji.png" },
+  { name: "Rungta",          logo: "/logos/rungta.png" },
+  { name: "Shyam Steel",     logo: "/logos/image28a.deda90641d90831e6621.webp" },
+  { name: "Ambuja Cement",   logo: "/logos/Ambuja-Footer 1.webp" },
+  { name: "SAIL",            logo: "/logos/SAIL_LOGO_NEW.png" },
+  { name: "Tata Steel",      logo: "/logos/tata-steel-logo.webp" },
+  { name: "Rashmi Metaliks", logo: "/logos/Rashmi-logo-dark.png" },
+  { name: "Jindal Steel",    logo: "/logos/jindal-steel-logo-white.svg" },
+  { name: "UltraTech Cement",logo: "/logos/ultratech-cement-logo.png" },
+  { name: "JK Cement",       logo: "/logos/new-logo-jk.webp" },
+  { name: "Havells",         logo: "/logos/Havells_Logo.svg" },
+  { name: "JSW Steel",       logo: "/logos/JSW_Steel_Logo.svg" },
+];
+
 const associations = [
   { name: "ISO 14001",     logo: "/logos/ISO-14001.jpg" },
   { name: "ISO 27001",     logo: "/logos/ISO-27001.jpg" },
@@ -1233,6 +1249,7 @@ export default function Home() {
           {[
             { title: "Trusted By", subtitle: "Chosen by the companies building India's National Infrastructure pipeline.", logos: trustedBy },
             { title: "Associations", subtitle: "We are Proud to be a part of", logos: associations },
+             { title: "Supplier Network", subtitle: "A trusted network of suppliers committed to quality, growth, and efficiency.", logos: supplierNetwork },
             { title: "Our Financing Partners", subtitle: "Who help us drive innovation in the Supply Chain Financing", logos: financingPartners },
           ].map((block) => (
             <FadeUp key={block.title}>
