@@ -75,7 +75,7 @@ export function WhatsAppButton() {
                     <div>
                       <p className="text-white font-bold text-sm leading-none">Vendor Infra</p>
                       <p className="text-white/70 text-xs mt-0.5 flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-[#25D366] rounded-full inline-block animate-pulse" />
+                        <span className="w-1.5 h-1.5 bg-[#25D366] rounded-full inline-block" />
                         Typically replies instantly
                       </p>
                     </div>
@@ -140,7 +140,12 @@ export function WhatsAppButton() {
             aria-label="Chat on WhatsApp"
             className="relative w-14 h-14 bg-[#25D366] rounded-full shadow-[0_4px_24px_rgba(37,211,102,0.5)] flex items-center justify-center cursor-pointer"
           >
-            <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" />
+            <motion.span
+              aria-hidden
+              className="absolute inset-0 rounded-full bg-[#25D366]"
+              animate={{ opacity: [0.12, 0, 0.12], scale: [1, 1.08, 1] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+            />
             <WhatsAppIcon className="w-7 h-7 text-white relative z-10" />
           </motion.button>
         </div>

@@ -17,6 +17,7 @@ import { sectors as allSectors } from "@/lib/sectorsData";
 import heroImage from "@/assets/hero-construction.png";
 
 const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PLATFORM_STATS_API_URL = "http://3.110.208.157/api/vendor/getPlatformStats";
 
 /* -- animated counter ------------------------------- */
 function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {
@@ -85,11 +86,18 @@ const services: ServiceItem[] = [
   { icon: BarChart3,   title: "Other Services",                  href: "/services", image: "/images/services/otherServices.png",           desc: "Stay ahead with tender updates, sector intelligence, and access to 75+ Schedules of Rates (SOR) for accurate estimation and benchmarking." },
 ];
 
+/* -- Platform stats -----------------------------------
+   Labels, suffixes, and sub-text stay static. Only the numeric
+   `value` for each is overridden at render time from the live
+   getPlatformStats API response (via the `key` field below,
+   which maps to the corresponding field in the API's `data` object).
+   These starting values act as the fallback shown before the API
+   responds, or if the request fails. */
 const stats = [
-  { value: 31637, suffix: "",    label: "Contractors & Vendors", sub: "Certified Contractors & Vendors & accross 20+ Sectors." },
-  { value: 263,   suffix: "",    label: "Live Users",             sub: "Total number of customers who are using our products." },
-  { value: 6052,  suffix: " Cr", label: "Project Value",         sub: "Value of the projects posted in our portal." },
-  { value: 159,   suffix: "",    label: "Plants & Equipment",    sub: "Number of Plants & Equipment." },
+  { key: "contractorsAndVendors", value: 31637, suffix: "",    label: "Contractors & Vendors", sub: "Certified Contractors & Vendors & accross 20+ Sectors." },
+  { key: "liveUsers",             value: 263,   suffix: "",    label: "Live Users",             sub: "Total number of customers who are using our products." },
+  { key: "projectValueCr",        value: 6052,  suffix: " Cr", label: "Project Value",         sub: "Value of the projects posted in our portal." },
+  { key: "plantsAndEquipment",    value: 159,   suffix: "",    label: "Plants & Equipment",    sub: "Number of Plants & Equipment." },
 ];
 
 const blogs = [
@@ -132,7 +140,7 @@ const supplierNetwork = [
   { name: "SAIL",            logo: "/logos/SAIL_LOGO_NEW.png" },
   { name: "Tata Steel",      logo: "/logos/tata-steel-logo.webp" },
   { name: "Rashmi Metaliks", logo: "/logos/Rashmi-logo-dark.png" },
-  { name: "Jindal Steel",    logo: "/logos/jindal-steel-logo-white.svg" },
+  { name: "Jindal Steel",    logo: "/logos/jindal-steel-logo-black.svg" },
   { name: "UltraTech Cement",logo: "/logos/ultratech-cement-logo.png" },
   { name: "JK Cement",       logo: "/logos/new-logo-jk.webp" },
   { name: "Havells",         logo: "/logos/Havells_Logo.svg" },
@@ -403,6 +411,41 @@ export default function Home() {
   const [contactOpen, setContactOpen] = useState(false);
   const [contactPlan, setContactPlan] = useState<string | undefined>(undefined);
 
+  // Live platform stats fetched from getPlatformStats. Starts as an empty
+  // object so `liveStats` below falls back to the static `stats` values
+  // until the API responds (or forever, if it fails).
+  const [platformStats, setPlatformStats] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch(PLATFORM_STATS_API_URL)
+      .then((res) => res.json())
+      .then((json) => {
+        if (!cancelled && json?.success && json.data && typeof json.data === "object") {
+          setPlatformStats(json.data);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch platform stats:", err);
+        // keep static fallback values on error
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Same stats array/order/labels/suffixes as before — only `value` is
+  // swapped for the live number when available (matched via `key`).
+  // projectValueCr can come back as a float (e.g. 12108.0), so it's rounded
+  // for display since Counter expects a whole number to step through.
+  const liveStats = stats.map((s) => {
+    const live = platformStats[s.key];
+    if (typeof live !== "number") return s;
+    return { ...s, value: Math.round(live) };
+  });
+
   const openContact = (planName: string) => {
     setContactPlan(planName);
     setContactOpen(true);
@@ -498,7 +541,7 @@ export default function Home() {
             whileInView="show"
             viewport={{ once: true, margin: "-60px" }}
           >
-            {stats.map((s, i) => (
+            {liveStats.map((s, i) => (
               <motion.div key={i} variants={gridItem}
                 className="bg-white py-10 md:py-12 px-6 hover:bg-gray-50 transition-colors duration-300 text-center">
                 <div
@@ -1334,107 +1377,6 @@ export default function Home() {
       </section>
 
 
-      {/* <section className="py-14 md:py-20 bg-gray-50 border-y border-gray-100 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.45]" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(0,39,77,0.12) 1px, transparent 0)", backgroundSize: "28px 28px" }} />
-        <div className="relative max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <FadeUp className="text-center mb-14">
-            <span className="inline-flex items-center gap-2 text-[#edad1a] text-[12px] font-bold uppercase tracking-[0.3em] mb-4">
-              <span className="w-6 h-px bg-[#edad1a]/60" />
-              Pricing
-              <span className="w-6 h-px bg-[#edad1a]/60" />
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-[#00274d] mb-4">
-              Simple and <span className="text-[#edad1a]">flexible.</span>
-            </h2>
-
-            <p className="text-gray-500 text-base font-normal">Monthly pricing plans, billed annually.</p>
-          </FadeUp>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-            variants={gridVariants}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            {homePricingPlans.map((plan) => (
-              <motion.div key={plan.name} variants={gridItem}>
-                <div className={`h-full rounded-2xl overflow-hidden flex flex-col border transition-all duration-300 hover:-translate-y-1 ${
-                  plan.highlight
-                    ? "bg-[#00274d] border-[#edad1a] shadow-2xl shadow-yellow-400/20"
-                    : "bg-white border-gray-200 shadow-sm hover:shadow-md"
-                }`}>
-                  <div className={`p-7 ${plan.highlight ? "bg-[#00274d]" : "bg-white"}`}>
-                    <span className={`inline-flex rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider mb-4 ${
-                      plan.highlight ? "bg-[#edad1a] text-white" : "bg-gray-100 text-gray-500"
-                    }`}>
-                      {plan.tag}
-                    </span>
-                    <h3 className={`text-2xl font-bold mb-3 ${plan.highlight ? "text-white" : "text-[#00274d]"}`}>{plan.name}</h3>
-                    <div className="flex items-baseline gap-2 mb-4">
-                      {plan.ctaType === "contact" ? (
-                        <button
-                          type="button"
-                          onClick={() => openContact(plan.name)}
-                          className="inline-flex items-center justify-center rounded-xl bg-[#00274d] px-5 py-3 text-lg font-bold text-white shadow-md transition-colors hover:bg-[#003a73]"
-                        >
-                          {plan.price}
-                        </button>
-                      ) : (
-                        <span className={`text-4xl font-extrabold tracking-tight ${plan.highlight ? "text-white" : "text-[#00274d]"}`}>{plan.price}</span>
-                      )}
-                      {plan.priceSuffix && <span className={`text-sm font-medium ${plan.highlight ? "text-white/60" : "text-gray-500"}`}>{plan.priceSuffix}</span>}
-                    </div>
-                    <p className={`text-sm leading-relaxed font-normal ${plan.highlight ? "text-white/65" : "text-gray-500"}`}>{plan.description}</p>
-                  </div>
-                  <div className={`h-px ${plan.highlight ? "bg-white/10" : "bg-gray-100"}`} />
-                  <div className={`p-7 flex-1 flex flex-col ${plan.highlight ? "bg-[#00274d]" : "bg-white"}`}>
-                  <ul className="space-y-3 mb-8 flex-1">
-                    {plan.features.map((f) => (
-                      <li key={f} className="flex items-start gap-3">
-                        <span className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${plan.highlight ? "bg-[#edad1a]/20" : "bg-[#edad1a]/10"}`}>
-                          <CheckCircle2 className="h-3 w-3 text-[#edad1a]" />
-                        </span>
-                        <span className={`text-sm font-normal ${plan.highlight ? "text-white/85" : "text-gray-700"}`}>{f}</span>
-                      </li>
-                    ))}
-                    {plan.excluded.map((f) => (
-                      <li key={f} className="flex items-start gap-3">
-                        <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-red-500/10">
-                          <span className="text-xs font-bold text-red-500">×</span>
-                        </span>
-                        <span className={`text-sm font-normal ${plan.highlight ? "text-white/50" : "text-gray-500"}`}>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    onClick={() => {
-                      if (plan.ctaType === "contact") openContact(plan.name);
-                      else window.open(PORTAL_REGISTER_URL, "_blank", "noopener,noreferrer");
-                    }}
-                    className={`w-full py-3.5 rounded-xl text-sm font-semibold transition-all ${
-                      plan.highlight
-                        ? "bg-[#edad1a] text-white hover:bg-[#d4941a] shadow-lg shadow-yellow-500/30"
-                        : "bg-[#00274d] text-white hover:bg-[#003a73] shadow-md shadow-[#00274d]/20"
-                    }`}>
-                    {plan.ctaType === "contact" ? "Contact Us" : "Get Started"}
-                    </button>
-
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-          <FadeUp className="mt-10 text-center flex justify-center">
-            <Link href="/pricing">
-              <button className="group inline-flex items-center justify-center gap-3 rounded-xl bg-[#edad1a] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-yellow-500/20 transition-all hover:bg-[#d4941a]">
-                View all pricing plans <CtaArrow variant="dark" />
-              </button>
-            </Link>
-          </FadeUp>
-        </div>
-      </section> */}
-
       {/* ── CTA BANNER ────────────────────────────────── */}
       <section
         className="bg-[#edad1a] py-16 relative"
@@ -1461,11 +1403,11 @@ export default function Home() {
               Join <span className="font-semibold">32,000+</span> contractors, vendors, manufacturers, suppliers, and consultants already using Vendor Infra to discover new opportunities, streamline procurement, acesss plants and equipment solutions, and secure project financing and insurance—all through a single integrated platform.
             </p>
             <div className="flex flex-wrap gap-3 justify-center items-center">
-        <a
+        
   href={PORTAL_REGISTER_URL}
   target="_blank"
   rel="noopener noreferrer"
->
+<a>
   <SiteButton variant="onGold" className="normal-case tracking-normal">
     Join Now
   </SiteButton>

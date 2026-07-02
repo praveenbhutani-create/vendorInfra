@@ -3,7 +3,7 @@ import { createRootRouteWithContext, useRouter, Link, Outlet, HeadContent, Scrip
 import { jsx, jsxs } from "react/jsx-runtime";
 import { ZodError, z } from "zod";
 import nodemailer from "nodemailer";
-const appCss = "/assets/styles-D_UdBhr0.css";
+const appCss = "/assets/styles-DzEGhLFS.css";
 function NotFoundComponent() {
   return /* @__PURE__ */ jsx("div", { className: "flex min-h-screen items-center justify-center bg-background px-4", children: /* @__PURE__ */ jsxs("div", { className: "max-w-md text-center", children: [
     /* @__PURE__ */ jsx("h1", { className: "text-7xl font-bold text-foreground", children: "404" }),
@@ -48,7 +48,7 @@ function ErrorComponent({ error, reset }) {
     ] })
   ] }) });
 }
-const Route$7 = createRootRouteWithContext()({
+const Route$9 = createRootRouteWithContext()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -97,15 +97,15 @@ function RootShell({ children }) {
   ] });
 }
 function RootComponent() {
-  const { queryClient } = Route$7.useRouteContext();
+  const { queryClient } = Route$9.useRouteContext();
   return /* @__PURE__ */ jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsx(Outlet, {}) });
 }
-const $$splitComponentImporter$1 = () => import("./_-DoN_rYCx.js");
-const Route$6 = createFileRoute("/$")({
+const $$splitComponentImporter$1 = () => import("./_-BuyRUMUe.js");
+const Route$8 = createFileRoute("/$")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-DoN_rYCx.js");
-const Route$5 = createFileRoute("/")({
+const $$splitComponentImporter = () => import("./index-BuyRUMUe.js");
+const Route$7 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
 function jsonResponse(body, status = 200) {
@@ -132,7 +132,7 @@ function mailErrorResponse(error) {
   return jsonResponse({ error: "Unable to send request right now." }, 500);
 }
 const inquirySchema = z.object({
-  type: z.enum(["contact", "demo", "sales", "quote", "referral"]).default("contact"),
+  type: z.enum(["contact", "demo", "sales", "quote", "referral", "career", "investor"]).default("contact"),
   name: z.string().trim().min(1).max(120),
   company: z.string().trim().max(160).optional().default(""),
   email: z.string().trim().email().max(254).optional().or(z.literal("")).default(""),
@@ -144,6 +144,9 @@ const inquirySchema = z.object({
   plan: z.string().trim().max(120).optional().default(""),
   program: z.string().trim().max(160).optional().default(""),
   city: z.string().trim().max(120).optional().default(""),
+  position: z.string().trim().max(160).optional().default(""),
+  experience: z.string().trim().max(80).optional().default(""),
+  portfolio: z.string().trim().max(500).optional().default(""),
   items: z.array(
     z.object({
       categoryName: z.string().trim().max(160).optional().default(""),
@@ -161,18 +164,20 @@ const labels = {
   demo: "Demo booking",
   sales: "Sales enquiry",
   quote: "Quote request",
-  referral: "Referral application"
+  referral: "Referral application",
+  career: "Career application",
+  investor: "Investor relations enquiry"
 };
 function getEnv(name, fallback = "") {
   return process.env[name] ?? fallback;
 }
-function getMailConfig() {
+function getMailConfig(recipientEnvVar = "MAIL_TO") {
   const host = getEnv("SMTP_HOST", "smtp.gmail.com");
   const port = Number.parseInt(getEnv("SMTP_PORT", "465"), 10);
   const secure = getEnv("SMTP_SECURE", "true") !== "false";
   const user = getEnv("SMTP_USER", "enquiry@vendorinfra.com");
   const pass = getEnv("SMTP_PASS");
-  const to = getEnv("MAIL_TO", "enquiry@vendorinfra.com");
+  const to = getEnv(recipientEnvVar, getEnv("MAIL_TO", "enquiry@vendorinfra.com"));
   const from = getEnv("MAIL_FROM", `"Vendor Infra Website" <${user}>`);
   const replyTo = getEnv("MAIL_REPLY_TO");
   if (!host || !port || !user || !pass || !to) {
@@ -180,13 +185,13 @@ function getMailConfig() {
   }
   return { host, port, secure, user, pass, to, from, replyTo };
 }
-function escapeHtml(value) {
-  return String(value ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+function escapeHtml(value2) {
+  return String(value2 ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
-function field(label, value) {
-  if (Array.isArray(value) && value.length === 0) return "";
-  if (value == null || value === "") return "";
-  const displayValue = Array.isArray(value) ? value.join(", ") : value;
+function field(label, value2) {
+  if (Array.isArray(value2) && value2.length === 0) return "";
+  if (value2 == null || value2 === "") return "";
+  const displayValue = Array.isArray(value2) ? value2.join(", ") : value2;
   return `
     <tr>
       <td style="padding:8px 12px;color:#64748b;font-weight:600;border-bottom:1px solid #e5e7eb;width:180px;">${escapeHtml(label)}</td>
@@ -241,6 +246,9 @@ function renderHtml(data) {
               ${field("Plan", data.plan)}
               ${field("Program", data.program)}
               ${field("City", data.city)}
+              ${field("Position", data.position)}
+              ${field("Experience", data.experience)}
+              ${field("Portfolio", data.portfolio)}
               ${field("Sector", data.sector)}
               ${field("Sectors", data.sectors)}
               ${field("Message", data.message)}
@@ -263,6 +271,9 @@ function renderText(data) {
     data.plan && `Plan: ${data.plan}`,
     data.program && `Program: ${data.program}`,
     data.city && `City: ${data.city}`,
+    data.position && `Position: ${data.position}`,
+    data.experience && `Experience: ${data.experience}`,
+    data.portfolio && `Portfolio: ${data.portfolio}`,
     data.sector && `Sector: ${data.sector}`,
     data.sectors.length && `Sectors: ${data.sectors.join(", ")}`,
     data.message && `Message: ${data.message}`
@@ -278,9 +289,9 @@ function renderText(data) {
   }
   return lines.join("\n");
 }
-async function sendInquiryMail(rawData) {
+async function sendInquiryMail(rawData, options = {}) {
   const data = inquirySchema.parse(rawData);
-  const config = getMailConfig();
+  const config = getMailConfig(options.recipientEnvVar);
   const transporter = nodemailer.createTransport({
     host: config.host,
     port: config.port,
@@ -297,10 +308,11 @@ async function sendInquiryMail(rawData) {
     replyTo,
     subject: `[Vendor Infra] ${labels[data.type]} from ${data.name}`,
     text: renderText(data),
-    html: renderHtml(data)
+    html: renderHtml(data),
+    attachments: options.attachments
   });
 }
-const Route$4 = createFileRoute("/api/referral")({
+const Route$6 = createFileRoute("/api/referral")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -315,7 +327,7 @@ const Route$4 = createFileRoute("/api/referral")({
     }
   }
 });
-const Route$3 = createFileRoute("/api/quote-requests")({
+const Route$5 = createFileRoute("/api/quote-requests")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -330,7 +342,25 @@ const Route$3 = createFileRoute("/api/quote-requests")({
     }
   }
 });
-const Route$2 = createFileRoute("/api/demo-bookings")({
+const Route$4 = createFileRoute("/api/investor")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        try {
+          const data = await parseJsonRequest(request);
+          await sendInquiryMail(
+            { ...data, type: "investor" },
+            { recipientEnvVar: "INVESTOR_MAIL_TO" }
+          );
+          return jsonResponse({ ok: true });
+        } catch (error) {
+          return mailErrorResponse(error);
+        }
+      }
+    }
+  }
+});
+const Route$3 = createFileRoute("/api/demo-bookings")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -345,7 +375,7 @@ const Route$2 = createFileRoute("/api/demo-bookings")({
     }
   }
 });
-const Route$1 = createFileRoute("/api/contact-sales")({
+const Route$2 = createFileRoute("/api/contact-sales")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -360,7 +390,7 @@ const Route$1 = createFileRoute("/api/contact-sales")({
     }
   }
 });
-const Route = createFileRoute("/api/contact")({
+const Route$1 = createFileRoute("/api/contact")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -375,51 +405,107 @@ const Route = createFileRoute("/api/contact")({
     }
   }
 });
-const SplatRoute = Route$6.update({
+const MAX_RESUME_BYTES = 5 * 1024 * 1024;
+function value(formData, key) {
+  const item = formData.get(key);
+  return typeof item === "string" ? item : "";
+}
+const Route = createFileRoute("/api/career")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => {
+        try {
+          const formData = await request.formData();
+          const resume = formData.get("resume");
+          const attachments = [];
+          if (resume instanceof File && resume.size > 0) {
+            if (resume.size > MAX_RESUME_BYTES) {
+              return jsonResponse({ error: "Resume must be 5MB or less." }, 400);
+            }
+            attachments.push({
+              filename: resume.name || "resume",
+              content: Buffer.from(await resume.arrayBuffer()),
+              contentType: resume.type || void 0
+            });
+          }
+          await sendInquiryMail(
+            {
+              type: "career",
+              name: value(formData, "name"),
+              email: value(formData, "email"),
+              phone: value(formData, "phone"),
+              position: value(formData, "position"),
+              experience: value(formData, "experience"),
+              portfolio: value(formData, "portfolio"),
+              message: value(formData, "message")
+            },
+            { attachments }
+          );
+          return jsonResponse({ ok: true });
+        } catch (error) {
+          return mailErrorResponse(error);
+        }
+      }
+    }
+  }
+});
+const SplatRoute = Route$8.update({
   id: "/$",
   path: "/$",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
 });
-const IndexRoute = Route$5.update({
+const IndexRoute = Route$7.update({
   id: "/",
   path: "/",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
 });
-const ApiReferralRoute = Route$4.update({
+const ApiReferralRoute = Route$6.update({
   id: "/api/referral",
   path: "/api/referral",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
 });
-const ApiQuoteRequestsRoute = Route$3.update({
+const ApiQuoteRequestsRoute = Route$5.update({
   id: "/api/quote-requests",
   path: "/api/quote-requests",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
 });
-const ApiDemoBookingsRoute = Route$2.update({
+const ApiInvestorRoute = Route$4.update({
+  id: "/api/investor",
+  path: "/api/investor",
+  getParentRoute: () => Route$9
+});
+const ApiDemoBookingsRoute = Route$3.update({
   id: "/api/demo-bookings",
   path: "/api/demo-bookings",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
 });
-const ApiContactSalesRoute = Route$1.update({
+const ApiContactSalesRoute = Route$2.update({
   id: "/api/contact-sales",
   path: "/api/contact-sales",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
 });
-const ApiContactRoute = Route.update({
+const ApiContactRoute = Route$1.update({
   id: "/api/contact",
   path: "/api/contact",
-  getParentRoute: () => Route$7
+  getParentRoute: () => Route$9
+});
+const ApiCareerRoute = Route.update({
+  id: "/api/career",
+  path: "/api/career",
+  getParentRoute: () => Route$9
 });
 const rootRouteChildren = {
   IndexRoute,
   SplatRoute,
+  ApiCareerRoute,
   ApiContactRoute,
   ApiContactSalesRoute,
   ApiDemoBookingsRoute,
+  ApiInvestorRoute,
   ApiQuoteRequestsRoute,
   ApiReferralRoute
 };
-const routeTree = Route$7._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$9._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
   const router = createRouter({

@@ -4,7 +4,7 @@ import { z } from "zod";
 const inquirySchema = z
   .object({
     type: z
-      .enum(["contact", "demo", "sales", "quote", "referral"])
+      .enum(["contact", "demo", "sales", "quote", "referral", "career", "investor"])
       .default("contact"),
     name: z.string().trim().min(1).max(120),
     company: z.string().trim().max(160).optional().default(""),
@@ -17,6 +17,9 @@ const inquirySchema = z
     plan: z.string().trim().max(120).optional().default(""),
     program: z.string().trim().max(160).optional().default(""),
     city: z.string().trim().max(120).optional().default(""),
+    position: z.string().trim().max(160).optional().default(""),
+    experience: z.string().trim().max(80).optional().default(""),
+    portfolio: z.string().trim().max(500).optional().default(""),
     items: z
       .array(
         z.object({
@@ -43,19 +46,21 @@ const labels: Record<InquiryPayload["type"], string> = {
   sales: "Sales enquiry",
   quote: "Quote request",
   referral: "Referral application",
+  career: "Career application",
+  investor: "Investor relations enquiry",
 };
 
 function getEnv(name: string, fallback = "") {
   return process.env[name] ?? fallback;
 }
 
-function getMailConfig() {
+function getMailConfig(recipientEnvVar = "MAIL_TO") {
   const host = getEnv("SMTP_HOST", "smtp.gmail.com");
   const port = Number.parseInt(getEnv("SMTP_PORT", "465"), 10);
   const secure = getEnv("SMTP_SECURE", "true") !== "false";
   const user = getEnv("SMTP_USER", "enquiry@vendorinfra.com");
   const pass = getEnv("SMTP_PASS");
-  const to = getEnv("MAIL_TO", "enquiry@vendorinfra.com");
+  const to = getEnv(recipientEnvVar, getEnv("MAIL_TO", "enquiry@vendorinfra.com"));
   const from = getEnv("MAIL_FROM", `"Vendor Infra Website" <${user}>`);
   const replyTo = getEnv("MAIL_REPLY_TO");
 
@@ -140,6 +145,9 @@ function renderHtml(data: InquiryPayload) {
               ${field("Plan", data.plan)}
               ${field("Program", data.program)}
               ${field("City", data.city)}
+              ${field("Position", data.position)}
+              ${field("Experience", data.experience)}
+              ${field("Portfolio", data.portfolio)}
               ${field("Sector", data.sector)}
               ${field("Sectors", data.sectors)}
               ${field("Message", data.message)}
@@ -163,6 +171,9 @@ function renderText(data: InquiryPayload) {
     data.plan && `Plan: ${data.plan}`,
     data.program && `Program: ${data.program}`,
     data.city && `City: ${data.city}`,
+    data.position && `Position: ${data.position}`,
+    data.experience && `Experience: ${data.experience}`,
+    data.portfolio && `Portfolio: ${data.portfolio}`,
     data.sector && `Sector: ${data.sector}`,
     data.sectors.length && `Sectors: ${data.sectors.join(", ")}`,
     data.message && `Message: ${data.message}`,
@@ -182,9 +193,19 @@ function renderText(data: InquiryPayload) {
   return lines.join("\n");
 }
 
-export async function sendInquiryMail(rawData: unknown) {
+export async function sendInquiryMail(
+  rawData: unknown,
+  options: {
+    recipientEnvVar?: string;
+    attachments?: Array<{
+      filename: string;
+      content: Buffer;
+      contentType?: string;
+    }>;
+  } = {},
+) {
   const data = inquirySchema.parse(rawData);
-  const config = getMailConfig();
+  const config = getMailConfig(options.recipientEnvVar);
   const transporter = nodemailer.createTransport({
     host: config.host,
     port: config.port,
@@ -204,6 +225,6 @@ export async function sendInquiryMail(rawData: unknown) {
     subject: `[Vendor Infra] ${labels[data.type]} from ${data.name}`,
     text: renderText(data),
     html: renderHtml(data),
+    attachments: options.attachments,
   });
 }
-

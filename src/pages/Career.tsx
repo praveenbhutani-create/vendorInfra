@@ -58,11 +58,37 @@ export default function Career() {
   );
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
-    event.currentTarget.reset();
+    setIsSubmitting(true);
+    setSubmitError("");
+    setSubmitted(false);
+
+    const form = event.currentTarget;
+
+    try {
+      const res = await fetch("/api/career", {
+        method: "POST",
+        body: new FormData(form),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) throw new Error(data.error ?? "Unable to send application.");
+
+      setSubmitted(true);
+      form.reset();
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Could not send your application. Please call us or try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -174,10 +200,10 @@ export default function Career() {
                   Send your updated CV along with your portfolio, if applicable, to our HR team.
                 </p>
                 <a
-                  href="mailto:hr@vendorinfra.com"
+                  href="mailto:hrhelpdesk@vendorinfra.com"
                   className="inline-flex items-center gap-2 text-[#edad1a] font-bold break-all"
                 >
-                  hr@vendorinfra.com <ArrowRight className="w-4 h-4 shrink-0" />
+                  hrhelpdesk@vendorinfra.com <ArrowRight className="w-4 h-4 shrink-0" />
                 </a>
                 <p className="text-white/70 text-sm leading-relaxed mt-5">
                   Please mention the position you are applying for in the subject line, such as "Application for Sales Executive" or "Application for Social Media Executive".
@@ -321,15 +347,24 @@ export default function Career() {
                   Thank you for applying to Vendor Infra. Our HR team will review your application and reach out if your profile matches our requirements.
                 </div>
               )}
+              {submitError && (
+                <div className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
+                  {submitError}
+                </div>
+              )}
 
               <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-4">
-                <button type="submit" className={siteButtonClasses("primary", "px-6 py-3")}>
-                  Submit Application <Send className="w-4 h-4" />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className={siteButtonClasses("primary", "px-6 py-3 disabled:cursor-not-allowed disabled:opacity-60")}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit Application"} <Send className="w-4 h-4" />
                 </button>
                 <p className="text-xs text-gray-500">
                   Questions? Reach out anytime at{" "}
-                  <a href="mailto:hr@vendorinfra.com" className="font-semibold text-[#00274d] hover:text-[#edad1a]">
-                    hr@vendorinfra.com
+                  <a href="mailto:hrhelpdesk@vendorinfra.com" className="font-semibold text-[#00274d] hover:text-[#edad1a]">
+                    hrhelpdesk@vendorinfra.com
                   </a>
                 </p>
               </div>

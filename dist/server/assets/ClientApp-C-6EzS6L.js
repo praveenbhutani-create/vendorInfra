@@ -2468,6 +2468,7 @@ function getSectorBySlug(slug) {
 }
 const heroImage = "/assets/hero-construction-PkMOOhzu.png";
 const PORTAL_REGISTER_URL$7 = "http://3.110.208.157/customer/";
+const PLATFORM_STATS_API_URL = "http://3.110.208.157/api/vendor/getPlatformStats";
 function Counter({ target, suffix = "", prefix = "" }) {
   const [count2, setCount] = useState(0);
   const ref = useRef(null);
@@ -2524,10 +2525,10 @@ const services$1 = [
   { icon: BarChart3, title: "Other Services", href: "/services", image: "/images/services/otherServices.png", desc: "Stay ahead with tender updates, sector intelligence, and access to 75+ Schedules of Rates (SOR) for accurate estimation and benchmarking." }
 ];
 const stats$1 = [
-  { value: 31637, suffix: "", label: "Contractors & Vendors", sub: "Certified Contractors & Vendors & accross 20+ Sectors." },
-  { value: 263, suffix: "", label: "Live Users", sub: "Total number of customers who are using our products." },
-  { value: 6052, suffix: " Cr", label: "Project Value", sub: "Value of the projects posted in our portal." },
-  { value: 159, suffix: "", label: "Plants & Equipment", sub: "Number of Plants & Equipment." }
+  { key: "contractorsAndVendors", value: 31637, suffix: "", label: "Contractors & Vendors", sub: "Certified Contractors & Vendors & accross 20+ Sectors." },
+  { key: "liveUsers", value: 263, suffix: "", label: "Live Users", sub: "Total number of customers who are using our products." },
+  { key: "projectValueCr", value: 6052, suffix: " Cr", label: "Project Value", sub: "Value of the projects posted in our portal." },
+  { key: "plantsAndEquipment", value: 159, suffix: "", label: "Plants & Equipment", sub: "Number of Plants & Equipment." }
 ];
 const blogs = [
   { img: "/images/blog/Blog-promote-digitalisation.png", date: "March 31, 2026", cat: "Marketplace", title: "Vendor Infra Marketplace for Plants & Equipment: Unlocking the Power of a Marketplace", excerpt: "In the ever-evolving landscape of industries, effective management of plants and equipment is crucial for businesses seeking to optimize their ROI." },
@@ -2565,7 +2566,7 @@ const supplierNetwork = [
   { name: "SAIL", logo: "/logos/SAIL_LOGO_NEW.png" },
   { name: "Tata Steel", logo: "/logos/tata-steel-logo.webp" },
   { name: "Rashmi Metaliks", logo: "/logos/Rashmi-logo-dark.png" },
-  { name: "Jindal Steel", logo: "/logos/jindal-steel-logo-white.svg" },
+  { name: "Jindal Steel", logo: "/logos/jindal-steel-logo-black.svg" },
   { name: "UltraTech Cement", logo: "/logos/ultratech-cement-logo.png" },
   { name: "JK Cement", logo: "/logos/new-logo-jk.webp" },
   { name: "Havells", logo: "/logos/Havells_Logo.svg" },
@@ -2663,6 +2664,25 @@ function Home() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [contactOpen, setContactOpen] = useState(false);
   const [contactPlan, setContactPlan] = useState(void 0);
+  const [platformStats, setPlatformStats] = useState({});
+  useEffect(() => {
+    let cancelled = false;
+    fetch(PLATFORM_STATS_API_URL).then((res) => res.json()).then((json) => {
+      if (!cancelled && json?.success && json.data && typeof json.data === "object") {
+        setPlatformStats(json.data);
+      }
+    }).catch((err) => {
+      console.error("Failed to fetch platform stats:", err);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  const liveStats = stats$1.map((s) => {
+    const live = platformStats[s.key];
+    if (typeof live !== "number") return s;
+    return { ...s, value: Math.round(live) };
+  });
   useEffect(() => {
     const t = setInterval(() => setActiveTestimonial((p) => (p + 1) % testimonials.length), 5500);
     return () => clearInterval(t);
@@ -2742,7 +2762,7 @@ function Home() {
         initial: "hidden",
         whileInView: "show",
         viewport: { once: true, margin: "-60px" },
-        children: stats$1.map((s, i) => /* @__PURE__ */ jsxs(
+        children: liveStats.map((s, i) => /* @__PURE__ */ jsxs(
           motion.div,
           {
             variants: gridItem,
@@ -3378,15 +3398,12 @@ function Home() {
             /* @__PURE__ */ jsx("span", { className: "font-semibold", children: "32,000+" }),
             " contractors, vendors, manufacturers, suppliers, and consultants already using Vendor Infra to discover new opportunities, streamline procurement, acesss plants and equipment solutions, and secure project financing and insurance—all through a single integrated platform."
           ] }),
-          /* @__PURE__ */ jsx("div", { className: "flex flex-wrap gap-3 justify-center items-center", children: /* @__PURE__ */ jsx(
-            "a",
-            {
-              href: PORTAL_REGISTER_URL$7,
-              target: "_blank",
-              rel: "noopener noreferrer",
-              children: /* @__PURE__ */ jsx(SiteButton, { variant: "onGold", className: "normal-case tracking-normal", children: "Join Now" })
-            }
-          ) })
+          /* @__PURE__ */ jsxs("div", { className: "flex flex-wrap gap-3 justify-center items-center", children: [
+            "href=",
+            PORTAL_REGISTER_URL$7,
+            'target="_blank" rel="noopener noreferrer"',
+            /* @__PURE__ */ jsx("a", { children: /* @__PURE__ */ jsx(SiteButton, { variant: "onGold", className: "normal-case tracking-normal", children: "Join Now" }) })
+          ] })
         ] }) })
       }
     ),
@@ -8170,10 +8187,30 @@ function Career() {
     "Explore current openings at Vendor Infra and apply to build your career with a growth-oriented infrastructure technology company."
   );
   const [submitted, setSubmitted] = useState(false);
-  function handleSubmit(event) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  async function handleSubmit(event) {
     event.preventDefault();
-    setSubmitted(true);
-    event.currentTarget.reset();
+    setIsSubmitting(true);
+    setSubmitError("");
+    setSubmitted(false);
+    const form = event.currentTarget;
+    try {
+      const res = await fetch("/api/career", {
+        method: "POST",
+        body: new FormData(form)
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error ?? "Unable to send application.");
+      setSubmitted(true);
+      form.reset();
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Could not send your application. Please call us or try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   }
   return /* @__PURE__ */ jsxs("div", { className: "min-h-screen flex flex-col", children: [
     /* @__PURE__ */ jsx("div", { className: "fixed right-0 top-0 h-full w-[18px] bg-[#00274d] z-50 pointer-events-none" }),
@@ -8260,10 +8297,10 @@ function Career() {
           /* @__PURE__ */ jsxs(
             "a",
             {
-              href: "mailto:hr@vendorinfra.com",
+              href: "mailto:hrhelpdesk@vendorinfra.com",
               className: "inline-flex items-center gap-2 text-[#edad1a] font-bold break-all",
               children: [
-                "hr@vendorinfra.com ",
+                "hrhelpdesk@vendorinfra.com ",
                 /* @__PURE__ */ jsx(ArrowRight, { className: "w-4 h-4 shrink-0" })
               ]
             }
@@ -8407,15 +8444,25 @@ function Career() {
             ] })
           ] }),
           submitted && /* @__PURE__ */ jsx("div", { className: "mt-6 rounded-xl border border-[#edad1a]/30 bg-[#edad1a]/10 px-4 py-3 text-sm font-semibold text-[#00274d]", children: "Thank you for applying to Vendor Infra. Our HR team will review your application and reach out if your profile matches our requirements." }),
+          submitError && /* @__PURE__ */ jsx("div", { className: "mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600", children: submitError }),
           /* @__PURE__ */ jsxs("div", { className: "mt-7 flex flex-col sm:flex-row sm:items-center gap-4", children: [
-            /* @__PURE__ */ jsxs("button", { type: "submit", className: siteButtonClasses("primary", "px-6 py-3"), children: [
-              "Submit Application ",
-              /* @__PURE__ */ jsx(Send, { className: "w-4 h-4" })
-            ] }),
+            /* @__PURE__ */ jsxs(
+              "button",
+              {
+                type: "submit",
+                disabled: isSubmitting,
+                className: siteButtonClasses("primary", "px-6 py-3 disabled:cursor-not-allowed disabled:opacity-60"),
+                children: [
+                  isSubmitting ? "Submitting..." : "Submit Application",
+                  " ",
+                  /* @__PURE__ */ jsx(Send, { className: "w-4 h-4" })
+                ]
+              }
+            ),
             /* @__PURE__ */ jsxs("p", { className: "text-xs text-gray-500", children: [
               "Questions? Reach out anytime at",
               " ",
-              /* @__PURE__ */ jsx("a", { href: "mailto:hr@vendorinfra.com", className: "font-semibold text-[#00274d] hover:text-[#edad1a]", children: "hr@vendorinfra.com" })
+              /* @__PURE__ */ jsx("a", { href: "mailto:hrhelpdesk@vendorinfra.com", className: "font-semibold text-[#00274d] hover:text-[#edad1a]", children: "hrhelpdesk@vendorinfra.com" })
             ] })
           ] })
         ] })
@@ -8516,12 +8563,33 @@ function InvestorModal({ onClose }) {
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/investor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.fullName,
+          email: form.email,
+          company: form.company,
+          message: form.message
+        })
+      });
+      if (!res.ok) throw new Error("Server error");
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Could not send your investor enquiry. Please call us or try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return /* @__PURE__ */ jsxs("div", { className: "fixed inset-0 z-[100] flex items-center justify-center p-4", children: [
     /* @__PURE__ */ jsx(
@@ -8636,17 +8704,22 @@ function InvestorModal({ onClose }) {
                   }
                 )
               ] }),
-              /* @__PURE__ */ jsxs(
+              /* @__PURE__ */ jsx(
                 "button",
                 {
                   type: "submit",
-                  className: "w-full rounded-xl bg-[#edad1a] px-6 py-3.5 text-sm font-black text-[#00274d] hover:bg-[#f0b800] active:scale-[0.98] transition-all shadow-lg shadow-[#edad1a]/30 flex items-center justify-center gap-2",
-                  children: [
+                  disabled: isSubmitting,
+                  className: "w-full rounded-xl bg-[#edad1a] px-6 py-3.5 text-sm font-black text-[#00274d] hover:bg-[#f0b800] active:scale-[0.98] transition-all shadow-lg shadow-[#edad1a]/30 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60",
+                  children: isSubmitting ? /* @__PURE__ */ jsxs(Fragment, { children: [
+                    /* @__PURE__ */ jsx(Loader2, { className: "h-4 w-4 animate-spin" }),
+                    "Sending..."
+                  ] }) : /* @__PURE__ */ jsxs(Fragment, { children: [
                     "Submit Inquiry",
                     /* @__PURE__ */ jsx(Mail, { className: "h-4 w-4" })
-                  ]
+                  ] })
                 }
               ),
+              submitError && /* @__PURE__ */ jsx("p", { className: "text-center text-xs font-semibold text-red-500", children: submitError }),
               /* @__PURE__ */ jsx("p", { className: "text-center text-[11px] text-gray-400", children: "Highly confidential · For private circulation only" })
             ] })
           ] })
@@ -10329,7 +10402,7 @@ function WhatsAppButton() {
               /* @__PURE__ */ jsxs("div", { children: [
                 /* @__PURE__ */ jsx("p", { className: "text-white font-bold text-sm leading-none", children: "Vendor Infra" }),
                 /* @__PURE__ */ jsxs("p", { className: "text-white/70 text-xs mt-0.5 flex items-center gap-1", children: [
-                  /* @__PURE__ */ jsx("span", { className: "w-1.5 h-1.5 bg-[#25D366] rounded-full inline-block animate-pulse" }),
+                  /* @__PURE__ */ jsx("span", { className: "w-1.5 h-1.5 bg-[#25D366] rounded-full inline-block" }),
                   "Typically replies instantly"
                 ] })
               ] })
@@ -10393,7 +10466,15 @@ function WhatsAppButton() {
         "aria-label": "Chat on WhatsApp",
         className: "relative w-14 h-14 bg-[#25D366] rounded-full shadow-[0_4px_24px_rgba(37,211,102,0.5)] flex items-center justify-center cursor-pointer",
         children: [
-          /* @__PURE__ */ jsx("span", { className: "absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25" }),
+          /* @__PURE__ */ jsx(
+            motion.span,
+            {
+              "aria-hidden": true,
+              className: "absolute inset-0 rounded-full bg-[#25D366]",
+              animate: { opacity: [0.12, 0, 0.12], scale: [1, 1.08, 1] },
+              transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+            }
+          ),
           /* @__PURE__ */ jsx(WhatsAppIcon, { className: "w-7 h-7 text-white relative z-10" })
         ]
       }
@@ -10477,220 +10558,242 @@ function BookDemoButton() {
     }, 350);
   };
   const sectorLabel = form.sectors.length ? form.sectors.length === 1 ? form.sectors[0] : `${form.sectors.length} sectors selected` : "Select sectors...";
-  return /* @__PURE__ */ jsxs("div", { className: "fixed bottom-6 left-4 sm:left-6 z-50 flex flex-col items-start gap-0", children: [
-    /* @__PURE__ */ jsx(AnimatePresence, { children: open && /* @__PURE__ */ jsxs(
-      motion.div,
-      {
-        initial: { opacity: 0, y: 20, scale: 0.96 },
-        animate: { opacity: 1, y: 0, scale: 1 },
-        exit: { opacity: 0, y: 16, scale: 0.96 },
-        transition: { type: "spring", stiffness: 340, damping: 30 },
-        className: "mb-3 w-[300px] bg-white rounded-xl shadow-xl shadow-black/15 border border-gray-100 overflow-hidden",
-        children: [
-          /* @__PURE__ */ jsxs("div", { className: "relative bg-[#00274d] px-4 py-3", children: [
-            /* @__PURE__ */ jsx(
-              "div",
-              {
-                className: "absolute inset-0 opacity-[0.07]",
-                style: { backgroundImage: "radial-gradient(circle at 1px 1px,#fff 1px,transparent 0)", backgroundSize: "18px 18px" }
-              }
-            ),
-            /* @__PURE__ */ jsxs("div", { className: "flex items-start justify-between relative z-10 gap-2", children: [
-              /* @__PURE__ */ jsxs("div", { className: "min-w-0", children: [
-                /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
-                  /* @__PURE__ */ jsx("div", { className: "w-6 h-6 bg-white/12 rounded-md flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsx(CalendarCheck, { className: "w-3 h-3 text-white" }) }),
-                  /* @__PURE__ */ jsx("p", { className: "text-white font-semibold text-[13px] leading-none tracking-tight", children: "Book a Free Demo" })
-                ] }),
-                /* @__PURE__ */ jsx("p", { className: "text-white/65 text-[11px] mt-1.5 leading-snug", children: "For AI-Powered SaaS Platform for the Infrastructure, Construction & Manufacturing Industry." })
-              ] }),
-              /* @__PURE__ */ jsx(
-                "button",
-                {
-                  onClick: close,
-                  "aria-label": "Close",
-                  className: "w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-colors shrink-0",
-                  children: /* @__PURE__ */ jsx(X, { className: "w-3 h-3" })
-                }
-              )
-            ] })
-          ] }),
-          /* @__PURE__ */ jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxs(AnimatePresence, { mode: "wait", children: [
-            step === "form" && /* @__PURE__ */ jsxs(
-              motion.form,
-              {
-                initial: { opacity: 0 },
-                animate: { opacity: 1 },
-                exit: { opacity: 0 },
-                onSubmit: submit,
-                noValidate: true,
-                className: "space-y-2.5",
-                children: [
-                  /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: labelCls, children: "Full Name *" }),
-                    /* @__PURE__ */ jsx(
-                      "input",
-                      {
-                        value: form.name,
-                        onChange: set("name"),
-                        placeholder: "James",
-                        className: `${inputCls} ${errors.name ? "border-red-400 ring-2 ring-red-200" : ""}`
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: labelCls, children: "Company *" }),
-                    /* @__PURE__ */ jsx(
-                      "input",
-                      {
-                        value: form.company,
-                        onChange: set("company"),
-                        placeholder: "Your company",
-                        className: `${inputCls} ${errors.company ? "border-red-400 ring-2 ring-red-200" : ""}`
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: labelCls, children: "Phone *" }),
-                    /* @__PURE__ */ jsx(
-                      "input",
-                      {
-                        value: form.phone,
-                        onChange: set("phone"),
-                        placeholder: "98765 43210",
-                        type: "tel",
-                        className: `${inputCls} ${errors.phone ? "border-red-400 ring-2 ring-red-200" : ""}`
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: labelCls, children: "Email" }),
-                    /* @__PURE__ */ jsx(
-                      "input",
-                      {
-                        value: form.email,
-                        onChange: set("email"),
-                        placeholder: "you@company.com",
-                        type: "email",
-                        className: inputCls
-                      }
-                    )
-                  ] }),
-                  /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("label", { className: labelCls, children: "Sectors" }),
-                    /* @__PURE__ */ jsxs("div", { className: "relative group", children: [
-                      /* @__PURE__ */ jsxs(
-                        "button",
-                        {
-                          type: "button",
-                          className: `${inputCls} flex items-center justify-between text-left`,
-                          children: [
-                            /* @__PURE__ */ jsx("span", { className: form.sectors.length ? "text-[13px] text-gray-700 truncate" : "text-[12.5px] text-gray-400 font-normal", children: sectorLabel }),
-                            /* @__PURE__ */ jsx(ChevronDown, { className: "w-4 h-4 text-gray-400 shrink-0" })
-                          ]
-                        }
-                      ),
-                      /* @__PURE__ */ jsx("div", { className: "invisible opacity-0 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 absolute left-0 right-0 bottom-full z-30 mb-2 max-h-52 overflow-y-auto rounded-lg border border-gray-200 bg-white p-1.5 shadow-2xl transition-all", children: SECTORS.map((s) => /* @__PURE__ */ jsxs("label", { className: "flex min-h-9 cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-1.5 text-[13px] font-medium leading-snug text-[#00274d] hover:bg-[#edad1a]/10", children: [
-                        /* @__PURE__ */ jsx(
-                          "input",
-                          {
-                            type: "checkbox",
-                            checked: form.sectors.includes(s),
-                            onChange: () => toggleSector(s),
-                            className: "h-3.5 w-3.5 shrink-0 rounded border-gray-300 accent-[#edad1a]"
-                          }
-                        ),
-                        /* @__PURE__ */ jsx("span", { children: s })
-                      ] }, s)) })
-                    ] })
-                  ] }),
-                  /* @__PURE__ */ jsxs(
-                    "button",
-                    {
-                      type: "submit",
-                      className: "group/btn w-full bg-[#edad1a] hover:bg-[#d4941a] text-white font-semibold py-2.5 pl-4 pr-2 rounded-md text-[13px] tracking-tight transition-all mt-1 flex items-center justify-between shadow-sm hover:shadow-md",
-                      children: [
-                        /* @__PURE__ */ jsx("span", { children: "Request My Free Demo" }),
-                        /* @__PURE__ */ jsx("span", { className: "w-6 h-6 bg-white rounded-full flex items-center justify-center text-[#1a1a1a] transition-transform group-hover/btn:translate-x-0.5", children: /* @__PURE__ */ jsx(ArrowRight, { className: "w-3.5 h-3.5" }) })
-                      ]
-                    }
-                  ),
-                  /* @__PURE__ */ jsx("p", { className: "text-center text-gray-400 text-[10px] pt-0.5", children: "Our expert will connect with you shortly" }),
-                  submitError && /* @__PURE__ */ jsx("p", { className: "text-center text-red-500 text-[11px] leading-snug", children: submitError })
-                ]
-              },
-              "form"
-            ),
-            step === "loading" && /* @__PURE__ */ jsxs(
-              motion.div,
-              {
-                initial: { opacity: 0 },
-                animate: { opacity: 1 },
-                exit: { opacity: 0 },
-                className: "flex flex-col items-center justify-center py-10 gap-3",
-                children: [
-                  /* @__PURE__ */ jsx(Loader2, { className: "w-8 h-8 text-[#edad1a] animate-spin" }),
-                  /* @__PURE__ */ jsx("p", { className: "text-gray-500 text-sm", children: "Booking your demo…" })
-                ]
-              },
-              "loading"
-            ),
-            step === "success" && /* @__PURE__ */ jsxs(
-              motion.div,
-              {
-                initial: { opacity: 0, scale: 0.92 },
-                animate: { opacity: 1, scale: 1 },
-                exit: { opacity: 0 },
-                transition: { type: "spring", stiffness: 260, damping: 22 },
-                className: "flex flex-col items-center justify-center py-8 gap-3 text-center",
-                children: [
-                  /* @__PURE__ */ jsx("div", { className: "w-14 h-14 bg-green-50 rounded-full flex items-center justify-center", children: /* @__PURE__ */ jsx(CheckCircle2, { className: "w-8 h-8 text-green-500" }) }),
-                  /* @__PURE__ */ jsx("h3", { className: "text-base font-semibold text-[#00274d]", children: "Demo Booked!" }),
-                  /* @__PURE__ */ jsxs("p", { className: "text-gray-500 text-xs leading-relaxed max-w-[200px]", children: [
-                    "Thank you,  ",
-                    /* @__PURE__ */ jsx("strong", { className: "text-gray-700", children: form.name }),
-                    "!  One of our experts will contact you shortly."
+  return /* @__PURE__ */ jsxs(
+    "div",
+    {
+      className: "fixed z-[60] flex flex-col items-start gap-0",
+      style: {
+        bottom: "max(1.25rem, env(safe-area-inset-bottom))",
+        left: "max(1rem, env(safe-area-inset-left))"
+      },
+      children: [
+        /* @__PURE__ */ jsx(AnimatePresence, { children: open && /* @__PURE__ */ jsxs(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 20, scale: 0.96 },
+            animate: { opacity: 1, y: 0, scale: 1 },
+            exit: { opacity: 0, y: 16, scale: 0.96 },
+            transition: { type: "spring", stiffness: 340, damping: 30 },
+            className: "mb-3 w-[calc(100vw-2rem)] max-w-[300px] bg-white rounded-xl shadow-2xl shadow-black/30 border border-gray-100 overflow-hidden",
+            children: [
+              /* @__PURE__ */ jsxs("div", { className: "relative bg-[#00274d] px-4 py-3", children: [
+                /* @__PURE__ */ jsx(
+                  "div",
+                  {
+                    className: "absolute inset-0 opacity-[0.07]",
+                    style: { backgroundImage: "radial-gradient(circle at 1px 1px,#fff 1px,transparent 0)", backgroundSize: "18px 18px" }
+                  }
+                ),
+                /* @__PURE__ */ jsxs("div", { className: "flex items-start justify-between relative z-10 gap-2", children: [
+                  /* @__PURE__ */ jsxs("div", { className: "min-w-0", children: [
+                    /* @__PURE__ */ jsxs("div", { className: "flex items-center gap-2", children: [
+                      /* @__PURE__ */ jsx("div", { className: "w-6 h-6 bg-[#edad1a] rounded-md flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsx(CalendarCheck, { className: "w-3 h-3 text-white" }) }),
+                      /* @__PURE__ */ jsx("p", { className: "text-white font-semibold text-[13px] leading-none tracking-tight", children: "Book a Free Demo" })
+                    ] }),
+                    /* @__PURE__ */ jsx("p", { className: "text-white/65 text-[11px] mt-1.5 leading-snug", children: "For AI-Powered SaaS Platform for the Infrastructure, Construction & Manufacturing Industry." })
                   ] }),
                   /* @__PURE__ */ jsx(
                     "button",
                     {
                       onClick: close,
-                      className: "mt-1 bg-[#00274d] text-white font-medium px-6 py-2.5 rounded-full text-sm hover:bg-[#003a6e] transition-colors",
-                      children: "Done"
+                      "aria-label": "Close",
+                      className: "w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-colors shrink-0",
+                      children: /* @__PURE__ */ jsx(X, { className: "w-3 h-3" })
                     }
                   )
-                ]
-              },
-              "success"
-            )
-          ] }) })
-        ]
-      }
-    ) }),
-    /* @__PURE__ */ jsxs(
-      motion.button,
-      {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { delay: 2, duration: 0.5, type: "spring" },
-        onClick: () => setOpen((v) => !v),
-        "aria-label": "Book a Free Demo",
-        className: "flex items-center gap-2.5 bg-[#00274d] hover:bg-[#003a6e] text-white font-medium p-3 sm:pl-3 sm:pr-4 sm:py-3 rounded-full shadow-lg shadow-[#00274d]/25 transition-colors duration-200 group border border-white/10",
-        children: [
-          /* @__PURE__ */ jsx("div", { className: "w-7 h-7 bg-[#edad1a] rounded-full flex items-center justify-center shrink-0", children: /* @__PURE__ */ jsx(CalendarCheck, { className: "w-4 h-4 text-white" }) }),
-          /* @__PURE__ */ jsx("span", { className: "hidden sm:inline text-sm", children: "Book a Demo" }),
-          /* @__PURE__ */ jsx(
-            motion.div,
-            {
-              className: "hidden sm:block",
-              animate: { rotate: open ? 180 : 0 },
-              transition: { duration: 0.25 },
-              children: /* @__PURE__ */ jsx(ChevronDown, { className: "w-4 h-4 text-white/60" })
-            }
-          )
-        ]
-      }
-    )
-  ] });
+                ] })
+              ] }),
+              /* @__PURE__ */ jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxs(AnimatePresence, { mode: "wait", children: [
+                step === "form" && /* @__PURE__ */ jsxs(
+                  motion.form,
+                  {
+                    initial: { opacity: 0 },
+                    animate: { opacity: 1 },
+                    exit: { opacity: 0 },
+                    onSubmit: submit,
+                    noValidate: true,
+                    className: "space-y-2.5",
+                    children: [
+                      /* @__PURE__ */ jsxs("div", { children: [
+                        /* @__PURE__ */ jsx("label", { className: labelCls, children: "Full Name *" }),
+                        /* @__PURE__ */ jsx(
+                          "input",
+                          {
+                            value: form.name,
+                            onChange: set("name"),
+                            placeholder: "James",
+                            className: `${inputCls} ${errors.name ? "border-red-400 ring-2 ring-red-200" : ""}`
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxs("div", { children: [
+                        /* @__PURE__ */ jsx("label", { className: labelCls, children: "Company *" }),
+                        /* @__PURE__ */ jsx(
+                          "input",
+                          {
+                            value: form.company,
+                            onChange: set("company"),
+                            placeholder: "Your company",
+                            className: `${inputCls} ${errors.company ? "border-red-400 ring-2 ring-red-200" : ""}`
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxs("div", { children: [
+                        /* @__PURE__ */ jsx("label", { className: labelCls, children: "Phone *" }),
+                        /* @__PURE__ */ jsx(
+                          "input",
+                          {
+                            value: form.phone,
+                            onChange: set("phone"),
+                            placeholder: "98765 43210",
+                            type: "tel",
+                            className: `${inputCls} ${errors.phone ? "border-red-400 ring-2 ring-red-200" : ""}`
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxs("div", { children: [
+                        /* @__PURE__ */ jsx("label", { className: labelCls, children: "Email" }),
+                        /* @__PURE__ */ jsx(
+                          "input",
+                          {
+                            value: form.email,
+                            onChange: set("email"),
+                            placeholder: "you@company.com",
+                            type: "email",
+                            className: inputCls
+                          }
+                        )
+                      ] }),
+                      /* @__PURE__ */ jsxs("div", { children: [
+                        /* @__PURE__ */ jsx("label", { className: labelCls, children: "Sectors" }),
+                        /* @__PURE__ */ jsxs("div", { className: "relative group", children: [
+                          /* @__PURE__ */ jsxs(
+                            "button",
+                            {
+                              type: "button",
+                              className: `${inputCls} flex items-center justify-between text-left`,
+                              children: [
+                                /* @__PURE__ */ jsx("span", { className: form.sectors.length ? "text-[13px] text-gray-700 truncate" : "text-[12.5px] text-gray-400 font-normal", children: sectorLabel }),
+                                /* @__PURE__ */ jsx(ChevronDown, { className: "w-4 h-4 text-gray-400 shrink-0" })
+                              ]
+                            }
+                          ),
+                          /* @__PURE__ */ jsx("div", { className: "invisible opacity-0 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100 absolute left-0 right-0 bottom-full z-30 mb-2 max-h-52 overflow-y-auto rounded-lg border border-gray-200 bg-white p-1.5 shadow-2xl transition-all", children: SECTORS.map((s) => /* @__PURE__ */ jsxs("label", { className: "flex min-h-9 cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-1.5 text-[13px] font-medium leading-snug text-[#00274d] hover:bg-[#edad1a]/10", children: [
+                            /* @__PURE__ */ jsx(
+                              "input",
+                              {
+                                type: "checkbox",
+                                checked: form.sectors.includes(s),
+                                onChange: () => toggleSector(s),
+                                className: "h-3.5 w-3.5 shrink-0 rounded border-gray-300 accent-[#edad1a]"
+                              }
+                            ),
+                            /* @__PURE__ */ jsx("span", { children: s })
+                          ] }, s)) })
+                        ] })
+                      ] }),
+                      /* @__PURE__ */ jsxs(
+                        "button",
+                        {
+                          type: "submit",
+                          className: "group/btn w-full bg-[#edad1a] hover:bg-[#d4941a] text-white font-semibold py-2.5 pl-4 pr-2 rounded-md text-[13px] tracking-tight transition-all mt-1 flex items-center justify-between shadow-sm hover:shadow-md",
+                          children: [
+                            /* @__PURE__ */ jsx("span", { children: "Request My Free Demo" }),
+                            /* @__PURE__ */ jsx("span", { className: "w-6 h-6 bg-white rounded-full flex items-center justify-center text-[#1a1a1a] transition-transform group-hover/btn:translate-x-0.5", children: /* @__PURE__ */ jsx(ArrowRight, { className: "w-3.5 h-3.5" }) })
+                          ]
+                        }
+                      ),
+                      /* @__PURE__ */ jsx("p", { className: "text-center text-gray-400 text-[10px] pt-0.5", children: "Our expert will connect with you shortly" }),
+                      submitError && /* @__PURE__ */ jsx("p", { className: "text-center text-red-500 text-[11px] leading-snug", children: submitError })
+                    ]
+                  },
+                  "form"
+                ),
+                step === "loading" && /* @__PURE__ */ jsxs(
+                  motion.div,
+                  {
+                    initial: { opacity: 0 },
+                    animate: { opacity: 1 },
+                    exit: { opacity: 0 },
+                    className: "flex flex-col items-center justify-center py-10 gap-3",
+                    children: [
+                      /* @__PURE__ */ jsx(Loader2, { className: "w-8 h-8 text-[#edad1a] animate-spin" }),
+                      /* @__PURE__ */ jsx("p", { className: "text-gray-500 text-sm", children: "Booking your demo…" })
+                    ]
+                  },
+                  "loading"
+                ),
+                step === "success" && /* @__PURE__ */ jsxs(
+                  motion.div,
+                  {
+                    initial: { opacity: 0, scale: 0.92 },
+                    animate: { opacity: 1, scale: 1 },
+                    exit: { opacity: 0 },
+                    transition: { type: "spring", stiffness: 260, damping: 22 },
+                    className: "flex flex-col items-center justify-center py-8 gap-3 text-center",
+                    children: [
+                      /* @__PURE__ */ jsx("div", { className: "w-14 h-14 bg-green-50 rounded-full flex items-center justify-center", children: /* @__PURE__ */ jsx(CheckCircle2, { className: "w-8 h-8 text-green-500" }) }),
+                      /* @__PURE__ */ jsx("h3", { className: "text-base font-semibold text-[#00274d]", children: "Demo Booked!" }),
+                      /* @__PURE__ */ jsxs("p", { className: "text-gray-500 text-xs leading-relaxed max-w-[200px]", children: [
+                        "Thank you,  ",
+                        /* @__PURE__ */ jsx("strong", { className: "text-gray-700", children: form.name }),
+                        "!  One of our experts will contact you shortly."
+                      ] }),
+                      /* @__PURE__ */ jsx(
+                        "button",
+                        {
+                          onClick: close,
+                          className: "mt-1 bg-[#00274d] text-white font-medium px-6 py-2.5 rounded-full text-sm hover:bg-[#003a6e] transition-colors",
+                          children: "Done"
+                        }
+                      )
+                    ]
+                  },
+                  "success"
+                )
+              ] }) })
+            ]
+          }
+        ) }),
+        /* @__PURE__ */ jsxs(
+          motion.button,
+          {
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { delay: 1, duration: 0.5, type: "spring" },
+            onClick: () => setOpen((v) => !v),
+            "aria-label": "Book a Free Demo",
+            className: "relative flex items-center justify-center sm:justify-start gap-0 sm:gap-2.5 w-12 h-12 sm:w-auto sm:h-auto sm:py-3 sm:pl-3 sm:pr-4 bg-[#00274d] hover:bg-[#003a6e] text-white font-medium rounded-full shadow-xl shadow-black/40 transition-colors duration-200 group border-2 border-white/30 ring-1 ring-black/20",
+            children: [
+              /* @__PURE__ */ jsx("span", { className: "absolute inset-0 rounded-full bg-[#edad1a]/0 group-hover:bg-[#edad1a]/5 transition-colors" }),
+              /* @__PURE__ */ jsxs("div", { className: "relative w-7 h-7 bg-[#edad1a] rounded-full flex items-center justify-center shrink-0 ring-2 ring-white/40", children: [
+                /* @__PURE__ */ jsx(CalendarCheck, { className: "w-4 h-4 text-white" }),
+                /* @__PURE__ */ jsx(
+                  motion.span,
+                  {
+                    "aria-hidden": true,
+                    className: "absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#00274d]",
+                    animate: { opacity: [1, 0.55, 1] },
+                    transition: { duration: 1.8, repeat: Infinity, ease: "easeInOut" }
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsx("span", { className: "relative hidden sm:inline text-sm whitespace-nowrap", children: "Book a Demo" }),
+              /* @__PURE__ */ jsx(
+                motion.div,
+                {
+                  className: "relative hidden sm:block",
+                  animate: { rotate: open ? 180 : 0 },
+                  transition: { duration: 0.25 },
+                  children: /* @__PURE__ */ jsx(ChevronDown, { className: "w-4 h-4 text-white/70" })
+                }
+              )
+            ]
+          }
+        )
+      ]
+    }
+  );
 }
 function BackToTop() {
   const [show, setShow] = useState(false);

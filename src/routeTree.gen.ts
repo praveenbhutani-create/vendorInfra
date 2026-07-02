@@ -13,9 +13,11 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiReferralRouteImport } from './routes/api/referral'
 import { Route as ApiQuoteRequestsRouteImport } from './routes/api/quote-requests'
+import { Route as ApiInvestorRouteImport } from './routes/api/investor'
 import { Route as ApiDemoBookingsRouteImport } from './routes/api/demo-bookings'
 import { Route as ApiContactSalesRouteImport } from './routes/api/contact-sales'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiCareerRouteImport } from './routes/api/career'
 
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
@@ -37,6 +39,11 @@ const ApiQuoteRequestsRoute = ApiQuoteRequestsRouteImport.update({
   path: '/api/quote-requests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiInvestorRoute = ApiInvestorRouteImport.update({
+  id: '/api/investor',
+  path: '/api/investor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiDemoBookingsRoute = ApiDemoBookingsRouteImport.update({
   id: '/api/demo-bookings',
   path: '/api/demo-bookings',
@@ -52,22 +59,31 @@ const ApiContactRoute = ApiContactRouteImport.update({
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCareerRoute = ApiCareerRouteImport.update({
+  id: '/api/career',
+  path: '/api/career',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/api/career': typeof ApiCareerRoute
   '/api/contact': typeof ApiContactRoute
   '/api/contact-sales': typeof ApiContactSalesRoute
   '/api/demo-bookings': typeof ApiDemoBookingsRoute
+  '/api/investor': typeof ApiInvestorRoute
   '/api/quote-requests': typeof ApiQuoteRequestsRoute
   '/api/referral': typeof ApiReferralRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/api/career': typeof ApiCareerRoute
   '/api/contact': typeof ApiContactRoute
   '/api/contact-sales': typeof ApiContactSalesRoute
   '/api/demo-bookings': typeof ApiDemoBookingsRoute
+  '/api/investor': typeof ApiInvestorRoute
   '/api/quote-requests': typeof ApiQuoteRequestsRoute
   '/api/referral': typeof ApiReferralRoute
 }
@@ -75,9 +91,11 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/api/career': typeof ApiCareerRoute
   '/api/contact': typeof ApiContactRoute
   '/api/contact-sales': typeof ApiContactSalesRoute
   '/api/demo-bookings': typeof ApiDemoBookingsRoute
+  '/api/investor': typeof ApiInvestorRoute
   '/api/quote-requests': typeof ApiQuoteRequestsRoute
   '/api/referral': typeof ApiReferralRoute
 }
@@ -86,27 +104,33 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/api/career'
     | '/api/contact'
     | '/api/contact-sales'
     | '/api/demo-bookings'
+    | '/api/investor'
     | '/api/quote-requests'
     | '/api/referral'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
+    | '/api/career'
     | '/api/contact'
     | '/api/contact-sales'
     | '/api/demo-bookings'
+    | '/api/investor'
     | '/api/quote-requests'
     | '/api/referral'
   id:
     | '__root__'
     | '/'
     | '/$'
+    | '/api/career'
     | '/api/contact'
     | '/api/contact-sales'
     | '/api/demo-bookings'
+    | '/api/investor'
     | '/api/quote-requests'
     | '/api/referral'
   fileRoutesById: FileRoutesById
@@ -114,9 +138,11 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SplatRoute: typeof SplatRoute
+  ApiCareerRoute: typeof ApiCareerRoute
   ApiContactRoute: typeof ApiContactRoute
   ApiContactSalesRoute: typeof ApiContactSalesRoute
   ApiDemoBookingsRoute: typeof ApiDemoBookingsRoute
+  ApiInvestorRoute: typeof ApiInvestorRoute
   ApiQuoteRequestsRoute: typeof ApiQuoteRequestsRoute
   ApiReferralRoute: typeof ApiReferralRoute
 }
@@ -151,6 +177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiQuoteRequestsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/investor': {
+      id: '/api/investor'
+      path: '/api/investor'
+      fullPath: '/api/investor'
+      preLoaderRoute: typeof ApiInvestorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/demo-bookings': {
       id: '/api/demo-bookings'
       path: '/api/demo-bookings'
@@ -172,15 +205,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/career': {
+      id: '/api/career'
+      path: '/api/career'
+      fullPath: '/api/career'
+      preLoaderRoute: typeof ApiCareerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SplatRoute: SplatRoute,
+  ApiCareerRoute: ApiCareerRoute,
   ApiContactRoute: ApiContactRoute,
   ApiContactSalesRoute: ApiContactSalesRoute,
   ApiDemoBookingsRoute: ApiDemoBookingsRoute,
+  ApiInvestorRoute: ApiInvestorRoute,
   ApiQuoteRequestsRoute: ApiQuoteRequestsRoute,
   ApiReferralRoute: ApiReferralRoute,
 }

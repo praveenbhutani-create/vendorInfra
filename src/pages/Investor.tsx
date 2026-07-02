@@ -19,6 +19,7 @@ import {
   HardHat,
   Landmark,
   Layers3,
+  Loader2,
   Mail,
   Monitor,
   Network,
@@ -741,15 +742,37 @@ function InvestorModal({ onClose }: { onClose: () => void }) {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: wire up your actual submission logic here
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const res = await fetch("/api/investor", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.fullName,
+          email: form.email,
+          company: form.company,
+          message: form.message,
+        }),
+      });
+
+      if (!res.ok) throw new Error("Server error");
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Could not send your investor enquiry. Please call us or try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -873,11 +896,24 @@ function InvestorModal({ onClose }: { onClose: () => void }) {
               {/* Submit */}
               <button
                 type="submit"
-                className="w-full rounded-xl bg-[#edad1a] px-6 py-3.5 text-sm font-black text-[#00274d] hover:bg-[#f0b800] active:scale-[0.98] transition-all shadow-lg shadow-[#edad1a]/30 flex items-center justify-center gap-2"
+                disabled={isSubmitting}
+                className="w-full rounded-xl bg-[#edad1a] px-6 py-3.5 text-sm font-black text-[#00274d] hover:bg-[#f0b800] active:scale-[0.98] transition-all shadow-lg shadow-[#edad1a]/30 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Submit Inquiry
-                <Mail className="h-4 w-4" />
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Submit Inquiry
+                    <Mail className="h-4 w-4" />
+                  </>
+                )}
               </button>
+              {submitError && (
+                <p className="text-center text-xs font-semibold text-red-500">{submitError}</p>
+              )}
 
               <p className="text-center text-[11px] text-gray-400">
                 Highly confidential · For private circulation only

@@ -24,7 +24,6 @@ export function BookDemoButton() {
   const [submitError, setSubmitError] = useState("");
 
   const set = (k: "name" | "company" | "phone" | "email") => (e: React.ChangeEvent<HTMLInputElement>) => {
-
     setForm(f => ({ ...f, [k]: e.target.value }));
     setErrors(p => ({ ...p, [k]: undefined }));
   };
@@ -51,7 +50,6 @@ export function BookDemoButton() {
     return e;
   };
 
-
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
@@ -75,7 +73,6 @@ export function BookDemoButton() {
   const close = () => {
     setOpen(false);
     setTimeout(() => { setStep("form"); setForm({ name: "", company: "", phone: "", email: "", sectors: [] }); setErrors({}); setSubmitError(""); }, 350);
-
   };
 
   const sectorLabel = form.sectors.length
@@ -83,7 +80,13 @@ export function BookDemoButton() {
     : "Select sectors...";
 
   return (
-    <div className="fixed bottom-6 left-4 sm:left-6 z-50 flex flex-col items-start gap-0">
+    <div
+      className="fixed z-[60] flex flex-col items-start gap-0"
+      style={{
+        bottom: "max(1.25rem, env(safe-area-inset-bottom))",
+        left: "max(1rem, env(safe-area-inset-left))",
+      }}
+    >
       {/* Slide-up panel */}
       <AnimatePresence>
         {open && (
@@ -92,7 +95,7 @@ export function BookDemoButton() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ type: "spring", stiffness: 340, damping: 30 }}
-            className="mb-3 w-[300px] bg-white rounded-xl shadow-xl shadow-black/15 border border-gray-100 overflow-hidden"
+            className="mb-3 w-[calc(100vw-2rem)] max-w-[300px] bg-white rounded-xl shadow-2xl shadow-black/30 border border-gray-100 overflow-hidden"
           >
             {/* Panel header */}
             <div className="relative bg-[#00274d] px-4 py-3">
@@ -101,7 +104,7 @@ export function BookDemoButton() {
               <div className="flex items-start justify-between relative z-10 gap-2">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-white/12 rounded-md flex items-center justify-center shrink-0">
+                    <div className="w-6 h-6 bg-[#edad1a] rounded-md flex items-center justify-center shrink-0">
                       <CalendarCheck className="w-3 h-3 text-white" />
                     </div>
                     <p className="text-white font-semibold text-[13px] leading-none tracking-tight">Book a Free Demo</p>
@@ -117,11 +120,9 @@ export function BookDemoButton() {
               </div>
             </div>
 
-
             {/* Panel body */}
             <div className="p-4">
               <AnimatePresence mode="wait">
-
                 {step === "form" && (
                   <motion.form key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                     onSubmit={submit} noValidate className="space-y-2.5">
@@ -191,8 +192,6 @@ export function BookDemoButton() {
                     {submitError && (
                       <p className="text-center text-red-500 text-[11px] leading-snug">{submitError}</p>
                     )}
-
-
                   </motion.form>
                 )}
 
@@ -214,7 +213,6 @@ export function BookDemoButton() {
                     <h3 className="text-base font-semibold text-[#00274d]">Demo Booked!</h3>
                     <p className="text-gray-500 text-xs leading-relaxed max-w-[200px]">
                       Thank you,  <strong className="text-gray-700">{form.name}</strong>!  One of our experts will contact you shortly.
-                      {/* <strong className="text-gray-700">{form.phone}</strong> within 12 hours. */}
                     </p>
                     <button onClick={close}
                       className="mt-1 bg-[#00274d] text-white font-medium px-6 py-2.5 rounded-full text-sm hover:bg-[#003a6e] transition-colors">
@@ -228,25 +226,43 @@ export function BookDemoButton() {
         )}
       </AnimatePresence>
 
-      {/* Floating trigger button — icon-only on mobile, full label on sm+ */}
+      {/* Floating trigger button — icon-only "blinking" beacon on mobile, full label on larger screens */}
       <motion.button
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 2, duration: 0.5, type: "spring" }}
+        transition={{ delay: 1, duration: 0.5, type: "spring" }}
         onClick={() => setOpen(v => !v)}
         aria-label="Book a Free Demo"
-        className="flex items-center gap-2.5 bg-[#00274d] hover:bg-[#003a6e] text-white font-medium p-3 sm:pl-3 sm:pr-4 sm:py-3 rounded-full shadow-lg shadow-[#00274d]/25 transition-colors duration-200 group border border-white/10"
+        className="relative flex items-center justify-center sm:justify-start gap-0 sm:gap-2.5 w-12 h-12 sm:w-auto sm:h-auto sm:py-3 sm:pl-3 sm:pr-4 bg-[#00274d] hover:bg-[#003a6e] text-white font-medium rounded-full shadow-xl shadow-black/40 transition-colors duration-200 group border-2 border-white/30 ring-1 ring-black/20"
       >
-        <div className="w-7 h-7 bg-[#edad1a] rounded-full flex items-center justify-center shrink-0">
+        {/* Breathing halo — reads as a "live" beacon rather than a static icon */}
+        
+        {/* Sharper secondary pulse ring, slightly offset in timing for depth */}
+        
+
+        {/* Soft hover glow so it separates from dark/busy backgrounds */}
+        <span className="absolute inset-0 rounded-full bg-[#edad1a]/0 group-hover:bg-[#edad1a]/5 transition-colors" />
+
+        <div className="relative w-7 h-7 bg-[#edad1a] rounded-full flex items-center justify-center shrink-0 ring-2 ring-white/40">
           <CalendarCheck className="w-4 h-4 text-white" />
+          {/* Blinking notification dot */}
+          <motion.span
+            aria-hidden
+            className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-[#00274d]"
+            animate={{ opacity: [1, 0.55, 1] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          />
         </div>
-        <span className="hidden sm:inline text-sm">Book a Demo</span>
+
+        {/* Label hidden on mobile, shown from sm breakpoint up */}
+        <span className="relative hidden sm:inline text-sm whitespace-nowrap">Book a Demo</span>
+
         <motion.div
-          className="hidden sm:block"
+          className="relative hidden sm:block"
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.25 }}
         >
-          <ChevronDown className="w-4 h-4 text-white/60" />
+          <ChevronDown className="w-4 h-4 text-white/70" />
         </motion.div>
       </motion.button>
     </div>
