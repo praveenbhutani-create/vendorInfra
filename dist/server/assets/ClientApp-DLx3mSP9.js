@@ -8559,6 +8559,7 @@ function InvestorModal({ onClose }) {
   const [form, setForm] = useState({
     fullName: "",
     email: "",
+    mobile: "",
     company: "",
     message: ""
   });
@@ -8579,6 +8580,7 @@ function InvestorModal({ onClose }) {
         body: JSON.stringify({
           name: form.fullName,
           email: form.email,
+          mobile: form.mobile,
           company: form.company,
           message: form.message
         })
@@ -8668,6 +8670,20 @@ function InvestorModal({ onClose }) {
                     value: form.email,
                     onChange: handleChange,
                     placeholder: "john@example.com",
+                    className: "w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-[#00274d] placeholder-gray-400 outline-none focus:border-[#00274d] focus:bg-white focus:ring-2 focus:ring-[#00274d]/10 transition-all"
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxs("div", { children: [
+                /* @__PURE__ */ jsx("label", { className: "block text-xs font-black uppercase tracking-[0.15em] text-[#00274d] mb-1.5", children: "Mobile Number" }),
+                /* @__PURE__ */ jsx(
+                  "input",
+                  {
+                    type: "tel",
+                    name: "mobile",
+                    value: form.mobile,
+                    onChange: handleChange,
+                    placeholder: "123-456-7890",
                     className: "w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-[#00274d] placeholder-gray-400 outline-none focus:border-[#00274d] focus:bg-white focus:ring-2 focus:ring-[#00274d]/10 transition-all"
                   }
                 )
