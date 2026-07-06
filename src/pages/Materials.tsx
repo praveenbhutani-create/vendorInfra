@@ -55,7 +55,7 @@ function highlight(text: string, query: string) {
   );
 }
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 
 export default function Materials() {
   usePageSeo("Material Procurement | Vendor Infra", "Source 1000+ construction and infrastructure materials across 10+ categories including steel, cement, electrical and solar.");

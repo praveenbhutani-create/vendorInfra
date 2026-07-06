@@ -16,7 +16,7 @@ import { categories } from "@/lib/materialsData";
 import { sectors as allSectors } from "@/lib/sectorsData";
 import heroImage from "@/assets/hero-construction.png";
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 const PLATFORM_STATS_API_URL = "http://3.110.208.157/api/vendor/getPlatformStats";
 
 /* -- animated counter ------------------------------- */
@@ -64,7 +64,7 @@ const gridItem = {
 };
 
 /* -- data ------------------------------------------- */
-const PORTAL_LOGIN_URL = "http://3.110.208.157/customer/";
+const PORTAL_LOGIN_URL = "https://customer.vendorinfra.com/#/";
 
 type ServiceItem = {
   icon: typeof Search;

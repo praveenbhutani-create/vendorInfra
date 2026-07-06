@@ -469,7 +469,7 @@ function Navbar() {
         /* @__PURE__ */ jsx(
           "a",
           {
-            href: "http://3.110.208.157/customer/",
+            href: "https://customer.vendorinfra.com/#/",
             target: "_blank",
             rel: "noopener noreferrer",
             className: siteButtonClasses(
@@ -2467,7 +2467,7 @@ function getSectorBySlug(slug) {
   return sectors.find((s) => s.slug === slug);
 }
 const heroImage = "/assets/hero-construction-PkMOOhzu.png";
-const PORTAL_REGISTER_URL$7 = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL$7 = "https://customer.vendorinfra.com/#/";
 const PLATFORM_STATS_API_URL = "http://3.110.208.157/api/vendor/getPlatformStats";
 function Counter({ target, suffix = "", prefix = "" }) {
   const [count2, setCount] = useState(0);
@@ -2513,7 +2513,7 @@ const gridItem = {
   hidden: { opacity: 0, y: 20 },
   show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } }
 };
-const PORTAL_LOGIN_URL$1 = "http://3.110.208.157/customer/";
+const PORTAL_LOGIN_URL$1 = "https://customer.vendorinfra.com/#/";
 const services$1 = [
   { icon: Search, title: "AI-Powered Vendor Discovery", href: PORTAL_LOGIN_URL$1, external: true, image: "/images/services/ai-discovery.jpg", desc: "Search and connect with verified vendors and suppliers in real time. Compare multiple options to identify the best partners for your projects quickly and confidently." },
   { icon: Calculator, title: "Smart Price Discovery", href: PORTAL_LOGIN_URL$1, external: true, image: "/images/services/smart-price-discovery.jpg", desc: "Streamline vendor selection and proposal management. Request quotes or send instant proposals to secure the best prices for services and materials." },
@@ -3466,7 +3466,7 @@ function usePageSeo(title, description) {
   }, [title, description]);
 }
 const base = "/";
-const PORTAL_REGISTER_URL$6 = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL$6 = "https://customer.vendorinfra.com/#/";
 const FOUNDER_PHOTO = "about-members/2025-11-10.png";
 const trustedBy = [
   { name: "Adani Group", logo: "/logos/Adani-Group.png" },
@@ -3916,8 +3916,8 @@ function About() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const PORTAL_LOGIN_URL = "http://3.110.208.157/customer/";
-const PORTAL_REGISTER_URL$5 = "http://3.110.208.157/customer/";
+const PORTAL_LOGIN_URL = "https://customer.vendorinfra.com/#/";
+const PORTAL_REGISTER_URL$5 = "https://customer.vendorinfra.com/#/";
 const services = [
   {
     title: "AI-Powered Vendor Discovery",
@@ -5467,7 +5467,7 @@ function BlogPost() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const PORTAL_REGISTER_URL$4 = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL$4 = "https://customer.vendorinfra.com/#/";
 const container = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.07 } }
@@ -5587,7 +5587,7 @@ function Sectors() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const PORTAL_REGISTER_URL$3 = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL$3 = "https://customer.vendorinfra.com/#/";
 function SectorDetail() {
   const { slug } = useParams();
   const sector = getSectorBySlug(slug);
@@ -5834,7 +5834,7 @@ function FeatureLabel({ text }) {
     (p, i) => p.startsWith("(") && p.endsWith(")") ? /* @__PURE__ */ jsx("span", { className: "text-[#edad1a] font-semibold", children: p }, i) : /* @__PURE__ */ jsx("span", { children: p }, i)
   ) });
 }
-const PORTAL_REGISTER_URL$2 = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL$2 = "https://customer.vendorinfra.com/#/";
 function FadeUp({ children, delay = 0, className = "" }) {
   return /* @__PURE__ */ jsx(
     motion.div,
@@ -9084,7 +9084,7 @@ function highlight(text, query) {
     text.slice(idx + query.length)
   ] });
 }
-const PORTAL_REGISTER_URL$1 = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL$1 = "https://customer.vendorinfra.com/#/";
 function Materials() {
   usePageSeo("Material Procurement | Vendor Infra", "Source 1000+ construction and infrastructure materials across 10+ categories including steel, cement, electrical and solar.");
   const { total } = useQuoteCart();
@@ -9418,7 +9418,7 @@ function Materials() {
     /* @__PURE__ */ jsx(Footer, {})
   ] });
 }
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 function AddToQuoteBtn({
   categorySlug,
   categoryName,

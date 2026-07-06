@@ -10,7 +10,7 @@ import { useQuoteCart } from "@/lib/quoteCart";
 import { useState } from "react";
 import { SiteButton } from "@/components/SiteButton";
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 
 function AddToQuoteBtn({
   categorySlug,

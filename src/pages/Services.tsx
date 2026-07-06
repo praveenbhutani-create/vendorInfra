@@ -11,8 +11,8 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SiteButton } from "@/components/SiteButton";
 
-const PORTAL_LOGIN_URL = "http://3.110.208.157/customer/";
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_LOGIN_URL = "https://customer.vendorinfra.com/#/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 
 const services = [
   {

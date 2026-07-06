@@ -8,7 +8,7 @@ import { SiteButton } from "@/components/SiteButton";
 import NotFound from "@/pages/not-found";
 
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 
 export default function SectorDetail() {
   const { slug } = useParams<{ slug: string }>();

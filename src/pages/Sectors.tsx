@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { sectors } from "@/lib/sectorsData";
 import { SiteButton } from "@/components/SiteButton";
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 
 const container = {
   hidden: { opacity: 0 },

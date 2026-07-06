@@ -10,7 +10,7 @@ import { Link } from "wouter";
 
 const base = import.meta.env.BASE_URL;
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 const FOUNDER_PHOTO = "about-members/2025-11-10.png";
 
 const trustedBy = [

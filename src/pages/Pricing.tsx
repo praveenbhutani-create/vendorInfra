@@ -24,7 +24,7 @@ import { ContactSalesModal } from "@/components/ContactSalesModal";
 import { Link } from "wouter";
 import { SiteButton } from "@/components/SiteButton";
 
-const PORTAL_REGISTER_URL = "http://3.110.208.157/customer/";
+const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
 
 type Plan = {
   name: string;
