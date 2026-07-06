@@ -2982,7 +2982,7 @@ function Home() {
                 ] }),
                 /* @__PURE__ */ jsxs("div", { className: "relative p-5 z-10 -mt-2", children: [
                   /* @__PURE__ */ jsx("div", { className: "flex items-center gap-2.5 mb-3", children: /* @__PURE__ */ jsx("div", { className: "w-9 h-9 rounded-xl bg-[#edad1a]/20 border border-[#edad1a]/40 flex items-center justify-center flex-shrink-0 group-hover:bg-[#edad1a]/30 transition-colors", children: /* @__PURE__ */ jsx(s.icon, { className: "w-4 h-4 text-[#edad1a]" }) }) }),
-                  /* @__PURE__ */ jsx("h3", { className: "text-white font-semibold text-sm leading-snug mb-2", children: s.title }),
+                  /* @__PURE__ */ jsx("h3", { className: "text-white font-bold text-xl leading-snug mb-2", children: s.title }),
                   /* @__PURE__ */ jsx("p", { className: "text-white/70 text-xs leading-relaxed", children: s.desc })
                 ] })
               ] });

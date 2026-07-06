@@ -823,7 +823,7 @@ export default function Home() {
                   <s.icon className="w-4 h-4 text-[#edad1a]" />
                 </div>
               </div>
-              <h3 className="text-white font-semibold text-sm leading-snug mb-2">{s.title}</h3>
+              <h3 className="text-white font-bold text-xl leading-snug mb-2">{s.title}</h3>
               <p className="text-white/70 text-xs leading-relaxed">{s.desc}</p>
             </div>
           </div>
