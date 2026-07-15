@@ -1,9 +1,10 @@
 import { FormEvent, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowRight,
   BriefcaseBusiness,
   CheckCircle2,
+  ChevronDown,
   Mail,
   Send,
   Sparkles,
@@ -39,9 +40,63 @@ const culturePoints = [
   },
 ];
 
-const openings = [
-  "Sales Executive / Senior Sales Executive",
-  "Digital Marketing Executive (Graphic Design & Social Media Specialist)",
+type JobOpening = {
+  title: string;
+  location: string;
+  type: string;
+  overview?: string;
+  responsibilities?: string[];
+  requiredSkills?: string[];
+  experience?: string[];
+  portfolio?: string[];
+  portfolioNote?: string;
+};
+
+const openings: JobOpening[] = [
+  // {
+  //   title: "Sales Executive / Senior Sales Executive",
+  //   location: "Gurugram (On-site)",
+  //   type: "Full-time",
+  // },
+  {
+    title: "Digital Marketing Executive (Graphic Design & Social Media Specialisation)",
+    location: "Gurugram (On-site)",
+    type: "Full-Time",
+    overview:
+      "We are looking for a creative, passionate, and detail-oriented Digital Marketing Executive (Graphic Design & Social Media Specialisation) with 1–2 years of experience to join our marketing team. The ideal candidate should have expertise in graphic design, video creation, and social media management, with the ability to transform ideas into engaging visual content that strengthens our brand presence and drives audience engagement. This role requires someone who can independently create compelling graphics, create & edit professional-quality videos, manage social media content, and contribute creative ideas for branding and marketing campaigns.",
+    responsibilities: [
+      "Design high-quality creatives, including social media posts, banners, brochures, presentations, infographics, flyers, advertisements, website graphics, landing page assets, blog visuals, email creatives, and other marketing collateral.",
+      "Create and edit engaging short-form videos, reels, promotional videos, corporate videos, product videos, motion graphics, and multimedia content by incorporating animations, transitions, subtitles, sound effects, and music.",
+      "Capture and edit office, event, product, client, and interview videos when required, ensuring all content is optimized for LinkedIn, Instagram, Facebook, YouTube, and X.",
+      "Plan, create, schedule, and publish engaging social media content while maintaining a consistent brand identity and visual language across all digital and print channels.",
+      "Develop creative concepts, campaign visuals, storytelling content, and monthly content calendars aligned with branding, product marketing, and business objectives.",
+      "Ensure all creative assets meet quality standards, brand guidelines, and project timelines.",
+      "Stay updated with the latest design trends, video editing techniques, AI-powered creative tools, social media algorithms, and emerging content formats to continuously improve creative output and audience engagement.",
+    ],
+    requiredSkills: [
+      "Strong proficiency in Adobe Photoshop, Adobe Illustrator, Canva, and Figma.",
+      "Hands-on experience with Adobe Premiere Pro, After Effects, CapCut, DaVinci Resolve, Filmora, or similar video editing software.",
+      "Strong understanding of graphic design principles, branding, typography, color theory, layout design, and visual storytelling.",
+      "Experience creating social media creatives, marketing collateral, presentations, and digital assets.",
+      "Ability to create engaging reels, promotional videos, motion graphics, and short-form video content.",
+      "Experience managing content across LinkedIn, Instagram, Facebook, YouTube, and X.",
+      "Familiarity with AI-powered creative tools such as Adobe Firefly, Canva AI, Midjourney, or similar is an added advantage.",
+      "Excellent creativity, communication, time management, and attention to detail.",
+    ],
+    experience: [
+      "1–2 years of professional experience in Graphic Design, Video Editing, and Social Media Content Creation.",
+      "Experience working in a startup, digital marketing agency, or corporate marketing team is preferred.",
+      "Bachelor's degree or diploma in Graphic Design, Multimedia, Fine Arts, Mass Communication, Marketing, or a related field is preferred.",
+    ],
+    portfolio: [
+      "Graphic Design projects",
+      "Social Media Creatives",
+      "Branding & Marketing Collateral",
+      "Video Editing & Motion Graphics",
+      "Reels, Promotional Videos, and Corporate Videos",
+    ],
+    portfolioNote: "Applications without a portfolio may not be considered.",
+  },
 ];
 
 const positions = [
@@ -60,6 +115,11 @@ export default function Career() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  function toggleOpening(index: number) {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -98,9 +158,7 @@ export default function Career() {
 
       <PageHero
         eyebrow="Career"
-        // title="Transforming a Trillion-Dollar Industry with Technology, Innovation & Deep Industry Expertise."
         title="A place to build, grow, and succeed — together."
-       
       />
 
       <main className="flex-1 bg-gradient-to-b from-[#f6f8fb] via-white to-[#f6f8fb]">
@@ -113,8 +171,6 @@ export default function Career() {
                 viewport={{ once: true }}
                 className="lg:sticky lg:top-28"
               >
-
-                
                 <span className="inline-flex items-center gap-3 text-[#edad1a] text-[12px] font-bold uppercase tracking-[0.3em] mb-4">
                   <span className="w-8 h-px bg-[#edad1a]/60" />
                   Join the team
@@ -169,25 +225,148 @@ export default function Career() {
                 <h2 className="text-3xl md:text-4xl font-bold text-[#00274d] leading-tight mb-8">
                   Roles we are hiring for
                 </h2>
+
                 <div className="space-y-4">
-                  {openings.map((opening, index) => (
-                    <motion.div
-                      key={opening}
-                      initial={{ opacity: 0, x: -14 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.05 }}
-                      className="group flex items-center gap-5 rounded-2xl border border-l-4 border-gray-200 border-l-[#00274d] bg-[#f8fafc] p-5 md:p-6 hover:border-[#edad1a]/70 hover:bg-white hover:shadow-md transition-all"
-                    >
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#00274d] text-white group-hover:bg-[#edad1a] transition-colors">
-                        <BriefcaseBusiness className="w-5 h-5" />
-                      </span>
-                      <div className="min-w-0 flex-1">
-                        <p className="font-bold text-[#00274d] text-lg leading-snug">{opening}</p>
-                        <p className="text-sm text-gray-500 mt-1">Full-time role at Vendor Infra</p>
-                      </div>
-                    </motion.div>
-                  ))}
+                  {openings.map((opening, index) => {
+                    const isOpen = openIndex === index;
+                    const hasDetails = Boolean(opening.overview);
+
+                    return (
+                      <motion.div
+                        key={opening.title}
+                        initial={{ opacity: 0, x: -14 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.05 }}
+                        className={`rounded-2xl border border-l-4 border-gray-200 border-l-[#00274d] bg-[#f8fafc] transition-all ${
+                          isOpen ? "bg-white shadow-md border-[#edad1a]/60" : "hover:border-[#edad1a]/70 hover:bg-white hover:shadow-md"
+                        }`}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => hasDetails && toggleOpening(index)}
+                          aria-expanded={isOpen}
+                          className={`group flex w-full items-center gap-5 p-5 md:p-6 text-left ${
+                            hasDetails ? "cursor-pointer" : "cursor-default"
+                          }`}
+                        >
+                          <span
+                            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white transition-colors ${
+                              isOpen ? "bg-[#edad1a]" : "bg-[#00274d] group-hover:bg-[#edad1a]"
+                            }`}
+                          >
+                            <BriefcaseBusiness className="w-5 h-5" />
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p className="font-bold text-[#00274d] text-lg leading-snug">{opening.title}</p>
+                            <p className="text-sm text-gray-500 mt-1">
+                              {opening.type} role at Vendor Infra · {opening.location}
+                            </p>
+                          </div>
+                          {hasDetails && (
+                            <ChevronDown
+                              className={`w-5 h-5 shrink-0 text-[#00274d] transition-transform duration-300 ${
+                                isOpen ? "rotate-180 text-[#edad1a]" : ""
+                              }`}
+                            />
+                          )}
+                        </button>
+
+                        <AnimatePresence initial={false}>
+                          {isOpen && hasDetails && (
+                            <motion.div
+                              key="content"
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.3, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="px-5 pb-6 md:px-6 md:pb-8 border-t border-gray-200 pt-5">
+                                {opening.overview && (
+                                  <p className="text-sm text-gray-600 leading-relaxed mb-5">
+                                    {opening.overview}
+                                  </p>
+                                )}
+
+                                {opening.responsibilities && (
+                                  <div className="mb-5">
+                                    <h5 className="text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide">
+                                      Key Responsibilities
+                                    </h5>
+                                    <ul className="space-y-2">
+                                      {opening.responsibilities.map((item) => (
+                                        <li key={item} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
+                                          <span className="text-[#edad1a] mt-1">•</span>
+                                          <span>{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+
+                                {opening.requiredSkills && (
+                                  <div className="mb-5">
+                                    <h5 className="text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide">
+                                      Required Skills
+                                    </h5>
+                                    <ul className="space-y-2">
+                                      {opening.requiredSkills.map((item) => (
+                                        <li key={item} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
+                                          <span className="text-[#edad1a] mt-1">•</span>
+                                          <span>{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+
+                                {opening.experience && (
+                                  <div className="mb-5">
+                                    <h5 className="text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide">
+                                      Experience
+                                    </h5>
+                                    <ul className="space-y-2">
+                                      {opening.experience.map((item) => (
+                                        <li key={item} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
+                                          <span className="text-[#edad1a] mt-1">•</span>
+                                          <span>{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                )}
+
+                                {opening.portfolio && (
+                                  <div>
+                                    <h5 className="text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide">
+                                      Portfolio Required
+                                    </h5>
+                                    <p className="text-sm text-gray-600 leading-relaxed mb-2">
+                                      Applicants must submit a portfolio showcasing:
+                                    </p>
+                                    <ul className="space-y-2 mb-3">
+                                      {opening.portfolio.map((item) => (
+                                        <li key={item} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
+                                          <span className="text-[#edad1a] mt-1">•</span>
+                                          <span>{item}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                    {opening.portfolioNote && (
+                                      <p className="text-sm font-semibold text-[#00274d]">
+                                        {opening.portfolioNote}
+                                      </p>
+                                    )}
+                                  </div>
+                                )}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -240,7 +419,7 @@ export default function Career() {
                   <input
                     required
                     name="name"
-                    className="w-full rou nded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#edad1a] focus:ring-4 focus:ring-[#edad1a]/10"
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#edad1a] focus:ring-4 focus:ring-[#edad1a]/10"
                   />
                 </label>
 
