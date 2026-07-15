@@ -3659,7 +3659,7 @@ const team = [
   { name: "Utkarsh Kashyap", role: "Strategy & IR", tag: "Strategy", photo: "about-members/2025-11-19.png", linkedin: "https://www.linkedin.com/in/utkarsh-kashyap/" },
   { name: "Pawanpreet Singh", role: "Procurement", tag: "Procurement", photo: "about-members/2025-11-25.png", linkedin: "https://www.linkedin.com/in/pawanpreet-singh-b68b7b3b3/" },
   { name: "Deepak Kumar", role: "Supplier Relations", tag: "Operations", photo: "about-members/deepak-kumar.png", linkedin: "https://www.linkedin.com/in/deepak-kumar-89702321b" },
-  { name: "Rahul Maurya", role: "Accounts", tag: "Accounts", photo: "about-members/2025-11-VI-employee-photos-20.png", linkedin: "https://www.linkedin.com/in/rahul-maurya-indirect-taxation%F0%9F%8F%A6-b8b566280/" },
+  { name: "Rahul Maurya", role: "Accounts", tag: "Accounts", photo: "about-members/IMG-20260714-WA0005.jpg", linkedin: "https://www.linkedin.com/in/rahul-maurya-indirect-taxation%F0%9F%8F%A6-b8b566280/" },
   { name: "Ankit Yadav", role: "Data Optimization", tag: "Data", photo: "about-members/2025-11-27.png", linkedin: "https://www.linkedin.com/in/yashika-nimh-9bab51271/" },
   { name: "Kaushal Kumar", role: "Supplier Relations", tag: "Operations", photo: "about-members/2025-12-VI-employee-photos-4.png", linkedin: "https://www.linkedin.com/in/kaushal-kumar-166a0b347" },
   { name: "Yashika Nimesh", role: "Data Optimization", tag: "Data", photo: "about-members/2026-03-1.png", linkedin: "https://www.linkedin.com/in/yashika-nimesh-9bab51271/" },
@@ -8178,8 +8178,49 @@ const culturePoints = [
   }
 ];
 const openings = [
-  "Sales Executive / Senior Sales Executive",
-  "Digital Marketing Executive (Graphic Design & Social Media Specialist)"
+  // {
+  //   title: "Sales Executive / Senior Sales Executive",
+  //   location: "Gurugram (On-site)",
+  //   type: "Full-time",
+  // },
+  {
+    title: "Digital Marketing Executive (Graphic Design & Social Media Specialisation)",
+    location: "Gurugram (On-site)",
+    type: "Full-Time",
+    overview: "We are looking for a creative, passionate, and detail-oriented Digital Marketing Executive (Graphic Design & Social Media Specialisation) with 1–2 years of experience to join our marketing team. The ideal candidate should have expertise in graphic design, video creation, and social media management, with the ability to transform ideas into engaging visual content that strengthens our brand presence and drives audience engagement. This role requires someone who can independently create compelling graphics, create & edit professional-quality videos, manage social media content, and contribute creative ideas for branding and marketing campaigns.",
+    responsibilities: [
+      "Design high-quality creatives, including social media posts, banners, brochures, presentations, infographics, flyers, advertisements, website graphics, landing page assets, blog visuals, email creatives, and other marketing collateral.",
+      "Create and edit engaging short-form videos, reels, promotional videos, corporate videos, product videos, motion graphics, and multimedia content by incorporating animations, transitions, subtitles, sound effects, and music.",
+      "Capture and edit office, event, product, client, and interview videos when required, ensuring all content is optimized for LinkedIn, Instagram, Facebook, YouTube, and X.",
+      "Plan, create, schedule, and publish engaging social media content while maintaining a consistent brand identity and visual language across all digital and print channels.",
+      "Develop creative concepts, campaign visuals, storytelling content, and monthly content calendars aligned with branding, product marketing, and business objectives.",
+      "Ensure all creative assets meet quality standards, brand guidelines, and project timelines.",
+      "Stay updated with the latest design trends, video editing techniques, AI-powered creative tools, social media algorithms, and emerging content formats to continuously improve creative output and audience engagement."
+    ],
+    requiredSkills: [
+      "Strong proficiency in Adobe Photoshop, Adobe Illustrator, Canva, and Figma.",
+      "Hands-on experience with Adobe Premiere Pro, After Effects, CapCut, DaVinci Resolve, Filmora, or similar video editing software.",
+      "Strong understanding of graphic design principles, branding, typography, color theory, layout design, and visual storytelling.",
+      "Experience creating social media creatives, marketing collateral, presentations, and digital assets.",
+      "Ability to create engaging reels, promotional videos, motion graphics, and short-form video content.",
+      "Experience managing content across LinkedIn, Instagram, Facebook, YouTube, and X.",
+      "Familiarity with AI-powered creative tools such as Adobe Firefly, Canva AI, Midjourney, or similar is an added advantage.",
+      "Excellent creativity, communication, time management, and attention to detail."
+    ],
+    experience: [
+      "1–2 years of professional experience in Graphic Design, Video Editing, and Social Media Content Creation.",
+      "Experience working in a startup, digital marketing agency, or corporate marketing team is preferred.",
+      "Bachelor's degree or diploma in Graphic Design, Multimedia, Fine Arts, Mass Communication, Marketing, or a related field is preferred."
+    ],
+    portfolio: [
+      "Graphic Design projects",
+      "Social Media Creatives",
+      "Branding & Marketing Collateral",
+      "Video Editing & Motion Graphics",
+      "Reels, Promotional Videos, and Corporate Videos"
+    ],
+    portfolioNote: "Applications without a portfolio may not be considered."
+  }
 ];
 function Career() {
   usePageSeo(
@@ -8189,6 +8230,10 @@ function Career() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [openIndex, setOpenIndex] = useState(null);
+  function toggleOpening(index) {
+    setOpenIndex((prev) => prev === index ? null : index);
+  }
   async function handleSubmit(event) {
     event.preventDefault();
     setIsSubmitting(true);
@@ -8271,24 +8316,99 @@ function Career() {
             /* @__PURE__ */ jsx("span", { className: "w-8 h-px bg-[#edad1a]/60" })
           ] }),
           /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-4xl font-bold text-[#00274d] leading-tight mb-8", children: "Roles we are hiring for" }),
-          /* @__PURE__ */ jsx("div", { className: "space-y-4", children: openings.map((opening, index) => /* @__PURE__ */ jsxs(
-            motion.div,
-            {
-              initial: { opacity: 0, x: -14 },
-              whileInView: { opacity: 1, x: 0 },
-              viewport: { once: true },
-              transition: { delay: index * 0.05 },
-              className: "group flex items-center gap-5 rounded-2xl border border-l-4 border-gray-200 border-l-[#00274d] bg-[#f8fafc] p-5 md:p-6 hover:border-[#edad1a]/70 hover:bg-white hover:shadow-md transition-all",
-              children: [
-                /* @__PURE__ */ jsx("span", { className: "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#00274d] text-white group-hover:bg-[#edad1a] transition-colors", children: /* @__PURE__ */ jsx(BriefcaseBusiness, { className: "w-5 h-5" }) }),
-                /* @__PURE__ */ jsxs("div", { className: "min-w-0 flex-1", children: [
-                  /* @__PURE__ */ jsx("p", { className: "font-bold text-[#00274d] text-lg leading-snug", children: opening }),
-                  /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-500 mt-1", children: "Full-time role at Vendor Infra" })
-                ] })
-              ]
-            },
-            opening
-          )) })
+          /* @__PURE__ */ jsx("div", { className: "space-y-4", children: openings.map((opening, index) => {
+            const isOpen = openIndex === index;
+            const hasDetails = Boolean(opening.overview);
+            return /* @__PURE__ */ jsxs(
+              motion.div,
+              {
+                initial: { opacity: 0, x: -14 },
+                whileInView: { opacity: 1, x: 0 },
+                viewport: { once: true },
+                transition: { delay: index * 0.05 },
+                className: `rounded-2xl border border-l-4 border-gray-200 border-l-[#00274d] bg-[#f8fafc] transition-all ${isOpen ? "bg-white shadow-md border-[#edad1a]/60" : "hover:border-[#edad1a]/70 hover:bg-white hover:shadow-md"}`,
+                children: [
+                  /* @__PURE__ */ jsxs(
+                    "button",
+                    {
+                      type: "button",
+                      onClick: () => hasDetails && toggleOpening(index),
+                      "aria-expanded": isOpen,
+                      className: `group flex w-full items-center gap-5 p-5 md:p-6 text-left ${hasDetails ? "cursor-pointer" : "cursor-default"}`,
+                      children: [
+                        /* @__PURE__ */ jsx(
+                          "span",
+                          {
+                            className: `flex h-12 w-12 shrink-0 items-center justify-center rounded-xl text-white transition-colors ${isOpen ? "bg-[#edad1a]" : "bg-[#00274d] group-hover:bg-[#edad1a]"}`,
+                            children: /* @__PURE__ */ jsx(BriefcaseBusiness, { className: "w-5 h-5" })
+                          }
+                        ),
+                        /* @__PURE__ */ jsxs("div", { className: "min-w-0 flex-1", children: [
+                          /* @__PURE__ */ jsx("p", { className: "font-bold text-[#00274d] text-lg leading-snug", children: opening.title }),
+                          /* @__PURE__ */ jsxs("p", { className: "text-sm text-gray-500 mt-1", children: [
+                            opening.type,
+                            " role at Vendor Infra · ",
+                            opening.location
+                          ] })
+                        ] }),
+                        hasDetails && /* @__PURE__ */ jsx(
+                          ChevronDown,
+                          {
+                            className: `w-5 h-5 shrink-0 text-[#00274d] transition-transform duration-300 ${isOpen ? "rotate-180 text-[#edad1a]" : ""}`
+                          }
+                        )
+                      ]
+                    }
+                  ),
+                  /* @__PURE__ */ jsx(AnimatePresence, { initial: false, children: isOpen && hasDetails && /* @__PURE__ */ jsx(
+                    motion.div,
+                    {
+                      initial: { height: 0, opacity: 0 },
+                      animate: { height: "auto", opacity: 1 },
+                      exit: { height: 0, opacity: 0 },
+                      transition: { duration: 0.3, ease: "easeInOut" },
+                      className: "overflow-hidden",
+                      children: /* @__PURE__ */ jsxs("div", { className: "px-5 pb-6 md:px-6 md:pb-8 border-t border-gray-200 pt-5", children: [
+                        opening.overview && /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600 leading-relaxed mb-5", children: opening.overview }),
+                        opening.responsibilities && /* @__PURE__ */ jsxs("div", { className: "mb-5", children: [
+                          /* @__PURE__ */ jsx("h5", { className: "text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide", children: "Key Responsibilities" }),
+                          /* @__PURE__ */ jsx("ul", { className: "space-y-2", children: opening.responsibilities.map((item2) => /* @__PURE__ */ jsxs("li", { className: "flex gap-2 text-sm text-gray-600 leading-relaxed", children: [
+                            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a] mt-1", children: "•" }),
+                            /* @__PURE__ */ jsx("span", { children: item2 })
+                          ] }, item2)) })
+                        ] }),
+                        opening.requiredSkills && /* @__PURE__ */ jsxs("div", { className: "mb-5", children: [
+                          /* @__PURE__ */ jsx("h5", { className: "text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide", children: "Required Skills" }),
+                          /* @__PURE__ */ jsx("ul", { className: "space-y-2", children: opening.requiredSkills.map((item2) => /* @__PURE__ */ jsxs("li", { className: "flex gap-2 text-sm text-gray-600 leading-relaxed", children: [
+                            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a] mt-1", children: "•" }),
+                            /* @__PURE__ */ jsx("span", { children: item2 })
+                          ] }, item2)) })
+                        ] }),
+                        opening.experience && /* @__PURE__ */ jsxs("div", { className: "mb-5", children: [
+                          /* @__PURE__ */ jsx("h5", { className: "text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide", children: "Experience" }),
+                          /* @__PURE__ */ jsx("ul", { className: "space-y-2", children: opening.experience.map((item2) => /* @__PURE__ */ jsxs("li", { className: "flex gap-2 text-sm text-gray-600 leading-relaxed", children: [
+                            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a] mt-1", children: "•" }),
+                            /* @__PURE__ */ jsx("span", { children: item2 })
+                          ] }, item2)) })
+                        ] }),
+                        opening.portfolio && /* @__PURE__ */ jsxs("div", { children: [
+                          /* @__PURE__ */ jsx("h5", { className: "text-sm font-bold text-[#00274d] mb-2 uppercase tracking-wide", children: "Portfolio Required" }),
+                          /* @__PURE__ */ jsx("p", { className: "text-sm text-gray-600 leading-relaxed mb-2", children: "Applicants must submit a portfolio showcasing:" }),
+                          /* @__PURE__ */ jsx("ul", { className: "space-y-2 mb-3", children: opening.portfolio.map((item2) => /* @__PURE__ */ jsxs("li", { className: "flex gap-2 text-sm text-gray-600 leading-relaxed", children: [
+                            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a] mt-1", children: "•" }),
+                            /* @__PURE__ */ jsx("span", { children: item2 })
+                          ] }, item2)) }),
+                          opening.portfolioNote && /* @__PURE__ */ jsx("p", { className: "text-sm font-semibold text-[#00274d]", children: opening.portfolioNote })
+                        ] })
+                      ] })
+                    },
+                    "content"
+                  ) })
+                ]
+              },
+              opening.title
+            );
+          }) })
         ] }),
         /* @__PURE__ */ jsxs("aside", { className: "rounded-2xl overflow-hidden text-white p-6 shadow-xl shadow-[#00274d]/15 bg-[#00274d]", children: [
           /* @__PURE__ */ jsx("div", { className: "w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center mb-5", children: /* @__PURE__ */ jsx(Mail, { className: "w-6 h-6 text-[#edad1a]" }) }),
@@ -8330,7 +8450,7 @@ function Career() {
                 {
                   required: true,
                   name: "name",
-                  className: "w-full rou nded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#edad1a] focus:ring-4 focus:ring-[#edad1a]/10"
+                  className: "w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm outline-none focus:border-[#edad1a] focus:ring-4 focus:ring-[#edad1a]/10"
                 }
               )
             ] }),
