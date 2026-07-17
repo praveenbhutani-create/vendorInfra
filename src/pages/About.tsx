@@ -283,7 +283,7 @@ const team = [
   { name: "Utkarsh Kashyap",    role: "Strategy & IR",       tag: "Strategy",     photo: "about-members/2025-11-19.png",                    linkedin: "https://www.linkedin.com/in/utkarsh-kashyap/" },
   { name: "Pawanpreet Singh",   role: "Procurement",         tag: "Procurement",  photo: "about-members/2025-11-25.png",                    linkedin: "https://www.linkedin.com/in/pawanpreet-singh-b68b7b3b3/" },
   { name: "Deepak Kumar",       role: "Supplier Relations",  tag: "Operations",   photo: "about-members/deepak-kumar.png",                  linkedin: "https://www.linkedin.com/in/deepak-kumar-89702321b" },
-  { name: "Rahul Maurya",       role: "Accounts",            tag: "Accounts",     photo: "about-members/IMG-20260714-WA0005.jpg", linkedin: "https://www.linkedin.com/in/rahul-maurya-indirect-taxation%F0%9F%8F%A6-b8b566280/" },
+  { name: "Rahul Maurya",       role: "Accounts",            tag: "Accounts",     photo: "about-members/ChatGPT Image Jul 17_ 2026 at 10_31_48 AM.png", linkedin: "https://www.linkedin.com/in/rahul-maurya-indirect-taxation%F0%9F%8F%A6-b8b566280/" },
   { name: "Ankit Yadav",        role: "Data Optimization",   tag: "Data",         photo: "about-members/2025-11-27.png" ,linkedin: "https://www.linkedin.com/in/yashika-nimh-9bab51271/" },
   { name: "Kaushal Kumar",      role: "Supplier Relations",  tag: "Operations",   photo: "about-members/2025-12-VI-employee-photos-4.png",linkedin: "https://www.linkedin.com/in/kaushal-kumar-166a0b347" },
   { name: "Yashika Nimesh",     role: "Data Optimization",   tag: "Data",         photo: "about-members/2026-03-1.png",                     linkedin: "https://www.linkedin.com/in/yashika-nimesh-9bab51271/" },
