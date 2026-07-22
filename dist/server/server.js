@@ -56,7 +56,7 @@ function renderErrorPage() {
 let serverEntryPromise;
 async function getServerEntry() {
   if (!serverEntryPromise) {
-    serverEntryPromise = import("./assets/server-qiaP-kGl.js").then((n) => n.s).then(
+    serverEntryPromise = import("./assets/server-Bup50aQB.js").then((n) => n.s).then(
       (m) => m.default ?? m
     );
   }

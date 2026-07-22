@@ -1400,18 +1400,18 @@ export default function Home() {
               Ready to Grow and Transform your Business?
             </h2>
             <p className="text-[#00274d]/85 mb-6 text-sm md:text-base">
-              Join <span className="font-semibold">32,000+</span> contractors, vendors, manufacturers, suppliers, and consultants already using Vendor Infra to discover new opportunities, streamline procurement, acesss plants and equipment solutions, and secure project financing and insurance—all through a single integrated platform.
-            </p>
+  Join <span className="font-semibold">32,000+</span> contractors, vendors, manufacturers, suppliers, and consultants already using Vendor Infra to discover new opportunities, streamline procurement, access plants and equipment solutions, and secure project financing and insurance—all through a single integrated platform.
+</p>
             <div className="flex flex-wrap gap-3 justify-center items-center">
-        
-  href={PORTAL_REGISTER_URL}
-  target="_blank"
-  rel="noopener noreferrer"
-<a>
-  <SiteButton variant="onGold" className="normal-case tracking-normal">
-    Join Now
-  </SiteButton>
-</a>
+              <a
+                href={PORTAL_REGISTER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <SiteButton variant="onGold" className="normal-case tracking-normal">
+                  Join Now
+                </SiteButton>
+              </a>
               {/* <Link href="/services">
                 <button className="group inline-flex items-center gap-2 border border-[#00274d] text-[#00274d] font-medium px-5 py-2.5 text-sm rounded-md hover:bg-[#00274d] hover:text-white transition-colors">
                   Explore Services

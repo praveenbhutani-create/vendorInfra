@@ -607,7 +607,7 @@ export default function About() {
                     Ready to Grow and Transform your Business?
                   </h2>
                   <p className="text-[#00274d]/85 mb-6 text-sm md:text-base">
-                    Join <span className="font-semibold">32,000+</span> contractors, vendors, manufacturers, suppliers, and consultants already using Vendor Infra to discover new opportunities, streamline procurement, acesss plants and equipment solutions, and secure project financing and insurance—all through a single integrated platform.
+                    Join <span className="font-semibold">32,000+</span> contractors, vendors, manufacturers, suppliers, and consultants already using Vendor Infra to discover new opportunities, streamline procurement, access plants and equipment solutions, and secure project financing and insurance—all through a single integrated platform.
                   </p>
                   <div className="flex flex-wrap gap-3 justify-center items-center">
                           <a
