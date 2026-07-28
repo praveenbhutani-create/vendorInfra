@@ -173,7 +173,7 @@ const awards = [
   {
     name: "HDFC Tech Innovators",
     label: "Tech Innovators",
-    image: "https://www.hdfccapital.com/techinnovators/images/HDFC_Capital.png",
+    image: "/awards/hdfc-tech-innovators.png",
   },
   {
     name: "IIT Delhi",
