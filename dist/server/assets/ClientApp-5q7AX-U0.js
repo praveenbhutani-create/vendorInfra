@@ -2468,7 +2468,7 @@ function getSectorBySlug(slug) {
 }
 const heroImage = "/assets/hero-construction-PkMOOhzu.png";
 const PORTAL_REGISTER_URL$7 = "https://customer.vendorinfra.com/#/";
-const PLATFORM_STATS_API_URL = "http://3.110.208.157/api/vendor/getPlatformStats";
+const PLATFORM_STATS_API_URL = "/api/platform-stats";
 function Counter({ target, suffix = "", prefix = "" }) {
   const [count2, setCount] = useState(0);
   const ref = useRef(null);

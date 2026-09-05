@@ -13,6 +13,7 @@ import { Route as SplatRouteImport } from './routes/$'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiReferralRouteImport } from './routes/api/referral'
 import { Route as ApiQuoteRequestsRouteImport } from './routes/api/quote-requests'
+import { Route as ApiPlatformStatsRouteImport } from './routes/api/platform-stats'
 import { Route as ApiInvestorRouteImport } from './routes/api/investor'
 import { Route as ApiDemoBookingsRouteImport } from './routes/api/demo-bookings'
 import { Route as ApiContactSalesRouteImport } from './routes/api/contact-sales'
@@ -37,6 +38,11 @@ const ApiReferralRoute = ApiReferralRouteImport.update({
 const ApiQuoteRequestsRoute = ApiQuoteRequestsRouteImport.update({
   id: '/api/quote-requests',
   path: '/api/quote-requests',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPlatformStatsRoute = ApiPlatformStatsRouteImport.update({
+  id: '/api/platform-stats',
+  path: '/api/platform-stats',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiInvestorRoute = ApiInvestorRouteImport.update({
@@ -73,6 +79,7 @@ export interface FileRoutesByFullPath {
   '/api/contact-sales': typeof ApiContactSalesRoute
   '/api/demo-bookings': typeof ApiDemoBookingsRoute
   '/api/investor': typeof ApiInvestorRoute
+  '/api/platform-stats': typeof ApiPlatformStatsRoute
   '/api/quote-requests': typeof ApiQuoteRequestsRoute
   '/api/referral': typeof ApiReferralRoute
 }
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/api/contact-sales': typeof ApiContactSalesRoute
   '/api/demo-bookings': typeof ApiDemoBookingsRoute
   '/api/investor': typeof ApiInvestorRoute
+  '/api/platform-stats': typeof ApiPlatformStatsRoute
   '/api/quote-requests': typeof ApiQuoteRequestsRoute
   '/api/referral': typeof ApiReferralRoute
 }
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/api/contact-sales': typeof ApiContactSalesRoute
   '/api/demo-bookings': typeof ApiDemoBookingsRoute
   '/api/investor': typeof ApiInvestorRoute
+  '/api/platform-stats': typeof ApiPlatformStatsRoute
   '/api/quote-requests': typeof ApiQuoteRequestsRoute
   '/api/referral': typeof ApiReferralRoute
 }
@@ -109,6 +118,7 @@ export interface FileRouteTypes {
     | '/api/contact-sales'
     | '/api/demo-bookings'
     | '/api/investor'
+    | '/api/platform-stats'
     | '/api/quote-requests'
     | '/api/referral'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +130,7 @@ export interface FileRouteTypes {
     | '/api/contact-sales'
     | '/api/demo-bookings'
     | '/api/investor'
+    | '/api/platform-stats'
     | '/api/quote-requests'
     | '/api/referral'
   id:
@@ -131,6 +142,7 @@ export interface FileRouteTypes {
     | '/api/contact-sales'
     | '/api/demo-bookings'
     | '/api/investor'
+    | '/api/platform-stats'
     | '/api/quote-requests'
     | '/api/referral'
   fileRoutesById: FileRoutesById
@@ -143,6 +155,7 @@ export interface RootRouteChildren {
   ApiContactSalesRoute: typeof ApiContactSalesRoute
   ApiDemoBookingsRoute: typeof ApiDemoBookingsRoute
   ApiInvestorRoute: typeof ApiInvestorRoute
+  ApiPlatformStatsRoute: typeof ApiPlatformStatsRoute
   ApiQuoteRequestsRoute: typeof ApiQuoteRequestsRoute
   ApiReferralRoute: typeof ApiReferralRoute
 }
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/api/quote-requests'
       fullPath: '/api/quote-requests'
       preLoaderRoute: typeof ApiQuoteRequestsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/platform-stats': {
+      id: '/api/platform-stats'
+      path: '/api/platform-stats'
+      fullPath: '/api/platform-stats'
+      preLoaderRoute: typeof ApiPlatformStatsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/investor': {
@@ -223,6 +243,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiContactSalesRoute: ApiContactSalesRoute,
   ApiDemoBookingsRoute: ApiDemoBookingsRoute,
   ApiInvestorRoute: ApiInvestorRoute,
+  ApiPlatformStatsRoute: ApiPlatformStatsRoute,
   ApiQuoteRequestsRoute: ApiQuoteRequestsRoute,
   ApiReferralRoute: ApiReferralRoute,
 }

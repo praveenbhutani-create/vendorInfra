@@ -17,7 +17,10 @@ import { sectors as allSectors } from "@/lib/sectorsData";
 import heroImage from "@/assets/hero-construction.png";
 
 const PORTAL_REGISTER_URL = "https://customer.vendorinfra.com/#/";
-const PLATFORM_STATS_API_URL = "http://3.110.208.157/api/vendor/getPlatformStats";
+// Same-origin proxy for the upstream getPlatformStats API — calling the
+// upstream directly from the browser fails on the live site.
+// See src/routes/api/platform-stats.ts for why.
+const PLATFORM_STATS_API_URL = "/api/platform-stats";
 
 /* -- animated counter ------------------------------- */
 function Counter({ target, suffix = "", prefix = "" }: { target: number; suffix?: string; prefix?: string }) {

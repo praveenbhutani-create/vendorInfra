@@ -48,7 +48,7 @@ function ErrorComponent({ error, reset }) {
     ] })
   ] }) });
 }
-const Route$9 = createRootRouteWithContext()({
+const Route$a = createRootRouteWithContext()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
@@ -97,15 +97,15 @@ function RootShell({ children }) {
   ] });
 }
 function RootComponent() {
-  const { queryClient } = Route$9.useRouteContext();
+  const { queryClient } = Route$a.useRouteContext();
   return /* @__PURE__ */ jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsx(Outlet, {}) });
 }
-const $$splitComponentImporter$1 = () => import("./_-DwViOKE3.js");
-const Route$8 = createFileRoute("/$")({
+const $$splitComponentImporter$1 = () => import("./_-Be4CALEN.js");
+const Route$9 = createFileRoute("/$")({
   component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-const $$splitComponentImporter = () => import("./index-DwViOKE3.js");
-const Route$7 = createFileRoute("/")({
+const $$splitComponentImporter = () => import("./index-Be4CALEN.js");
+const Route$8 = createFileRoute("/")({
   component: lazyRouteComponent($$splitComponentImporter, "component")
 });
 function jsonResponse(body, status = 200) {
@@ -312,7 +312,7 @@ async function sendInquiryMail(rawData, options = {}) {
     attachments: options.attachments
   });
 }
-const Route$6 = createFileRoute("/api/referral")({
+const Route$7 = createFileRoute("/api/referral")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -327,7 +327,7 @@ const Route$6 = createFileRoute("/api/referral")({
     }
   }
 });
-const Route$5 = createFileRoute("/api/quote-requests")({
+const Route$6 = createFileRoute("/api/quote-requests")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -337,6 +337,36 @@ const Route$5 = createFileRoute("/api/quote-requests")({
           return jsonResponse({ ok: true });
         } catch (error) {
           return mailErrorResponse(error);
+        }
+      }
+    }
+  }
+});
+const UPSTREAM_URL = "https://admin.vendorinfra.com/api/vendor/getPlatformStats";
+const Route$5 = createFileRoute("/api/platform-stats")({
+  server: {
+    handlers: {
+      GET: async () => {
+        try {
+          const upstream = await fetch(UPSTREAM_URL, {
+            headers: { accept: "application/json" },
+            signal: AbortSignal.timeout(8e3)
+          });
+          if (!upstream.ok) {
+            throw new Error(`Upstream responded ${upstream.status}`);
+          }
+          const json = await upstream.json();
+          return new Response(JSON.stringify(json), {
+            status: 200,
+            headers: {
+              "content-type": "application/json; charset=utf-8",
+              // Short cache so repeat visitors don't hit the upstream on every load.
+              "cache-control": "public, max-age=300, s-maxage=300"
+            }
+          });
+        } catch (error) {
+          console.error("Failed to fetch platform stats upstream:", error);
+          return jsonResponse({ success: false, error: "Unable to load platform stats." }, 502);
         }
       }
     }
@@ -449,50 +479,55 @@ const Route = createFileRoute("/api/career")({
     }
   }
 });
-const SplatRoute = Route$8.update({
+const SplatRoute = Route$9.update({
   id: "/$",
   path: "/$",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
-const IndexRoute = Route$7.update({
+const IndexRoute = Route$8.update({
   id: "/",
   path: "/",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
-const ApiReferralRoute = Route$6.update({
+const ApiReferralRoute = Route$7.update({
   id: "/api/referral",
   path: "/api/referral",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
-const ApiQuoteRequestsRoute = Route$5.update({
+const ApiQuoteRequestsRoute = Route$6.update({
   id: "/api/quote-requests",
   path: "/api/quote-requests",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
+});
+const ApiPlatformStatsRoute = Route$5.update({
+  id: "/api/platform-stats",
+  path: "/api/platform-stats",
+  getParentRoute: () => Route$a
 });
 const ApiInvestorRoute = Route$4.update({
   id: "/api/investor",
   path: "/api/investor",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
 const ApiDemoBookingsRoute = Route$3.update({
   id: "/api/demo-bookings",
   path: "/api/demo-bookings",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
 const ApiContactSalesRoute = Route$2.update({
   id: "/api/contact-sales",
   path: "/api/contact-sales",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
 const ApiContactRoute = Route$1.update({
   id: "/api/contact",
   path: "/api/contact",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
 const ApiCareerRoute = Route.update({
   id: "/api/career",
   path: "/api/career",
-  getParentRoute: () => Route$9
+  getParentRoute: () => Route$a
 });
 const rootRouteChildren = {
   IndexRoute,
@@ -502,10 +537,11 @@ const rootRouteChildren = {
   ApiContactSalesRoute,
   ApiDemoBookingsRoute,
   ApiInvestorRoute,
+  ApiPlatformStatsRoute,
   ApiQuoteRequestsRoute,
   ApiReferralRoute
 };
-const routeTree = Route$9._addFileChildren(rootRouteChildren)._addFileTypes();
+const routeTree = Route$a._addFileChildren(rootRouteChildren)._addFileTypes();
 const getRouter = () => {
   const queryClient = new QueryClient();
   const router = createRouter({
