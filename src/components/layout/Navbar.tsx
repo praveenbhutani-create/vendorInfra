@@ -133,7 +133,7 @@ export function Navbar() {
     "rounded-full px-7 py-3 normal-case tracking-normal"
   )}
 >
-  Register
+  Login / Register
 </a>  
         </nav>
 
