@@ -1,4 +1,4 @@
-import { C as ClientApp } from "./ClientApp-5q7AX-U0.js";
+import { C as ClientApp } from "./ClientApp-CZ6uta7O.js";
 import "react/jsx-runtime";
 import "react";
 import "wouter";

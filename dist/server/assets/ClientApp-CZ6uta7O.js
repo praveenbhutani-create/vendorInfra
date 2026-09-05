@@ -520,7 +520,7 @@ function Navbar() {
           /* @__PURE__ */ jsx("div", { className: "pt-2", children: /* @__PURE__ */ jsx(
             "a",
             {
-              href: "https://customer.vendorinfra.com/#/login-2",
+              href: "https://customer.vendorinfra.com/#/register-2",
               target: "_blank",
               rel: "noopener noreferrer",
               className: "inline-flex items-center justify-center rounded-full px-7 py-3 font-medium bg-[#edad1a] text-[#00274d] hover:bg-[#d89b18] transition-colors",
@@ -2526,7 +2526,7 @@ const services$1 = [
 ];
 const stats$1 = [
   { key: "contractorsAndVendors", value: 31637, suffix: "", label: "Contractors & Vendors", sub: "Certified Contractors & Vendors & accross 20+ Sectors." },
-  { key: "liveUsers", value: 263, suffix: "", label: "Live Users", sub: "Total number of customers who are using our products." },
+  { key: null, value: 263, suffix: "", label: "Live Users", sub: "Total number of customers who are using our products." },
   { key: "projectValueCr", value: 6052, suffix: " Cr", label: "Project Value", sub: "Value of the projects posted in our portal." },
   { key: "plantsAndEquipment", value: 159, suffix: "", label: "Plants & Equipment", sub: "Number of Plants & Equipment." }
 ];
@@ -2679,6 +2679,7 @@ function Home() {
     };
   }, []);
   const liveStats = stats$1.map((s) => {
+    if (s.key === null) return s;
     const live = platformStats[s.key];
     if (typeof live !== "number") return s;
     return { ...s, value: Math.round(live) };

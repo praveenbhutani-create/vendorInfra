@@ -90,15 +90,15 @@ const services: ServiceItem[] = [
 ];
 
 /* -- Platform stats -----------------------------------
-   Labels, suffixes, and sub-text stay static. Only the numeric
-   `value` for each is overridden at render time from the live
-   getPlatformStats API response (via the `key` field below,
-   which maps to the corresponding field in the API's `data` object).
-   These starting values act as the fallback shown before the API
-   responds, or if the request fails. */
-const stats = [
+   Labels, suffixes, and sub-text stay static. A `key` means the numeric
+   `value` is overridden at render time from the matching field in the
+   live getPlatformStats API response, with the value below acting as the
+   fallback shown before the API responds or if the request fails.
+   `key: null` means the number is intentionally static and is never
+   taken from the API. */
+const stats: { key: string | null; value: number; suffix: string; label: string; sub: string }[] = [
   { key: "contractorsAndVendors", value: 31637, suffix: "",    label: "Contractors & Vendors", sub: "Certified Contractors & Vendors & accross 20+ Sectors." },
-  { key: "liveUsers",             value: 263,   suffix: "",    label: "Live Users",             sub: "Total number of customers who are using our products." },
+  { key: null,                    value: 263,   suffix: "",    label: "Live Users",             sub: "Total number of customers who are using our products." },
   { key: "projectValueCr",        value: 6052,  suffix: " Cr", label: "Project Value",         sub: "Value of the projects posted in our portal." },
   { key: "plantsAndEquipment",    value: 159,   suffix: "",    label: "Plants & Equipment",    sub: "Number of Plants & Equipment." },
 ];
@@ -441,9 +441,11 @@ export default function Home() {
 
   // Same stats array/order/labels/suffixes as before — only `value` is
   // swapped for the live number when available (matched via `key`).
+  // Entries with a null `key` (Live Users) keep their static value.
   // projectValueCr can come back as a float (e.g. 12108.0), so it's rounded
   // for display since Counter expects a whole number to step through.
   const liveStats = stats.map((s) => {
+    if (s.key === null) return s;
     const live = platformStats[s.key];
     if (typeof live !== "number") return s;
     return { ...s, value: Math.round(live) };
