@@ -275,7 +275,7 @@ const team = [
   { name: "Abhishek Srivastav", role: "Procurement",         tag: "Procurement",  photo: "about-members/2026-03-2.png",                     linkedin: "https://www.linkedin.com/in/abhishek-srivastav-01495a119" },
   { name: "Shaurya Sonu",       role: "Finance & Accounts",  tag: "Finance",      photo: "about-members/2026-03-3.png",                     linkedin: "https://www.linkedin.com/in/shaurya-sonu-840aa8247" },
   { name: "Ashutosh Pandey",    role: "Procurement",         tag: "Procurement",  photo: "about-members/2025-11-26.png",                    linkedin: "https://www.linkedin.com/in/ashutosh-pandey-83889945/" },
-  { name: "Astha Tiwari",       role: "Human Resources",     tag: "HR",           photo: "about-members/2025-11-VI-employee-photos-12.png", linkedin: "https://www.linkedin.com/in/astha-tiwari-6990511b2/" },
+  // { name: "Astha Tiwari",       role: "Human Resources",     tag: "HR",           photo: "about-members/2025-11-VI-employee-photos-12.png", linkedin: "https://www.linkedin.com/in/astha-tiwari-6990511b2/" },
   { name: "Aman Goyal",         role: "Finance",             tag: "Finance",      photo: "about-members/2025-11-22.png",                    linkedin: "https://www.linkedin.com/in/amangoyal824" },
   { name: "Rajat Singh",        role: "Supplier Relations",  tag: "Operations",   photo: "about-members/2026-03-5.png",                     linkedin: "https://www.linkedin.com/in/rajat-singh-3b010a145" },
   { name: "Rajni Kumar",        role: "Product & IT",        tag: "Product & IT", photo: "about-members/2025-11-VI-employee-photos-16.png", linkedin: "https://www.linkedin.com/in/rajni-kumar-628477123" },
