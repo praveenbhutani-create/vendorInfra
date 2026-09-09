@@ -524,7 +524,7 @@ function Navbar() {
               target: "_blank",
               rel: "noopener noreferrer",
               className: "inline-flex items-center justify-center rounded-full px-7 py-3 font-medium bg-[#edad1a] text-[#00274d] hover:bg-[#d89b18] transition-colors",
-              children: "Register"
+              children: "Login / Register"
             }
           ) })
         ] })

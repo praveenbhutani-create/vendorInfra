@@ -213,7 +213,7 @@ export function Navbar() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full px-7 py-3 font-medium bg-[#edad1a] text-[#00274d] hover:bg-[#d89b18] transition-colors"
             >
-              Register
+              Login / Register
             </a>
               </div>
             </div>
