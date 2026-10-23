@@ -5,7 +5,7 @@ import { useLocation, Link, useParams, Router as Router$1, Switch, Route } from 
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva } from "class-variance-authority";
-import { X, AlertCircle, ArrowRight, ChevronDown, ShoppingCart, Menu, Facebook, Twitter, Linkedin, Instagram, User, Phone, Mail, Building2, MessageSquare, Loader2, CheckCircle2, Sparkles, Search, Calculator, Tractor, Package, Factory, ShieldCheck, Briefcase, BarChart3, ArrowUpRight, Star, ChevronLeft, ChevronRight, Target, Shield, Layers, Zap, BarChart, Globe, Play, FileSearch, Gauge, Layers3, BadgeCheck, ClipboardCheck, GitBranch, Truck, PackageCheck, LineChart, Globe2, MapPin, Send, Calendar, Tag, ArrowLeft, TrendingUp, Check, Brain, Database, Clock, Leaf, Lock, Network, LockKeyhole, Users, BriefcaseBusiness, HelpCircle, Upload, Workflow, Bot, CircleDollarSign, BadgeIndianRupee, MapPinned, PackageSearch, ShoppingBag, Minus, Plus, RotateCcw, CheckCircle, Trash2, CalendarCheck, ArrowUp } from "lucide-react";
+import { X, AlertCircle, ArrowRight, ChevronDown, ShoppingCart, Menu, Facebook, Twitter, Linkedin, Instagram, User, Phone, Mail, Building2, MessageSquare, Loader2, CheckCircle2, Sparkles, Search, Calculator, Tractor, Package, Factory, ShieldCheck, Briefcase, BarChart3, ArrowUpRight, Star, ChevronLeft, ChevronRight, Target, Shield, Layers, Zap, BarChart, Globe, Play, FileSearch, Gauge, Layers3, BadgeCheck, ClipboardCheck, GitBranch, Truck, PackageCheck, LineChart, Globe2, MapPin, Send, Calendar, Tag, ArrowLeft, TrendingUp, Check, Brain, Database, Clock, Leaf, Lock, Network, LockKeyhole, Users, BriefcaseBusiness, HelpCircle, Upload, IndianRupee, Wrench, Wallet, Workflow, Boxes, BrainCircuit, Compass, Banknote, HardHat, Bot, CircleDollarSign, BadgeIndianRupee, MapPinned, PackageSearch, ShoppingBag, Minus, Plus, RotateCcw, CheckCircle, Trash2, CalendarCheck, ArrowUp } from "lucide-react";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
@@ -8659,43 +8659,92 @@ const heroStats = [
 ];
 const problems = [
   {
-    title: "Fragmented industry",
-    text: "The infrastructure, construction & manufacturing industry is highly fragmented and heavily dependent on offline references, limiting efficiency and scale, with minimal use of intelligent systems."
+    title: "Project Selection",
+    text: "Choosing the right projects to bid on is guesswork — no data-backed win-probability or fit scoring.",
+    icon: Search
   },
   {
-    title: "No hand holding for contractors",
-    text: "Contractors working on large infrastructure projects lack structured support and unified digital tools for growth, resulting in low visibility and missed opportunities."
+    title: "Right Costing for Project",
+    text: "Inaccurate cost estimation leads to under-bidding, margin erosion, or lost tenders.",
+    icon: IndianRupee
   },
   {
-    title: "Low visibility",
-    text: "Contractors lack market visibility, restricting growth beyond existing networks & limiting access to high-value opportunities, with limited data-driven support."
+    title: "Right Contractor Selection",
+    text: "No structured way to vet and select the right contractor/vendor for the project.",
+    icon: Users
   },
   {
-    title: "Disconnected stakeholders",
-    text: "Stakeholders across the value chain operate in silos, leading to inefficiencies and lost opportunities, with lack of smart, connected systems limiting seamless coordination and decision-making."
+    title: "Idling of Plants & Equipment",
+    text: "Equipment utilization remains low, tying up capital in underused assets.",
+    icon: Wrench
+  },
+  {
+    title: "Cash-Flow Gaps (WC)",
+    text: "30–45 day payment cycles delay execution and strain working capital.",
+    icon: Wallet
+  },
+  {
+    title: "Project Risk Cover",
+    text: "Complex, fragmented insurance processes create delays & limited transparency.",
+    icon: ShieldCheck
   }
 ];
 const solutions = [
   {
-    title: "Unified AI-based ecosystem",
-    text: "A single platform connecting all infrastructure, construction & manufacturing stakeholders, unifying discovery, supply chain, plants & equipment, and insurance into one data-driven operating system.",
-    icon: Network
+    title: "Sector & Tender Intelligence",
+    text: "Find tenders, access documents, and gain sector intelligence across 20+ sectors.",
+    icon: Search
   },
   {
-    title: "Integrated value-chain collaboration",
-    text: "One platform enabling seamless coordination    across all infrastructure, construction & Manufacturing stakeholders. Ensuring aligned execution across planning, design, execution,  quality assurance, delivery, and operations.",
-    icon: Workflow
+    title: "Price Discovery",
+    text: "Get multiple competitive quotes from verified contractors/vendors across 20+ sectors.",
+    icon: IndianRupee
   },
   {
-    title: "Smart visibility and discovery",
-    text: "Verified profiles and smart matching unlock high-intent opportunities by surfacing the right vendors, contractors, and partners at the right time through data-driven insights.",
-    icon: Target
+    title: "Contractor/Vendor Discovery",
+    text: "Discover and connect with 36,000+ verified contractors/vendors across multiple sectors, powered by AI.",
+    icon: Users
   },
   {
-    title: "Scalable ecosystem monetisation",
-    text: "AI tools and ecosystem supports the contractors execute better and scale faster Multiple solutions built across the entire value chain to unlock opportunities.",
-    icon: Layers3
+    title: "Equipment Marketplace",
+    text: "Buy, hire, sell and discover plants, equipment and machinery for your project requirements.",
+    icon: Wrench
+  },
+  {
+    title: "Procurement & Credit",
+    text: "Fulfil project procurement needs and access embedded financing solutions aligned with project cycles.",
+    icon: Banknote
+  },
+  {
+    title: "Project Insurance",
+    text: "Fulfil your end-to-end project insurance needs with tailored coverage and competitive quotes.",
+    icon: ShieldCheck
   }
+];
+const thesisPoints = [
+  {
+    icon: Workflow,
+    text: "Vendor Infra is building an AI-powered B2B platform that unifies the entire infrastructure, construction, and manufacturing ecosystem. Every module is seamlessly connected, creating a single digital operating system where data, transactions, intelligence, financing, and execution continuously reinforce one another."
+  },
+  {
+    icon: Boxes,
+    text: "The platform enables businesses to discover opportunities, identify verified partners, benchmark prices, procure materials with embedded finance, manage projects, optimize assets, mitigate risk, and expand into new markets—all through one integrated ecosystem."
+  },
+  {
+    icon: BrainCircuit,
+    text: "Every interaction strengthens the platform through AI, continuously improving supplier matching, pricing intelligence, procurement decisions, risk assessment, equipment utilization, and business growth."
+  }
+];
+const workflowSteps = [
+  { label: "Discover Opportunities", icon: Search },
+  { label: "Find Verified Vendors", icon: BadgeCheck },
+  { label: "Benchmark Prices", icon: BarChart3 },
+  { label: "Procure with Credit", icon: Banknote },
+  { label: "Execute Projects", icon: HardHat },
+  { label: "Manage Risk", icon: ShieldCheck },
+  { label: "Optimize Equipment", icon: Wrench },
+  { label: "Access Enterprise Svcs", icon: Building2 },
+  { label: "Expand into New Markets", icon: Globe2 }
 ];
 const ecosystem = [
   {
@@ -8976,11 +9025,11 @@ function Investor() {
         /* @__PURE__ */ jsxs("div", { className: "container relative mx-auto px-4 max-w-7xl", children: [
           /* @__PURE__ */ jsxs("div", { className: "mx-auto mb-14 max-w-4xl text-center", children: [
             /* @__PURE__ */ jsx(SectionEyebrow, { children: "Problem" }),
-            /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-black leading-tight text-[#00274d]", children: "A massive industry still trapped in offline execution loops." })
+            /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-black leading-tight text-[#00274d]", children: "A ₹12+ lakh crore economy still runs on spreadsheets and phone calls." })
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "relative grid gap-5 lg:grid-cols-[1fr_220px_1fr] lg:items-center", children: [
-            /* @__PURE__ */ jsx("div", { className: "space-y-5", children: problems.slice(0, 2).map((item2, index) => {
-              const Icon = [Network, Workflow][index];
+            /* @__PURE__ */ jsx("div", { className: "space-y-5", children: problems.slice(0, 3).map((item2, index) => {
+              const Icon = item2.icon;
               return /* @__PURE__ */ jsx(
                 motion.article,
                 {
@@ -9009,8 +9058,8 @@ function Investor() {
               /* @__PURE__ */ jsx("div", { className: "absolute left-1/2 -top-8 -bottom-8 w-px -translate-x-1/2 bg-[#edad1a]/40" }),
               /* @__PURE__ */ jsx("div", { className: "absolute inset-5 rounded-full border border-dashed border-[#edad1a]/50" })
             ] }),
-            /* @__PURE__ */ jsx("div", { className: "space-y-5", children: problems.slice(2, 4).map((item2, index) => {
-              const Icon = [Target, Layers3][index];
+            /* @__PURE__ */ jsx("div", { className: "space-y-5", children: problems.slice(3, 6).map((item2, index) => {
+              const Icon = item2.icon;
               return /* @__PURE__ */ jsx(
                 motion.article,
                 {
@@ -9024,7 +9073,7 @@ function Investor() {
                     /* @__PURE__ */ jsxs("div", { children: [
                       /* @__PURE__ */ jsxs("p", { className: "mb-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-[#edad1a]", children: [
                         "Problem ",
-                        index + 3
+                        index + 4
                       ] }),
                       /* @__PURE__ */ jsx("h3", { className: "text-lg font-black leading-tight text-white", children: item2.title }),
                       /* @__PURE__ */ jsx("p", { className: "mt-2 text-sm leading-relaxed text-white/60", children: item2.text })
@@ -9034,76 +9083,164 @@ function Investor() {
                 item2.title
               );
             }) })
-          ] })
+          ] }),
+          /* @__PURE__ */ jsx(
+            motion.div,
+            {
+              initial: { opacity: 0, y: 16 },
+              whileInView: { opacity: 1, y: 0 },
+              viewport: { once: true },
+              className: "mt-12 rounded-2xl bg-[#00274d] px-6 py-6 md:px-8 md:py-7 shadow-xl shadow-[#00274d]/20",
+              children: /* @__PURE__ */ jsx("p", { className: "text-base md:text-lg leading-relaxed text-white/80", children: "Six structural gaps — from project selection to risk cover — quietly drain time, cash and trust out of every project." })
+            }
+          )
         ] })
       ] }),
       /* @__PURE__ */ jsx("section", { className: "relative overflow-hidden bg-white py-16 md:py-24", children: /* @__PURE__ */ jsxs("div", { className: "container relative mx-auto px-4 max-w-7xl", children: [
-        /* @__PURE__ */ jsxs("div", { className: "mb-12 text-center", children: [
+        /* @__PURE__ */ jsxs("div", { className: "mx-auto mb-12 max-w-4xl text-center", children: [
           /* @__PURE__ */ jsx(SectionEyebrow, { children: "Our thesis" }),
-          /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-4xl font-black text-[#00274d] leading-tight", children: "Vendor Infra Ecosystem" })
+          /* @__PURE__ */ jsxs("h2", { className: "text-3xl md:text-5xl font-black text-[#00274d] leading-tight", children: [
+            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a]", children: "Unified Ecosystem" }),
+            " for Vendor Infra"
+          ] })
         ] }),
-        /* @__PURE__ */ jsxs("div", { className: "grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center", children: [
-          /* @__PURE__ */ jsxs(
+        /* @__PURE__ */ jsxs("div", { className: "grid gap-6 lg:grid-cols-[1.25fr_0.75fr]", children: [
+          /* @__PURE__ */ jsx(
             motion.div,
             {
               initial: { opacity: 0, x: -18 },
               whileInView: { opacity: 1, x: 0 },
               viewport: { once: true },
               className: "rounded-2xl border border-gray-100 bg-[#f8fafc] p-6 md:p-8 shadow-sm",
-              children: [
-                /* @__PURE__ */ jsxs("p", { className: "text-lg leading-relaxed text-gray-650", children: [
-                  "Vendor Infra is building ",
-                  /* @__PURE__ */ jsx("span", { className: "font-black text-[#00274d]", children: "the horizontal operating system" }),
-                  " for ",
-                  /* @__PURE__ */ jsx("span", { className: "font-black text-[#00274d]", children: "infrastructure, construction and manufacturing" }),
-                  " in India."
-                ] }),
-                /* @__PURE__ */ jsxs("p", { className: "mt-5 text-lg leading-relaxed text-gray-650", children: [
-                  "Despite unprecedented public and private capex, infrastructure delivery remains ",
-                  /* @__PURE__ */ jsx("span", { className: "font-black text-[#edad1a]", children: "fragmented, opaque and inefficient." })
-                ] }),
-                /* @__PURE__ */ jsx("p", { className: "mt-5 text-lg leading-relaxed text-gray-650", children: "By embedding deeply into EPC workflows, Vendor Infra becomes mission-critical infrastructure driving:" }),
-                /* @__PURE__ */ jsx("ul", { className: "mt-5 grid gap-3 sm:grid-cols-3", children: ["High switching costs", "Strong repeat usage", "Expanding wallet share"].map((point) => /* @__PURE__ */ jsxs("li", { className: "rounded-xl bg-white p-4 text-sm font-bold text-[#00274d] shadow-sm", children: [
-                  /* @__PURE__ */ jsx(CheckCircle2, { className: "mb-2 h-5 w-5 text-[#edad1a]" }),
-                  point
-                ] }, point)) }),
-                /* @__PURE__ */ jsxs("p", { className: "mt-6 text-lg leading-relaxed text-gray-650", children: [
-                  "The platform converts infrastructure execution from relationship-driven chaos into ",
-                  /* @__PURE__ */ jsx("span", { className: "font-black text-[#00274d]", children: "data-driven, scalable operations." })
-                ] })
-              ]
+              children: /* @__PURE__ */ jsx("ul", { className: "space-y-6", children: thesisPoints.map((point) => {
+                const Icon = point.icon;
+                return /* @__PURE__ */ jsxs("li", { className: "flex items-start gap-4", children: [
+                  /* @__PURE__ */ jsx("span", { className: "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#00274d] text-[#edad1a]", children: /* @__PURE__ */ jsx(Icon, { className: "h-5 w-5" }) }),
+                  /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-gray-600", children: point.text })
+                ] }, point.text);
+              }) })
             }
           ),
-          /* @__PURE__ */ jsxs(
-            motion.aside,
+          /* @__PURE__ */ jsx("div", { className: "grid gap-6", children: [
             {
-              initial: { opacity: 0, x: 18 },
-              whileInView: { opacity: 1, x: 0 },
-              viewport: { once: true },
-              className: "rounded-2xl bg-[#00274d] p-7 md:p-8 text-white shadow-xl shadow-[#00274d]/20",
-              children: [
-                /* @__PURE__ */ jsx("div", { className: "mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edad1a]/15 text-[#edad1a]", children: /* @__PURE__ */ jsx(Users, { className: "h-7 w-7" }) }),
-                /* @__PURE__ */ jsxs("div", { className: "space-y-7", children: [
-                  /* @__PURE__ */ jsxs("div", { children: [
-                    /* @__PURE__ */ jsx("p", { className: "text-[#edad1a] text-sm font-black uppercase tracking-[0.22em] mb-3", children: "Vision" }),
-                    /* @__PURE__ */ jsx("p", { className: "text-white/85 leading-relaxed", children: "To build an AI-powered operating system for the infrastructure, construction and manufacturing industry." })
-                  ] }),
-                  /* @__PURE__ */ jsxs("div", { className: "border-t border-white/15 pt-7", children: [
-                    /* @__PURE__ */ jsx("p", { className: "text-[#edad1a] text-sm font-black uppercase tracking-[0.22em] mb-3", children: "Mission" }),
-                    /* @__PURE__ */ jsx("p", { className: "text-white/85 leading-relaxed", children: "Use AI, data intelligence and smart collaboration to connect all infrastructure stakeholders and enable smarter project execution." })
-                  ] })
-                ] })
-              ]
+              label: "Vision",
+              icon: Target,
+              text: "To build an AI-powered operating system for the infrastructure, construction & manufacturing industry."
+            },
+            {
+              label: "Mission",
+              icon: Compass,
+              text: "Use AI, data intelligence, and smart collaboration to connect all infrastructure stakeholders and enable smarter project execution."
             }
-          )
-        ] })
+          ].map((card, index) => {
+            const Icon = card.icon;
+            return /* @__PURE__ */ jsxs(
+              motion.aside,
+              {
+                initial: { opacity: 0, x: 18 },
+                whileInView: { opacity: 1, x: 0 },
+                viewport: { once: true },
+                transition: { delay: index * 0.08 },
+                className: "relative overflow-hidden rounded-2xl bg-[#00274d] p-6 md:p-7 text-white shadow-xl shadow-[#00274d]/20",
+                children: [
+                  /* @__PURE__ */ jsx(Icon, { className: "absolute -right-6 -bottom-6 h-32 w-32 text-white/[0.04]" }),
+                  /* @__PURE__ */ jsxs("div", { className: "relative flex items-start gap-4", children: [
+                    /* @__PURE__ */ jsx("span", { className: "flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#edad1a]/15 text-[#edad1a]", children: /* @__PURE__ */ jsx(Icon, { className: "h-6 w-6" }) }),
+                    /* @__PURE__ */ jsxs("div", { children: [
+                      /* @__PURE__ */ jsx("p", { className: "mb-2 text-sm font-black uppercase tracking-[0.22em] text-[#edad1a]", children: card.label }),
+                      /* @__PURE__ */ jsx("p", { className: "leading-relaxed text-white/85", children: card.text })
+                    ] })
+                  ] })
+                ]
+              },
+              card.label
+            );
+          }) })
+        ] }),
+        /* @__PURE__ */ jsxs("div", { className: "mt-16", children: [
+          /* @__PURE__ */ jsx("div", { className: "mb-10 text-center", children: /* @__PURE__ */ jsx("p", { className: "text-sm font-black uppercase tracking-[0.22em] text-[#00274d]", children: "One connected workflow" }) }),
+          /* @__PURE__ */ jsxs("div", { className: "relative hidden lg:block", children: [
+            /* @__PURE__ */ jsx("div", { className: "absolute left-[5.5%] right-[5.5%] top-7 h-1 rounded-full bg-[#00274d]/10" }),
+            /* @__PURE__ */ jsx(
+              motion.div,
+              {
+                initial: { scaleX: 0 },
+                whileInView: { scaleX: 1 },
+                viewport: { once: true },
+                transition: { duration: 1.4, ease: "easeOut" },
+                className: "absolute left-[5.5%] right-[5.5%] top-7 h-1 origin-left rounded-full bg-gradient-to-r from-[#edad1a] via-[#edad1a] to-[#00274d]"
+              }
+            ),
+            /* @__PURE__ */ jsx("ol", { className: "relative grid grid-cols-9 gap-2", children: workflowSteps.map((step, index) => {
+              const Icon = step.icon;
+              return /* @__PURE__ */ jsxs(
+                motion.li,
+                {
+                  initial: { opacity: 0, y: 14 },
+                  whileInView: { opacity: 1, y: 0 },
+                  viewport: { once: true },
+                  transition: { delay: 0.15 * index },
+                  className: "group flex flex-col items-center text-center",
+                  children: [
+                    /* @__PURE__ */ jsxs("span", { className: "relative flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#00274d] text-[#edad1a] shadow-lg shadow-[#00274d]/20 transition-transform group-hover:-translate-y-1 group-hover:bg-[#edad1a] group-hover:text-[#00274d]", children: [
+                      /* @__PURE__ */ jsx(Icon, { className: "h-6 w-6" }),
+                      /* @__PURE__ */ jsx("span", { className: "absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#edad1a] text-[10px] font-black text-[#00274d] ring-2 ring-white", children: String(index + 1).padStart(2, "0") })
+                    ] }),
+                    /* @__PURE__ */ jsx("p", { className: "mt-4 text-sm font-bold leading-snug text-[#00274d]", children: step.label })
+                  ]
+                },
+                step.label
+              );
+            }) })
+          ] }),
+          /* @__PURE__ */ jsxs("ol", { className: "relative mx-auto max-w-md space-y-5 lg:hidden", children: [
+            /* @__PURE__ */ jsx("div", { className: "absolute bottom-7 left-6 top-7 w-1 -translate-x-1/2 rounded-full bg-gradient-to-b from-[#edad1a] to-[#00274d]" }),
+            workflowSteps.map((step, index) => {
+              const Icon = step.icon;
+              return /* @__PURE__ */ jsxs(
+                motion.li,
+                {
+                  initial: { opacity: 0, x: -14 },
+                  whileInView: { opacity: 1, x: 0 },
+                  viewport: { once: true },
+                  transition: { delay: 0.05 * index },
+                  className: "relative flex items-center gap-4",
+                  children: [
+                    /* @__PURE__ */ jsx("span", { className: "relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-4 border-white bg-[#00274d] text-[#edad1a] shadow-md", children: /* @__PURE__ */ jsx(Icon, { className: "h-5 w-5" }) }),
+                    /* @__PURE__ */ jsxs("div", { className: "flex-1 rounded-xl border border-gray-100 bg-[#f8fafc] px-4 py-3", children: [
+                      /* @__PURE__ */ jsxs("p", { className: "text-[10px] font-black uppercase tracking-[0.22em] text-[#edad1a]", children: [
+                        "Step ",
+                        String(index + 1).padStart(2, "0")
+                      ] }),
+                      /* @__PURE__ */ jsx("p", { className: "text-sm font-bold text-[#00274d]", children: step.label })
+                    ] })
+                  ]
+                },
+                step.label
+              );
+            })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsx(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 16 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            className: "mt-14 rounded-2xl bg-[#00274d] px-6 py-6 md:py-7 text-center shadow-xl shadow-[#00274d]/20",
+            children: /* @__PURE__ */ jsx("p", { className: "flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xl md:text-2xl font-black text-white", children: ["One Platform.", "One Network.", "One AI Engine."].map((phrase, index) => /* @__PURE__ */ jsxs("span", { className: "flex items-center gap-4", children: [
+              index > 0 && /* @__PURE__ */ jsx("span", { className: "h-2 w-2 rounded-full bg-[#edad1a]" }),
+              /* @__PURE__ */ jsx("span", { className: index === 2 ? "text-[#edad1a]" : void 0, children: phrase })
+            ] }, phrase)) })
+          }
+        )
       ] }) }),
       /* @__PURE__ */ jsx("section", { className: "py-16 md:py-20", children: /* @__PURE__ */ jsxs("div", { className: "container mx-auto px-4 max-w-7xl", children: [
         /* @__PURE__ */ jsxs("div", { className: "text-center max-w-5xl mx-auto mb-12", children: [
           /* @__PURE__ */ jsx(SectionEyebrow, { children: "Solutions" }),
-          /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-bold text-[#00274d] leading-tight", children: "One connected platform for every stage of the infrastructure value chain." })
+          /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-bold text-[#00274d] leading-tight", children: "One platform, multiple solutions." })
         ] }),
-        /* @__PURE__ */ jsx("div", { className: "grid md:grid-cols-2 lg:grid-cols-4 gap-4", children: solutions.map((item2, index) => {
+        /* @__PURE__ */ jsx("div", { className: "grid md:grid-cols-2 lg:grid-cols-3 gap-4", children: solutions.map((item2, index) => {
           const Icon = item2.icon;
           return /* @__PURE__ */ jsxs(
             motion.article,
@@ -9121,7 +9258,17 @@ function Investor() {
             },
             item2.title
           );
-        }) })
+        }) }),
+        /* @__PURE__ */ jsx(
+          motion.div,
+          {
+            initial: { opacity: 0, y: 16 },
+            whileInView: { opacity: 1, y: 0 },
+            viewport: { once: true },
+            className: "mt-12 rounded-2xl bg-[#00274d] px-6 py-6 md:px-8 md:py-7 shadow-xl shadow-[#00274d]/20",
+            children: /* @__PURE__ */ jsx("p", { className: "text-base md:text-lg leading-relaxed text-white/80", children: "Every module feeds the same AI engine — so the more the ecosystem is used, the smarter and stickier it gets." })
+          }
+        )
       ] }) }),
       /* @__PURE__ */ jsxs("section", { className: "relative overflow-hidden bg-[#00274d] py-16 md:py-24 text-white", children: [
         /* @__PURE__ */ jsx(

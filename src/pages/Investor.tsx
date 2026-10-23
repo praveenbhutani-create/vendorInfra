@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   BadgeCheck,
+  Banknote,
   BarChart3,
   Bot,
   Boxes,
@@ -10,6 +11,7 @@ import {
   CheckCircle2,
   CircleDollarSign,
   ClipboardList,
+  Compass,
   Factory,
   FilePenLine,
   FileSpreadsheet,
@@ -17,12 +19,11 @@ import {
   Globe2,
   Handshake,
   HardHat,
+  IndianRupee,
   Landmark,
-  Layers3,
   Loader2,
   Mail,
   Monitor,
-  Network,
   Package,
   Search,
   ShieldCheck,
@@ -30,6 +31,7 @@ import {
   TrendingUp,
   Upload,
   Users,
+  Wallet,
   Workflow,
   Wrench,
   X,
@@ -57,44 +59,95 @@ const heroStats = [
 
 const problems = [
   {
-    title: "Fragmented industry",
-    text: "The infrastructure, construction & manufacturing industry is highly fragmented and heavily dependent on offline references, limiting efficiency and scale, with minimal use of intelligent systems.",
+    title: "Project Selection",
+    text: "Choosing the right projects to bid on is guesswork — no data-backed win-probability or fit scoring.",
+    icon: Search,
   },
   {
-    title: "No hand holding for contractors",
-    text: "Contractors working on large infrastructure projects lack structured support and unified digital tools for growth, resulting in low visibility and missed opportunities.",
+    title: "Right Costing for Project",
+    text: "Inaccurate cost estimation leads to under-bidding, margin erosion, or lost tenders.",
+    icon: IndianRupee,
   },
   {
-    title: "Low visibility",
-    text: "Contractors lack market visibility, restricting growth beyond existing networks & limiting access to high-value opportunities, with limited data-driven support.",
+    title: "Right Contractor Selection",
+    text: "No structured way to vet and select the right contractor/vendor for the project.",
+    icon: Users,
   },
   {
-    title: "Disconnected stakeholders",
-    text: "Stakeholders across the value chain operate in silos, leading to inefficiencies and lost opportunities, with lack of smart, connected systems limiting seamless coordination and decision-making.",
+    title: "Idling of Plants & Equipment",
+    text: "Equipment utilization remains low, tying up capital in underused assets.",
+    icon: Wrench,
+  },
+  {
+    title: "Cash-Flow Gaps (WC)",
+    text: "30–45 day payment cycles delay execution and strain working capital.",
+    icon: Wallet,
+  },
+  {
+    title: "Project Risk Cover",
+    text: "Complex, fragmented insurance processes create delays & limited transparency.",
+    icon: ShieldCheck,
   },
 ];
 
 const solutions = [
   {
-    title: "Unified AI-based ecosystem",
-    text: "A single platform connecting all infrastructure, construction & manufacturing stakeholders, unifying discovery, supply chain, plants & equipment, and insurance into one data-driven operating system.",
-    icon: Network,
+    title: "Sector & Tender Intelligence",
+    text: "Find tenders, access documents, and gain sector intelligence across 20+ sectors.",
+    icon: Search,
   },
   {
-    title: "Integrated value-chain collaboration",
-    text: "One platform enabling seamless coordination    across all infrastructure, construction & Manufacturing stakeholders. Ensuring aligned execution across planning, design, execution,  quality assurance, delivery, and operations.",
+    title: "Price Discovery",
+    text: "Get multiple competitive quotes from verified contractors/vendors across 20+ sectors.",
+    icon: IndianRupee,
+  },
+  {
+    title: "Contractor/Vendor Discovery",
+    text: "Discover and connect with 36,000+ verified contractors/vendors across multiple sectors, powered by AI.",
+    icon: Users,
+  },
+  {
+    title: "Equipment Marketplace",
+    text: "Buy, hire, sell and discover plants, equipment and machinery for your project requirements.",
+    icon: Wrench,
+  },
+  {
+    title: "Procurement & Credit",
+    text: "Fulfil project procurement needs and access embedded financing solutions aligned with project cycles.",
+    icon: Banknote,
+  },
+  {
+    title: "Project Insurance",
+    text: "Fulfil your end-to-end project insurance needs with tailored coverage and competitive quotes.",
+    icon: ShieldCheck,
+  },
+];
+
+const thesisPoints = [
+  {
     icon: Workflow,
+    text: "Vendor Infra is building an AI-powered B2B platform that unifies the entire infrastructure, construction, and manufacturing ecosystem. Every module is seamlessly connected, creating a single digital operating system where data, transactions, intelligence, financing, and execution continuously reinforce one another.",
   },
   {
-    title: "Smart visibility and discovery",
-    text: "Verified profiles and smart matching unlock high-intent opportunities by surfacing the right vendors, contractors, and partners at the right time through data-driven insights.",
-    icon: Target,
+    icon: Boxes,
+    text: "The platform enables businesses to discover opportunities, identify verified partners, benchmark prices, procure materials with embedded finance, manage projects, optimize assets, mitigate risk, and expand into new markets—all through one integrated ecosystem.",
   },
   {
-    title: "Scalable ecosystem monetisation",
-    text: "AI tools and ecosystem supports the contractors execute better and scale faster Multiple solutions built across the entire value chain to unlock opportunities.",
-    icon: Layers3,
+    icon: BrainCircuit,
+    text: "Every interaction strengthens the platform through AI, continuously improving supplier matching, pricing intelligence, procurement decisions, risk assessment, equipment utilization, and business growth.",
   },
+];
+
+const workflowSteps = [
+  { label: "Discover Opportunities", icon: Search },
+  { label: "Find Verified Vendors", icon: BadgeCheck },
+  { label: "Benchmark Prices", icon: BarChart3 },
+  { label: "Procure with Credit", icon: Banknote },
+  { label: "Execute Projects", icon: HardHat },
+  { label: "Manage Risk", icon: ShieldCheck },
+  { label: "Optimize Equipment", icon: Wrench },
+  { label: "Access Enterprise Svcs", icon: Building2 },
+  { label: "Expand into New Markets", icon: Globe2 },
 ];
 
 const ecosystemWheel = [
@@ -1027,17 +1080,14 @@ export default function Investor() {
     <div className="mx-auto mb-14 max-w-4xl text-center">
       <SectionEyebrow>Problem</SectionEyebrow>
       <h2 className="text-3xl md:text-5xl font-black leading-tight text-[#00274d]">
-        A massive industry still trapped in offline execution loops.
+        A ₹12+ lakh crore economy still runs on spreadsheets and phone calls.
       </h2>
-      {/* <p className="mx-auto mt-5 max-w-2xl text-[#00274d]/70">
-        Four structural gaps keep infrastructure execution slow, opaque and relationship-dependent.
-      </p> */}
     </div>
 
     <div className="relative grid gap-5 lg:grid-cols-[1fr_220px_1fr] lg:items-center">
       <div className="space-y-5">
-        {problems.slice(0, 2).map((item, index) => {
-          const Icon = [Network, Workflow][index];
+        {problems.slice(0, 3).map((item, index) => {
+          const Icon = item.icon;
           return (
             <motion.article
               key={item.title}
@@ -1077,8 +1127,8 @@ export default function Investor() {
       </div>
 
       <div className="space-y-5">
-        {problems.slice(2, 4).map((item, index) => {
-          const Icon = [Target, Layers3][index];
+        {problems.slice(3, 6).map((item, index) => {
+          const Icon = item.icon;
           return (
             <motion.article
               key={item.title}
@@ -1093,7 +1143,7 @@ export default function Investor() {
                   <Icon className="h-6 w-6" />
                 </span>
                 <div>
-                  <p className="mb-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-[#edad1a]">Problem {index + 3}</p>
+                  <p className="mb-1.5 text-[10px] font-black uppercase tracking-[0.22em] text-[#edad1a]">Problem {index + 4}</p>
                   <h3 className="text-lg font-black leading-tight text-white">{item.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-white/60">{item.text}</p>
                 </div>
@@ -1103,6 +1153,17 @@ export default function Investor() {
         })}
       </div>
     </div>
+
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="mt-12 rounded-2xl bg-[#00274d] px-6 py-6 md:px-8 md:py-7 shadow-xl shadow-[#00274d]/20"
+    >
+      <p className="text-base md:text-lg leading-relaxed text-white/80">
+        Six structural gaps — from project selection to risk cover — quietly drain time, cash and trust out of every project.
+      </p>
+    </motion.div>
   </div>
 </section>
 
@@ -1110,67 +1171,160 @@ export default function Investor() {
           {/* <div className="absolute left-0 top-12 h-32 w-32 rounded-full border-[10px] border-r-0 border-b-0 border-[#edad1a]" /> */}
           {/* <div className="absolute bottom-10 right-0 h-32 w-32 rounded-full border-[10px] border-l-0 border-t-0 border-[#00274d]" /> */}
           <div className="container relative mx-auto px-4 max-w-7xl">
-            <div className="mb-12 text-center">
+            <div className="mx-auto mb-12 max-w-4xl text-center">
               <SectionEyebrow>Our thesis</SectionEyebrow>
-              <h2 className="text-3xl md:text-4xl font-black text-[#00274d] leading-tight">
-                Vendor Infra Ecosystem
+              <h2 className="text-3xl md:text-5xl font-black text-[#00274d] leading-tight">
+                <span className="text-[#edad1a]">Unified Ecosystem</span> for Vendor Infra
               </h2>
             </div>
 
-            <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div className="grid gap-6 lg:grid-cols-[1.25fr_0.75fr]">
               <motion.div
                 initial={{ opacity: 0, x: -18 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 className="rounded-2xl border border-gray-100 bg-[#f8fafc] p-6 md:p-8 shadow-sm"
               >
-                <p className="text-lg leading-relaxed text-gray-650">
-                  Vendor Infra is building <span className="font-black text-[#00274d]">the horizontal operating system</span> for <span className="font-black text-[#00274d]">infrastructure, construction and manufacturing</span> in India.
-                </p>
-                <p className="mt-5 text-lg leading-relaxed text-gray-650">
-                  Despite unprecedented public and private capex, infrastructure delivery remains <span className="font-black text-[#edad1a]">fragmented, opaque and inefficient.</span>
-                </p>
-                <p className="mt-5 text-lg leading-relaxed text-gray-650">
-                  By embedding deeply into EPC workflows, Vendor Infra becomes mission-critical infrastructure driving:
-                </p>
-                <ul className="mt-5 grid gap-3 sm:grid-cols-3">
-                  {["High switching costs", "Strong repeat usage", "Expanding wallet share"].map((point) => (
-                    <li key={point} className="rounded-xl bg-white p-4 text-sm font-bold text-[#00274d] shadow-sm">
-                      <CheckCircle2 className="mb-2 h-5 w-5 text-[#edad1a]" />
-                      {point}
-                    </li>
-                  ))}
+                <ul className="space-y-6">
+                  {thesisPoints.map((point) => {
+                    const Icon = point.icon;
+                    return (
+                      <li key={point.text} className="flex items-start gap-4">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#00274d] text-[#edad1a]">
+                          <Icon className="h-5 w-5" />
+                        </span>
+                        <p className="leading-relaxed text-gray-600">{point.text}</p>
+                      </li>
+                    );
+                  })}
                 </ul>
-                <p className="mt-6 text-lg leading-relaxed text-gray-650">
-                  The platform converts infrastructure execution from relationship-driven chaos into <span className="font-black text-[#00274d]">data-driven, scalable operations.</span>
-                </p>
               </motion.div>
 
-              <motion.aside
-                initial={{ opacity: 0, x: 18 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="rounded-2xl bg-[#00274d] p-7 md:p-8 text-white shadow-xl shadow-[#00274d]/20"
-              >
-                <div className="mb-7 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#edad1a]/15 text-[#edad1a]">
-                  <Users className="h-7 w-7" />
-                </div>
-                <div className="space-y-7">
-                  <div>
-                    <p className="text-[#edad1a] text-sm font-black uppercase tracking-[0.22em] mb-3">Vision</p>
-                    <p className="text-white/85 leading-relaxed">
-                      To build an AI-powered operating system for the infrastructure, construction and manufacturing industry.
-                    </p>
-                  </div>
-                  <div className="border-t border-white/15 pt-7">
-                    <p className="text-[#edad1a] text-sm font-black uppercase tracking-[0.22em] mb-3">Mission</p>
-                    <p className="text-white/85 leading-relaxed">
-                      Use AI, data intelligence and smart collaboration to connect all infrastructure stakeholders and enable smarter project execution.
-                    </p>
-                  </div>
-                </div>
-              </motion.aside>
+              <div className="grid gap-6">
+                {[
+                  {
+                    label: "Vision",
+                    icon: Target,
+                    text: "To build an AI-powered operating system for the infrastructure, construction & manufacturing industry.",
+                  },
+                  {
+                    label: "Mission",
+                    icon: Compass,
+                    text: "Use AI, data intelligence, and smart collaboration to connect all infrastructure stakeholders and enable smarter project execution.",
+                  },
+                ].map((card, index) => {
+                  const Icon = card.icon;
+                  return (
+                    <motion.aside
+                      key={card.label}
+                      initial={{ opacity: 0, x: 18 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.08 }}
+                      className="relative overflow-hidden rounded-2xl bg-[#00274d] p-6 md:p-7 text-white shadow-xl shadow-[#00274d]/20"
+                    >
+                      <Icon className="absolute -right-6 -bottom-6 h-32 w-32 text-white/[0.04]" />
+                      <div className="relative flex items-start gap-4">
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#edad1a]/15 text-[#edad1a]">
+                          <Icon className="h-6 w-6" />
+                        </span>
+                        <div>
+                          <p className="mb-2 text-sm font-black uppercase tracking-[0.22em] text-[#edad1a]">{card.label}</p>
+                          <p className="leading-relaxed text-white/85">{card.text}</p>
+                        </div>
+                      </div>
+                    </motion.aside>
+                  );
+                })}
+              </div>
             </div>
+
+            {/* ── One connected workflow roadmap ── */}
+            <div className="mt-16">
+              <div className="mb-10 text-center">
+                <p className="text-sm font-black uppercase tracking-[0.22em] text-[#00274d]">One connected workflow</p>
+              </div>
+
+              {/* Desktop: horizontal roadmap */}
+              <div className="relative hidden lg:block">
+                <div className="absolute left-[5.5%] right-[5.5%] top-7 h-1 rounded-full bg-[#00274d]/10" />
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.4, ease: "easeOut" }}
+                  className="absolute left-[5.5%] right-[5.5%] top-7 h-1 origin-left rounded-full bg-gradient-to-r from-[#edad1a] via-[#edad1a] to-[#00274d]"
+                />
+                <ol className="relative grid grid-cols-9 gap-2">
+                  {workflowSteps.map((step, index) => {
+                    const Icon = step.icon;
+                    return (
+                      <motion.li
+                        key={step.label}
+                        initial={{ opacity: 0, y: 14 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.15 * index }}
+                        className="group flex flex-col items-center text-center"
+                      >
+                        <span className="relative flex h-14 w-14 items-center justify-center rounded-full border-4 border-white bg-[#00274d] text-[#edad1a] shadow-lg shadow-[#00274d]/20 transition-transform group-hover:-translate-y-1 group-hover:bg-[#edad1a] group-hover:text-[#00274d]">
+                          <Icon className="h-6 w-6" />
+                          <span className="absolute -right-1.5 -top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-[#edad1a] text-[10px] font-black text-[#00274d] ring-2 ring-white">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                        </span>
+                        <p className="mt-4 text-sm font-bold leading-snug text-[#00274d]">{step.label}</p>
+                      </motion.li>
+                    );
+                  })}
+                </ol>
+              </div>
+
+              {/* Mobile / tablet: vertical roadmap */}
+              <ol className="relative mx-auto max-w-md space-y-5 lg:hidden">
+                <div className="absolute bottom-7 left-6 top-7 w-1 -translate-x-1/2 rounded-full bg-gradient-to-b from-[#edad1a] to-[#00274d]" />
+                {workflowSteps.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
+                    <motion.li
+                      key={step.label}
+                      initial={{ opacity: 0, x: -14 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.05 * index }}
+                      className="relative flex items-center gap-4"
+                    >
+                      <span className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-4 border-white bg-[#00274d] text-[#edad1a] shadow-md">
+                        <Icon className="h-5 w-5" />
+                      </span>
+                      <div className="flex-1 rounded-xl border border-gray-100 bg-[#f8fafc] px-4 py-3">
+                        <p className="text-[10px] font-black uppercase tracking-[0.22em] text-[#edad1a]">
+                          Step {String(index + 1).padStart(2, "0")}
+                        </p>
+                        <p className="text-sm font-bold text-[#00274d]">{step.label}</p>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ol>
+            </div>
+
+            {/* ── Tagline ── */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-14 rounded-2xl bg-[#00274d] px-6 py-6 md:py-7 text-center shadow-xl shadow-[#00274d]/20"
+            >
+              <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xl md:text-2xl font-black text-white">
+                {["One Platform.", "One Network.", "One AI Engine."].map((phrase, index) => (
+                  <span key={phrase} className="flex items-center gap-4">
+                    {index > 0 && <span className="h-2 w-2 rounded-full bg-[#edad1a]" />}
+                    <span className={index === 2 ? "text-[#edad1a]" : undefined}>{phrase}</span>
+                  </span>
+                ))}
+              </p>
+            </motion.div>
           </div>
         </section>
 
@@ -1179,10 +1333,10 @@ export default function Investor() {
   <div className="text-center max-w-5xl mx-auto mb-12">
     <SectionEyebrow>Solutions</SectionEyebrow>
     <h2 className="text-3xl md:text-5xl font-bold text-[#00274d] leading-tight">
-      One connected platform for every stage of the infrastructure value chain.
+      One platform, multiple solutions.
     </h2>
   </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
               {solutions.map((item, index) => {
                 const Icon = item.icon;
                 return (
@@ -1203,6 +1357,17 @@ export default function Investor() {
                 );
               })}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-12 rounded-2xl bg-[#00274d] px-6 py-6 md:px-8 md:py-7 shadow-xl shadow-[#00274d]/20"
+            >
+              <p className="text-base md:text-lg leading-relaxed text-white/80">
+                Every module feeds the same AI engine — so the more the ecosystem is used, the smarter and stickier it gets.
+              </p>
+            </motion.div>
           </div>
         </section>
 
