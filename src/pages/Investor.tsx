@@ -1077,10 +1077,10 @@ export default function Investor() {
     }}
   />
   <div className="container relative mx-auto px-4 max-w-7xl">
-    <div className="mx-auto mb-14 max-w-4xl text-center">
+    <div className="mx-auto mb-14 max-w-5xl text-center">
       <SectionEyebrow>Problem</SectionEyebrow>
-      <h2 className="text-3xl md:text-5xl font-black leading-tight text-[#00274d]">
-        A ₹12+ lakh crore economy still runs on spreadsheets and phone calls.
+      <h2 className="text-3xl md:text-5xl font-black leading-tight text-[#00274d] text-balance">
+        Fragmented Industry, Disconnected Workflows & Limited Visibility.
       </h2>
     </div>
 
@@ -1174,7 +1174,7 @@ export default function Investor() {
             <div className="mx-auto mb-12 max-w-4xl text-center">
               <SectionEyebrow>Our thesis</SectionEyebrow>
               <h2 className="text-3xl md:text-5xl font-black text-[#00274d] leading-tight">
-                <span className="text-[#edad1a]">Unified Ecosystem</span> for Vendor Infra
+                Unified Ecosystem
               </h2>
             </div>
 

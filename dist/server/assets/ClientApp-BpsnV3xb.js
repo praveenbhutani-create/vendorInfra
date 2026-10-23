@@ -9023,9 +9023,9 @@ function Investor() {
           }
         ),
         /* @__PURE__ */ jsxs("div", { className: "container relative mx-auto px-4 max-w-7xl", children: [
-          /* @__PURE__ */ jsxs("div", { className: "mx-auto mb-14 max-w-4xl text-center", children: [
+          /* @__PURE__ */ jsxs("div", { className: "mx-auto mb-14 max-w-5xl text-center", children: [
             /* @__PURE__ */ jsx(SectionEyebrow, { children: "Problem" }),
-            /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-black leading-tight text-[#00274d]", children: "A ₹12+ lakh crore economy still runs on spreadsheets and phone calls." })
+            /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-black leading-tight text-[#00274d] text-balance", children: "Fragmented Industry, Disconnected Workflows & Limited Visibility." })
           ] }),
           /* @__PURE__ */ jsxs("div", { className: "relative grid gap-5 lg:grid-cols-[1fr_220px_1fr] lg:items-center", children: [
             /* @__PURE__ */ jsx("div", { className: "space-y-5", children: problems.slice(0, 3).map((item2, index) => {
@@ -9099,10 +9099,7 @@ function Investor() {
       /* @__PURE__ */ jsx("section", { className: "relative overflow-hidden bg-white py-16 md:py-24", children: /* @__PURE__ */ jsxs("div", { className: "container relative mx-auto px-4 max-w-7xl", children: [
         /* @__PURE__ */ jsxs("div", { className: "mx-auto mb-12 max-w-4xl text-center", children: [
           /* @__PURE__ */ jsx(SectionEyebrow, { children: "Our thesis" }),
-          /* @__PURE__ */ jsxs("h2", { className: "text-3xl md:text-5xl font-black text-[#00274d] leading-tight", children: [
-            /* @__PURE__ */ jsx("span", { className: "text-[#edad1a]", children: "Unified Ecosystem" }),
-            " for Vendor Infra"
-          ] })
+          /* @__PURE__ */ jsx("h2", { className: "text-3xl md:text-5xl font-black text-[#00274d] leading-tight", children: "Unified Ecosystem" })
         ] }),
         /* @__PURE__ */ jsxs("div", { className: "grid gap-6 lg:grid-cols-[1.25fr_0.75fr]", children: [
           /* @__PURE__ */ jsx(
