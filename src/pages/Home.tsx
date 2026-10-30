@@ -104,9 +104,9 @@ const stats: { key: string | null; value: number; suffix: string; label: string;
 ];
 
 const blogs = [
+  { img: "/images/blog/Blog-real-cost-of-fragmentation-376.png", srcSet: "/images/blog/Blog-real-cost-of-fragmentation-376.png 1x, /images/blog/Blog-real-cost-of-fragmentation-470.png 1.25x, /images/blog/Blog-real-cost-of-fragmentation-564.png 1.5x, /images/blog/Blog-real-cost-of-fragmentation-752.png 2x", date: "October 30, 2026", cat: "Infrastructure", title: "The Real Cost of Fragmentation: Why the Infrastructure & Construction Industry needs a Unified Ecosystem", excerpt: "Capital is abundant. Decision intelligence is not." },
   { img: "/images/blog/Blog-promote-digitalisation.png", date: "March 31, 2026", cat: "Marketplace", title: "Vendor Infra Marketplace for Plants & Equipment: Unlocking the Power of a Marketplace", excerpt: "In the ever-evolving landscape of industries, effective management of plants and equipment is crucial for businesses seeking to optimize their ROI." },
-  { img: "/images/blog/ChatGPT Image Jun 6, 2026, 12_13_52 PM.png", date: "March 30, 2026", cat: "Technology",  title: "SaaS Revolution in Construction and Infrastructure Industry",                                  excerpt: "The Indian economy stands on the shoulders of the Construction and Infrastructure industry, encompassing vital sectors like roads, railways, and urban infrastructure." },
-  { img: "/images/blog/ChatGPT Image Jun 6, 2026, 12_14_22 PM.png", date: "March 30, 2026", cat: "AI",          title: "Promote Digitalisation in Construction Industry: The Catalysts of Change",                       excerpt: "The construction industry is undergoing a digital revolution. It's time to embrace the catalysts of change and the power of innovation." },
+  { img: "/images/blog/ChatGPT Image Jun 6, 2026, 12_14_22 PM.png", date: "March 30, 2026", cat: "Technology",  title: "SaaS Revolution in Construction and Infrastructure Industry",                                  excerpt: "The Indian economy stands on the shoulders of the Construction and Infrastructure industry, encompassing vital sectors like roads, railways, and urban infrastructure." },
 
 ];
 
@@ -1258,7 +1258,7 @@ export default function Home() {
                 <Link href="/blog">
                   <div className="bg-white rounded-2xl overflow-hidden shadow-sm  border-1 border-[#00274d] hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group h-full flex flex-col cursor-pointer">
                     <div className="overflow-hidden h-48 bg-gray-100">
-                      <img src={b.img} alt={b.title}
+                      <img src={b.img} srcSet={b.srcSet} alt={b.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" />
                     </div>
                     <div className="p-5 flex flex-col flex-1">
