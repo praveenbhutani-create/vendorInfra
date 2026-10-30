@@ -2531,9 +2531,9 @@ const stats$1 = [
   { key: "plantsAndEquipment", value: 159, suffix: "", label: "Plants & Equipment", sub: "Number of Plants & Equipment." }
 ];
 const blogs = [
+  { img: "/images/blog/Blog-real-cost-of-fragmentation-376.png", srcSet: "/images/blog/Blog-real-cost-of-fragmentation-376.png 1x, /images/blog/Blog-real-cost-of-fragmentation-470.png 1.25x, /images/blog/Blog-real-cost-of-fragmentation-564.png 1.5x, /images/blog/Blog-real-cost-of-fragmentation-752.png 2x", date: "October 30, 2026", cat: "Infrastructure", title: "The Real Cost of Fragmentation: Why the Infrastructure & Construction Industry needs a Unified Ecosystem", excerpt: "Capital is abundant. Decision intelligence is not." },
   { img: "/images/blog/Blog-promote-digitalisation.png", date: "March 31, 2026", cat: "Marketplace", title: "Vendor Infra Marketplace for Plants & Equipment: Unlocking the Power of a Marketplace", excerpt: "In the ever-evolving landscape of industries, effective management of plants and equipment is crucial for businesses seeking to optimize their ROI." },
-  { img: "/images/blog/ChatGPT Image Jun 6, 2026, 12_13_52 PM.png", date: "March 30, 2026", cat: "Technology", title: "SaaS Revolution in Construction and Infrastructure Industry", excerpt: "The Indian economy stands on the shoulders of the Construction and Infrastructure industry, encompassing vital sectors like roads, railways, and urban infrastructure." },
-  { img: "/images/blog/ChatGPT Image Jun 6, 2026, 12_14_22 PM.png", date: "March 30, 2026", cat: "AI", title: "Promote Digitalisation in Construction Industry: The Catalysts of Change", excerpt: "The construction industry is undergoing a digital revolution. It's time to embrace the catalysts of change and the power of innovation." }
+  { img: "/images/blog/ChatGPT Image Jun 6, 2026, 12_14_22 PM.png", date: "March 30, 2026", cat: "Technology", title: "SaaS Revolution in Construction and Infrastructure Industry", excerpt: "The Indian economy stands on the shoulders of the Construction and Infrastructure industry, encompassing vital sectors like roads, railways, and urban infrastructure." }
 ];
 const testimonials = [
   { name: "Andleeb Jain", role: "Group President: People | Culture | Digital, JK Cement", image: "/testimonials/andleeb-jain.jpg", text: "I have witnessed this platform taking shape and the great efforts, thoughts analysis and data going into it. It's surely the first and one of a kind in the infrastructure space — a one stop shop, very useful, very comprehensive, very handy." },
@@ -3297,6 +3297,7 @@ function Home() {
               "img",
               {
                 src: b.img,
+                srcSet: b.srcSet,
                 alt: b.title,
                 className: "w-full h-full object-cover transition-transform duration-500 group-hover:scale-105",
                 loading: "eager"
@@ -5070,6 +5071,96 @@ function Contact() {
 }
 const blogPosts = [
   {
+    slug: "real-cost-of-fragmentation",
+    title: "The Real Cost of Fragmentation: Why the Infrastructure & Construction Industry needs a Unified Ecosystem",
+    date: "October 30, 2026",
+    author: "Rahul",
+    tags: ["Infrastructure", "Construction", "Vertical AI", "Supply Chain"],
+    preview: "India is in the midst of a generational infrastructure capex supercycle, with FY27 central capital expenditure at a record ₹12.2 lakh crore. Yet the industry deploying that capital still runs largely on spreadsheets, phone calls and personal networks...",
+    content: `
+## Capital is abundant. Decision intelligence is not.
+
+India is in the midst of a generational infrastructure capex supercycle, with FY27 central capital expenditure at a record ₹12.2 lakh crore. Yet the industry deploying that capital still runs largely on spreadsheets, phone calls and personal networks.
+
+Capital alone does not guarantee returns. Execution does, and a project's economics are largely decided the moment a contractor commits to a bid price.
+
+Too often, that price rests on incomplete information: a tender found late, rates carried over from the last project, quotes from a few familiar vendors, and equipment and financing left until after the award. Nothing connects these inputs.
+
+That is fragmentation. It never appears on a balance sheet, yet it surfaces as compressed margins, stalled sites and encashed guarantees. Across a capital-intensive industry, it amounts to systemic value leakage.
+
+## Diversification raises the stakes
+
+The problem sharpens as contractors grow. Firms rooted in roads and highways are moving into energy storage, transmission, renewables, metros and water, the ClimateTech and energy-transition segments attracting record capital.
+
+In a new sector, institutional knowledge no longer applies. Supply chains are often import-dependent and exposed to currency, freight and geopolitical risk, and cost benchmarks are borrowed from someone else's project. Yet the bid must still be the lowest to win.
+
+The contractor ends up pricing its least familiar work at its thinnest margin, backed by a bank guarantee.
+
+## Six major gaps
+
+- Project selection: tenders are chosen on instinct, not data
+- Right Cost: stale rates lead to margin erosion or lost mandates
+- Vendor selection: no structured way to vet subcontractors, OEMs or suppliers
+- Asset utilisation: idle machinery sits as stranded capital
+- Working capital: 30–45 day cycles squeeze liquidity when execution needs to accelerate
+- Risk transfer: fragmented insurance leaves cover misaligned with risk
+
+Together, they explain how a mandate is won on price and lost on execution.
+
+## One intelligence layer to close the gaps
+
+Vendor Infra is the AI Operating System for the Infrastructure & Construction Industry, a vertical AI, multi-sided platform that turns scattered inputs into decision intelligence:
+
+- Tender and sector intelligence across 20+ sectors
+- Price discovery from verified vendors and suppliers before capital is committed
+- AI-powered contractor/vendor discovery across 36,000+ verified partners
+- AI-powered plants and equipment marketplace with visible utilisation
+- Procurement with embedded finance matched to project cycles
+- Project insurance, launching next
+
+Every module runs on one proprietary engine, so each tender, quote and order sharpens the next decision. That data flywheel, reinforced by network effects, is what makes the platform hard to replicate.
+
+## Why now
+
+Projects are getting larger and less familiar. More than four years of supply chain transactions now train our intelligence layer, and that dataset can't be assembled from outside the trade. With the SaaS platform and equipment marketplace live, Vendor Infra is moving from trading economics to platform economics, and becoming the industry's system of record.
+
+## A BESS contract that lasted five months
+
+In January, a listed EPC contractor emerged as the lowest bidder for a 400 MWh battery energy storage project from a large public sector power company. The contract, worth more than ₹400 crore, was signed in April. By September, it had been terminated, and performance and mobilisation guarantees of roughly ₹90 crore had been encashed.
+
+The contractor cites force majeure and war risk, while the owner cites lack of progress. We take no view on who is right. The real question is this: how does a ₹400 crore commitment come apart within five months?
+
+Rarely through one bad decision. More often, through a chain of decisions made with incomplete information.
+
+Replay it on a connected ecosystem:
+
+- Before bidding: sector intelligence shows who delivered similar projects, at what prices and with what problems
+- While costing: live supplier quotes turn import dependence and lead times into numbers
+- While assembling the team: verified OEMs with storage experience are a search away
+- After the award: sourcing, equipment and finance sit in one workflow, with alternatives ready
+
+No platform removes force majeure. But the bid would carry its true, risk-adjusted cost.
+
+## Through an investor's lens
+
+For investors, Vendor Infra sits where several of today's most compelling themes converge: Vertical AI, ConTech, InfraTech, Supply Chain Tech, Embedded Fintech and InsurTech.
+
+Each of the six gaps is a distinct, monetisable revenue pool, all connected by one data layer. Every new module raises switching costs, deepens wallet share and creates operating leverage. Whoever owns the decision layer is positioned to define the category.
+
+## The bid is the easy part
+
+That contract did not fail in September. It failed the moment a price was committed without full visibility. The industry doesn't need another generic solution. It needs a unified ecosystem, and that is Vendor Infra. The lowest price will always win the award. Only an ecosystem covers the entire value chain.
+
+Let’s talk. I’d welcome the conversation.
+
+📩 DM me or email me at rahul@vendorinfra.com
+
+🔗 Visit our Investor Relations page: https://vendorinfra.com/investor-relations
+
+Case study source: NTPC press release
+    `
+  },
+  {
     slug: "marketplace-plants-equipment",
     title: "Vendor Infra Marketplace for Plants and Equipment: Unlocking the Power of a Marketplace for Plants and Equipment",
     date: "March 31, 2026",
@@ -5171,59 +5262,6 @@ Vendor Infra's SaaS platform is specifically designed for the Construction and I
 The SaaS revolution in the Construction and Infrastructure industry is just beginning. As more businesses adopt these technologies and the ecosystem matures, we can expect to see even greater levels of efficiency, transparency, and innovation.
 
 Vendor Infra is committed to being at the forefront of this transformation, continuously innovating and expanding its platform to meet the evolving needs of the industry. By embracing SaaS technology, businesses in the Construction and Infrastructure sector can position themselves for success in an increasingly competitive and technology-driven landscape.
-    `
-  },
-  {
-    slug: "digitalisation-construction",
-    title: "Promote Digitalisation in Construction Industry: The Catalysts of Change and the Power of Innovation",
-    date: "March 30, 2026",
-    author: "Tanay Singh",
-    tags: ["Artificial Intelligence", "Construction", "Digitalisation", "SaaS", "Technology"],
-    preview: "The construction industry is undergoing a digital revolution, and it's high time to embrace the catalysts of change and the power of innovation...",
-    content: `
-The construction industry is undergoing a digital revolution, and it's high time to embrace the catalysts of change and the power of innovation. Digitalisation in construction is not just a trend — it's a fundamental shift in how the industry operates, creating new opportunities for efficiency, sustainability, and growth.
-
-## Why Digitalisation Matters
-
-The construction industry has historically been one of the least digitised sectors of the global economy. This has led to significant inefficiencies, cost overruns, and productivity gaps. However, the tide is turning, driven by several key factors:
-
-**Increasing Complexity**: Modern construction projects are becoming increasingly complex, involving multiple stakeholders, intricate supply chains, and sophisticated regulatory requirements. Digital tools are essential for managing this complexity effectively.
-
-**Rising Cost Pressures**: With margins under pressure, construction companies are looking to digital solutions to reduce costs and improve efficiency. Digital tools can help optimize resource utilization, reduce waste, and streamline processes.
-
-**Sustainability Imperatives**: The construction industry is under increasing pressure to reduce its environmental impact. Digital tools can help companies design more sustainable buildings, optimize energy use, and minimize waste.
-
-**Talent Shortage**: The construction industry is facing a significant talent shortage, particularly in technical roles. Digital tools can help companies do more with less, compensating for the lack of skilled workers.
-
-## The Catalysts of Digital Change
-
-Several key technologies are driving the digitalisation of the construction industry:
-
-**Building Information Modelling (BIM)**: BIM is a digital representation of a building's physical and functional characteristics. It enables architects, engineers, and construction professionals to collaborate more effectively, reducing errors and improving efficiency.
-
-**Internet of Things (IoT)**: IoT sensors can monitor everything from equipment performance to environmental conditions on construction sites, providing real-time data that can be used to optimize operations and prevent problems before they occur.
-
-**Artificial Intelligence and Machine Learning**: AI and ML are being used to analyze vast amounts of data and provide actionable insights on everything from project scheduling to risk management. These technologies can help construction companies make better decisions and improve outcomes.
-
-**Drones and Autonomous Vehicles**: Drones are being used for site surveys, progress monitoring, and safety inspections, while autonomous vehicles are beginning to be deployed for tasks like material transport and earthmoving.
-
-**3D Printing**: 3D printing is enabling the production of building components with unprecedented precision and efficiency, opening up new possibilities for design and construction.
-
-## The Vendor Infra Approach to Digitalisation
-
-Vendor Infra is committed to driving digitalisation in the construction industry through its comprehensive platform. Our approach is built on three key pillars:
-
-**Connect**: We connect contractors, suppliers, consultants, and other stakeholders through our digital platform, enabling seamless collaboration and information sharing.
-
-**Optimize**: We use AI and data analytics to help our clients optimize their operations, from procurement and supply chain management to project scheduling and resource allocation.
-
-**Innovate**: We continuously innovate our platform, incorporating new technologies and best practices to stay at the forefront of the digitalisation revolution.
-
-## The Path Forward
-
-The digitalisation of the construction industry is not a destination — it's a journey. As technologies evolve and new opportunities emerge, the industry will need to adapt continuously. Vendor Infra is committed to being a partner on this journey, providing the tools, insights, and support that construction companies need to thrive in a digital world.
-
-The future of construction is digital, and the time to embrace that future is now. Companies that take the lead in digitalisation will be better positioned to compete, grow, and create value for their stakeholders. The question is: are you ready to embrace the digital revolution?
     `
   },
   {
